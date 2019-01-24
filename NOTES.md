@@ -12,7 +12,7 @@
 - optimizer.compute_gradients wraps tf.gradients(), as you can see here. It does additional asserts 
 
 ### Code
-'''
+```
 1. Simple Update of all Variables
 vars = tf.trainable_variables();
 gradients = tf.gradients(loss, trainable_params);
@@ -36,4 +36,4 @@ def _ClipIfNotNone(grad):
     grad = tf.clip_by_norm(grad, 5.0)
     return grad
 clipped_gradients = [(_ClipIfNotNone(grad), var) for grad, var in gradients]
-'''
+```
