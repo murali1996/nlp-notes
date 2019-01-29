@@ -73,20 +73,24 @@ print("Predicted model: {a:.3f}x + {b:.3f}".format(a=w_value[0], b=w_value[1]))
 print("Predicted model: {.3f}x + {.3f}".format(w_value[0], w_value[1]))
 ```
 
-## TensorFlow
+## Tensorflow
 ```
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True #takes the min required memory or
 config.gpu_options.per_process_gpu_memory_fraction = 0.4 #fixed memory - 40% of total memory
 session = tf.Session(config=config, ...)
+
 echo $CUDA_VISIBLE_DEVICES
 export CUDA_VISIBLE_DEVICES=1,2
 python3 -c "from tensorflow.python.client import device_lib; print(device_lib.list_local_devices())"
-torch.cuda.is_available()
+```
+
+## Tensorflow TensorBoard
+```
 tensorboard --logdir .
 ```
 
-## TensorFlow HUB
+## Tensorflow TensorflowHub
 ```
 You can download your model need from url + '?tf-hub-format=compressed'
 i tried downloading elmo and it worked
