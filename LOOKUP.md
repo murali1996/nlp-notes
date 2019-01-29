@@ -31,7 +31,7 @@ git commit -m "first commit"
 git push origin master
 git status
 ```
-#### Step-2: Creating a new branch and pushing files to remote
+#### Step-2: Creating a new_branch (say for example to fix a bug or to add a new feature) and pushing files to remote
 ```
 git checkout -b new_br_name_ origin/master
 -----<modify files>---
@@ -40,15 +40,38 @@ git commit -m "done some changes in new branch"
 git push origin new_br_name_
 -----<alternative: git push {remote name} {branch name}>----
 ```
-#### Step-3: After the owner merges your branch to the remote origin, do a pull (which essentially is (popularly suggested) fetch+merge operation)
+#### Step-3(1): You created a new_branch and modified some files and committed your code. Also, you have not pushed your new_branch code. But by then, your local master might or might not have been proceeded with few more commits since the new_branch above got split. If it didn't, then a simple Fast-Forward merge is sufficient without a commit. Else, a 3-Way merge is required. Code for doing this is as follows: <https://www.atlassian.com/git/tutorials/using-branches/git-merge>
+```
+# Start a new feature
+git checkout -b new-feature master
+# Edit some files
+git add <file>
+git commit -m "Start a feature"
+# Edit some files
+git add <file>
+git commit -m "Finish a feature"
+# Merge in the new-feature branch
+git checkout master
+git merge new-feature
+-----<This above command can also be used for 3-way merge but that would definitely result in merging with commit>------
+git branch -d new-feature
+-----<alternative: git merge --no-ff <branch> if you want to also commit after fast forward merge>------
+git push origin master
+-----<ensures all the new features are available at origin/master now>------
+```
+#### Step-3(2): For suppose, you have pushed your code to origin/master after adding the new feature above. Thus, your local master is now required to merge with the new head of origin/master. As Step-3(1), your local master might or might not have been proceeded with few more commits since the new_branch above got split. Code for doing this is as follows: <https://www.atlassian.com/git/tutorials/syncing/git-pull>
 ```
 git checkout master
 git fetch origin
------<alternative: fit fetch {remote}>-------
+-----<alternative: fit fetch {remote} {branch required at remote}>-------
+-----<check if you are on right local branch by doing: git status>-------
 git merge origin/master
------<alternative: fit fetch {remote}/{branch}>------
+-----<alternative: fit fetch {the remote branch that you want to merge with current local branch}>------
 ```
 #### Also..
+```
+https://www.atlassian.com/git/tutorials/making-a-pull-request
+```
 ```
 git reset --hard upstream/master
 git reset --hard origin/master
@@ -63,7 +86,7 @@ $git log | grep "commit\|Author\|Date" > filename.csv
 git log | findstr "Author Date commit" > filename.csv
 ```
 
-## Some frequently used np and tf methods
+## Some frequently used np stuff
 ```
 np.ravel() # to flatten
 np.hstack(), vstack(), stack() # from list to array or join arrays
@@ -72,7 +95,6 @@ Display of objects not supported in spyder: convert arrays to lists .tolist() an
 print("Predicted model: {a:.3f}x + {b:.3f}".format(a=w_value[0], b=w_value[1]))
 print("Predicted model: {.3f}x + {.3f}".format(w_value[0], w_value[1]))
 ```
-
 ## Tensorflow
 ```
 config = tf.ConfigProto()
@@ -84,12 +106,10 @@ echo $CUDA_VISIBLE_DEVICES
 export CUDA_VISIBLE_DEVICES=1,2
 python3 -c "from tensorflow.python.client import device_lib; print(device_lib.list_local_devices())"
 ```
-
 ## Tensorflow TensorBoard
 ```
 tensorboard --logdir .
 ```
-
 ## Tensorflow TensorflowHub
 ```
 You can download your model need from url + '?tf-hub-format=compressed'
@@ -133,7 +153,6 @@ unzip tecmint_files.zip -d /tmp/unziped, zip -r tecmint_files.zip tecmint_files 
 hostname -I # to get IP
 ping
 ```
-
 ## TMUX
 ```
 tmux (https://hackernoon.com/a-gentle-introduction-to-tmux-8d784c404340)
