@@ -167,6 +167,7 @@ tmux attach-session -t session_name || tmux new-session -s session_name
 ---> set_cuda9.0_cudnn7.0
 ---> locate cuda
 ---> set -a ; . /usr/local/nvidia_cuda/scripts/set_cuda9.0_cudnn7.0 ; set +a
+--------<Or, set -a ; . /usr/local/nvidia_cuda/scripts/set_cuda8.0_cudnn6.0 ; set +a>-----------
 ---> python
 --->---> import tensorflow as tf
 --->---> sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
