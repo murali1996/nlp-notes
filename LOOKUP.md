@@ -126,22 +126,35 @@ git fetch origin
 git merge origin/master
 -----<alternative: fit fetch {the remote branch that you want to merge with current local branch}>------
 ```
-#### Also..
+#### Pull Request
 ```
 Open Source Contribution:
 https://www.atlassian.com/git/tutorials/making-a-pull-request
-
+```
+#### Git Ignore
+```
+# https://github.com/github/gitignore/blob/master/Python.gitignore
+# https://www.atlassian.com/git/tutorials/saving-changes/gitignore
+cd project_repo
+touch .gitignore
+# add required types
+```
+#### Stash, Reset hard
+```
 In case when you have a scenario of 3-way merge but you donot want to commit (or ignore) you local master changes. Then either use stash or reset.
 git stash
 -----<you can later come to this stashed work using git stash pop, git stash list, etc.>------
 -----<https://www.atlassian.com/git/tutorials/saving-changes/git-stash>------
 git reset --hard upstream/master
 git reset --hard origin/master
-
-For large files:
+```
+#### Large Files
+```
 git lfs clone https://github.com/mmihaltz/word2vec-GoogleNews-vectors.git
 git clone https://github.com/mmihaltz/word2vec-GoogleNews-vectors.git
-
+```
+#### Collect Logs in CSV
+```
 Get logs into a csv:
 1. Linux
 $ git log | grep "commit\|Author\|Date" > filename.csv
