@@ -1,6 +1,64 @@
-# Look Up Items
+# Look Up for System
+## Linux
+```
+nvcc --version
+python --version
+echo ".py"
+htop
+ps <pid>
+ps -aux | grep python
+rm -rf <folder name>
+cp filename dirname
 
-## Anaconda Related and Proxy for python
+conda info --envs
+source activate conda_env_murali
+set -a ; . /usr/local/nvidia_cuda/scripts/set_cuda9.0_cudnn7.0 ; set +a
+jupyter notebook --no-browser --ip '*'
+
+pwd, cd, ls, mkdir, rmdir, rm, rm -r, mv, cp, apt-get, sudo #https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners
+touch # to create files # example: touch new.txt, touch main.py
+man, --help # get maunal # example: man cd, cd -help
+locate # use locate -i new.txt to search in a case insensitive way
+cp -a path_src path_dest
+
+echo # The "echo" command helps us move some data, usually text into a file
+cat # Use the cat command to display the contents of a file. It is usually used to easily view programs.
+chmod +x <filename> # change permissions to directly execute, ex: chmod +x main.py 
+
+tar # https://www.tecmint.com/18-tar-command-examples-in-linux/
+tar # examples: tar -cvf, tar -xvf, tar -tvf, etc.
+unzip tecmint_files.zip -d /tmp/unziped, zip -r tecmint_files.zip tecmint_files # Use zip to compress files into a zip archive, and unzip to extract files from a zip archive.
+
+hostname -I # to get IP
+ping
+```
+## TMUX
+```
+tmux (https://hackernoon.com/a-gentle-introduction-to-tmux-8d784c404340)
+tmux ls # lists active sessions
+tmux attach-session -t session_name || tmux new-session -s session_name
+---> source activate conda_env_murali
+---> set_cuda9.0_cudnn7.0
+---> locate cuda
+---> set -a ; . /usr/local/nvidia_cuda/scripts/set_cuda9.0_cudnn7.0 ; set +a
+--------<Or, set -a ; . /usr/local/nvidia_cuda/scripts/set_cuda8.0_cudnn6.0 ; set +a>-----------
+---> python
+--->---> import tensorflow as tf
+--->---> sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
+
+Now you can run the stuff and close terminal with tmux session actively doing its work!
+To re-open...
+
+---> tmux ls
+---> tmux attach-session -t my_session
+
+--->---> tmux kill-session #in session or ctrl+d
+--->---> detach: ctrl+b d
+```
+
+
+# Look Up for Tools
+## Conda & its SSL
 ```
 C:\ProgramData\Anaconda3\Lib\site-packages\skfuzzy\cluster
 set http_proxy=http://IP:PORT
@@ -9,8 +67,8 @@ conda config --set ssl_verify <pathToYourFile>.crt
 conda config --set ssl_verify false
 Defauly Python path: C:\ProgramData\Anaconda3\python
 ```
-
-## Step-0: Create a URL for your repo
+## Git Help
+#### Step-0: Create a URL for your repo
 #### Step-1: Cloning a repo; I'm sill working on master branch in local repo and since I did clone, i need not git init again
 ```
 git config --global user.name "murali1996"
@@ -90,8 +148,19 @@ $ git log | grep "commit\|Author\|Date" > filename.csv
 2. Windows
 > git log | findstr "Author Date commit" > filename.csv
 ```
+## PIP
+#### pip freeze
+```
+# This command is incredibly useful if you need to recreate your project from scratch and need to know the exact libraries/versions you need to install.
+cd project_folder
+pip freeze > requirements.txt
+```
+## Chrome Issues
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" -no-sandbox
 
-## Some frequently used np stuff
+
+# Look Up for Libraries
+## Numpy
 ```
 np.ravel() # to flatten
 np.hstack(), vstack(), stack() # from list to array or join arrays
@@ -101,6 +170,7 @@ print("Predicted model: {a:.3f}x + {b:.3f}".format(a=w_value[0], b=w_value[1]))
 print("Predicted model: {.3f}x + {.3f}".format(w_value[0], w_value[1]))
 ```
 ## Tensorflow
+#### General
 ```
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True #takes the min required memory or
@@ -111,11 +181,11 @@ echo $CUDA_VISIBLE_DEVICES
 export CUDA_VISIBLE_DEVICES=1,2
 python3 -c "from tensorflow.python.client import device_lib; print(device_lib.list_local_devices())"
 ```
-## Tensorflow TensorBoard
+#### TensorBoard
 ```
 tensorboard --logdir .
 ```
-## Tensorflow TensorflowHub
+#### TensorflowHub
 ```
 You can download your model need from url + '?tf-hub-format=compressed'
 i tried downloading elmo and it worked
@@ -125,63 +195,7 @@ the model will be downloaded as a tarfile to your machine.
 once you untar the file, it will have tfhub_module.pb
 ```
 
-## Linux
-```
-nvcc --version
-python --version
-echo ".py"
-htop
-ps <pid>
-ps -aux | grep python
-rm -rf <folder name>
-cp filename dirname
 
-conda info --envs
-source activate conda_env_murali
-set -a ; . /usr/local/nvidia_cuda/scripts/set_cuda9.0_cudnn7.0 ; set +a
-jupyter notebook --no-browser --ip '*'
 
-pwd, cd, ls, mkdir, rmdir, rm, rm -r, mv, cp, apt-get, sudo #https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners
-touch # to create files # example: touch new.txt, touch main.py
-man, --help # get maunal # example: man cd, cd -help
-locate # use locate -i new.txt to search in a case insensitive way
-cp -a path_src path_dest
 
-echo # The "echo" command helps us move some data, usually text into a file
-cat # Use the cat command to display the contents of a file. It is usually used to easily view programs.
-chmod +x <filename> # change permissions to directly execute, ex: chmod +x main.py 
-
-tar # https://www.tecmint.com/18-tar-command-examples-in-linux/
-tar # examples: tar -cvf, tar -xvf, tar -tvf, etc.
-unzip tecmint_files.zip -d /tmp/unziped, zip -r tecmint_files.zip tecmint_files # Use zip to compress files into a zip archive, and unzip to extract files from a zip archive.
-
-hostname -I # to get IP
-ping
-```
-## TMUX
-```
-tmux (https://hackernoon.com/a-gentle-introduction-to-tmux-8d784c404340)
-tmux ls # lists active sessions
-tmux attach-session -t session_name || tmux new-session -s session_name
----> source activate conda_env_murali
----> set_cuda9.0_cudnn7.0
----> locate cuda
----> set -a ; . /usr/local/nvidia_cuda/scripts/set_cuda9.0_cudnn7.0 ; set +a
---------<Or, set -a ; . /usr/local/nvidia_cuda/scripts/set_cuda8.0_cudnn6.0 ; set +a>-----------
----> python
---->---> import tensorflow as tf
---->---> sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
-
-Now you can run the stuff and close terminal with tmux session actively doing its work!
-To re-open...
-
----> tmux ls
----> tmux attach-session -t my_session
-
---->---> tmux kill-session #in session or ctrl+d
---->---> detach: ctrl+b d
-```
-
-## Chrome Issues
-"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" -no-sandbox
 
