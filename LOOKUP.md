@@ -30,6 +30,9 @@ tar # https://www.tecmint.com/18-tar-command-examples-in-linux/
 tar # examples: tar -cvf, tar -xvf, tar -tvf, etc.
 unzip tecmint_files.zip -d /tmp/unziped, zip -r tecmint_files.zip tecmint_files # Use zip to compress files into a zip archive, and unzip to extract files from a zip archive.
 
+wget https://tfhub.dev/google/universal-sentence-encoder/2'?tf-hub-format=compressed' -P use2
+wget https://tfhub.dev/google/universal-sentence-encoder/2'?tf-hub-format=compressed' -O <dir/dir/file_name>
+
 hostname -I # to get IP
 ping
 ```
