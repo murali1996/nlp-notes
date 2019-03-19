@@ -5,7 +5,8 @@ nvcc --version
 python --version
 echo ".py"
 htop
-ps <pid>
+top -H -p <PID>
+ps -A # to know all existing PIDs
 ps -aux | grep python
 rm -rf <folder name>
 cp filename dirname
