@@ -27,7 +27,7 @@ cat # Use the cat command to display the contents of a file. It is usually used 
 chmod +x <filename> # change permissions to directly execute, ex: chmod +x main.py 
 
 tar # https://www.tecmint.com/18-tar-command-examples-in-linux/
-tar # examples: tar -cvf, tar -xvf, tar -tvf, etc.
+tar -zxvf file_name.tar.gz # examples: tar -cvf, tar -xvf, tar -tvf, etc.
 unzip tecmint_files.zip -d /tmp/unziped, zip -r tecmint_files.zip tecmint_files # Use zip to compress files into a zip archive, and unzip to extract files from a zip archive.
 
 wget https://tfhub.dev/google/universal-sentence-encoder/2'?tf-hub-format=compressed' -P use2
