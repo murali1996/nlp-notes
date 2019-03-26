@@ -116,6 +116,7 @@ git commit -m "Finish a feature"
 git checkout master
 git merge new-feature
 -----<This above command can also be used for 3-way merge but that would definitely result in merging with commit>------
+-----<can also use: git pull origin branchname --allow-unrelated-histories>----
 git branch -d new-feature
 -----<alternative: git merge --no-ff <branch> if you want to also commit after fast forward merge>------
 git push origin master
