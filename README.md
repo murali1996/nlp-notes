@@ -15,21 +15,26 @@
 ---
 ##### Sentence Embedding
 1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
+1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Alexis et al. 2017][Alexis et al. 2017]
+1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Sandeep et al. 2018][Sandeep et al. 2018]
 1. [*USE*, Universal Sentence Encoder, Daniel et al. 2018][Daniel et al. 2018]
+---
+##### Transformer Networks
+1. [*Transformer*, Attention Is All You Need, Vaswami et al. 2017][Vaswami et al. 2017]
+1. [*Transformer-Decoder*, Generating Wikipedia by Summarizing Long Sequences, Lui et al. 2018][Lui et al. 2018]
+1. [*GPT-1 a.k.a OpenAI Transformer*, Improving Language Understanding by Generative Pre-Training, Radford et al. 2018][Radford et al. 2018]
+1. [*Transformer-XL*, Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context, Zihang et al. 2019][Zihang et al. 2019]
+1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019]
+---
+##### General Purpose Modeling a.k.a Pre-trained Models
+1. [*ULM-FiT*, Universal Language Model Fine-tuning for Text Classification, Howard and Ruder 2018][Howard and Ruder 2018]
+1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering][Bryan et al. 2018]
+1. [*BERT*, BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al. 2018][Devlin et al. 2018]
+1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
 ---
 ##### Capsule Networks
 1. [*Capsule-Nets*, Dynamic Routing Between Capsules, Sabour et al. 2017][Sabour et al. 2017]
 1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
----
-##### Transformer Networks
-1. [*The Transformer*, Attention Is All You Need, Vaswami et al. 2017][Vaswami et al. 2017]
-1. [*Transformer-Decoder*, Generating Wikipedia by Summarizing Long Sequences, Lui et al. 2018][Lui et al. 2018]
-1. [*OpenAI Transformer*, Improving Language Understanding by Generative Pre-Training, Radford et al. 2018][Radford et al. 2018]
----
-##### Pre-trained Modelling
-1. [*ULM-FiT*, Universal Language Model Fine-tuning for Text Classification, Howard and Ruder 2018][Howard and Ruder 2018]
-1. [*BERT*, BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al. 2018][Devlin et al. 2018]
-1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019]
 
 
 ## Downloads
@@ -57,3 +62,8 @@
 [Sabour et al. 2017]: https://arxiv.org/abs/1710.09829
 [Xia et al. 2018]: https://arxiv.org/abs/1809.00385
 [Daniel et al. 2018]: https://arxiv.org/pdf/1803.11175.pdf
+[Alexis et al. 2017]: https://arxiv.org/abs/1705.02364
+[Sandeep et al. 2018]: https://arxiv.org/abs/1804.00079
+[Bryan et al. 2018]: https://arxiv.org/abs/1806.08730
+[Zihang et al. 2019]: https://arxiv.org/abs/1901.02860v2
+[Victor et al. 2018]: https://arxiv.org/abs/1811.06031
