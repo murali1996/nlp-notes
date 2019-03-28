@@ -1,9 +1,5 @@
 #### This repository contains paper links, code links and my implementations to some of the well researched nlp problems till date.
 
-## Tasks Overview
-* [Understanding Word Embeddings](#understanding-word-embeddings)
-* [BERT for Intent Classification](#bert-for-intent-classification)
-
 ## Interesting Papers
 ##### Word Embedding
 1. [*Word2Vec*, Efficient Estimation of Word Representations in Vector Space, Mikolov et al. 2013a][Mikolov et al. 2013a]
