@@ -27,6 +27,7 @@
 1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019]
 ---
 ##### General Purpose Modeling a.k.a Pre-trained Models
+1. [Semi-supervised Sequence Learning, Andrew and Quoc 2015][Andrew and Quoc 2015]
 1. [*ULM-FiT*, Universal Language Model Fine-tuning for Text Classification, Howard and Ruder 2018][Howard and Ruder 2018]
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering][Bryan et al. 2018]
 1. [*BERT*, BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al. 2018][Devlin et al. 2018]
@@ -67,3 +68,4 @@
 [Bryan et al. 2018]: https://arxiv.org/abs/1806.08730
 [Zihang et al. 2019]: https://arxiv.org/abs/1901.02860v2
 [Victor et al. 2018]: https://arxiv.org/abs/1811.06031
+[Andrew and Quoc 2015]: https://arxiv.org/abs/1511.01432
