@@ -205,12 +205,8 @@ tensorboard --logdir .
 ```
 #### TensorflowHub
 ```
-You can download your model need from url + '?tf-hub-format=compressed'
-i tried downloading elmo and it worked
-url = https://tfhub.dev/google/elmo/2 + '?tf-hub-format=compressed'
-eg: https://tfhub.dev/google/elmo/2?tf-hub-format=compressed
-the model will be downloaded as a tarfile to your machine.
-once you untar the file, it will have tfhub_module.pb
+mkdir <folder_path>
+curl -L "https://tfhub.dev/google/elmo/2?tf-hub-format=compressed" | tar -zxvC <folder_path>
 ```
 
 
