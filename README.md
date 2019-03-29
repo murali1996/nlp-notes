@@ -1,5 +1,3 @@
-#### This repository contains paper links, code links and my implementations to some of the well researched nlp problems till date.
-
 ## Interesting Papers
 ##### Word Embedding
 1. [*Word2Vec*, Efficient Estimation of Word Representations in Vector Space, Mikolov et al. 2013a][Mikolov et al. 2013a]
@@ -9,11 +7,13 @@
 1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018] 
 1. [*FLAIR*, Contextual String Embeddings for Sequence Labeling, Akbik et al. 2018][Akbik et al. 2018] [[Code]](https://github.com/zalandoresearch/flair)
 ---
-##### Sentence Embedding
+##### Sentence Encoding
 1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
+1. [Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
 1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Alexis et al. 2017][Alexis et al. 2017]
-1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Sandeep et al. 2018][Sandeep et al. 2018]
+1. [Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Sandeep et al. 2018][Sandeep et al. 2018]
 1. [*USE*, Universal Sentence Encoder, Daniel et al. 2018][Daniel et al. 2018]
+1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
 ---
 ##### Transformer Networks
 1. [*Transformer*, Attention Is All You Need, Vaswami et al. 2017][Vaswami et al. 2017]
@@ -29,10 +29,13 @@
 1. [*BERT*, BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al. 2018][Devlin et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
 ---
-##### Capsule Networks
+##### Papers using Capsule Networks
 1. [*Capsule-Nets*, Dynamic Routing Between Capsules, Sabour et al. 2017][Sabour et al. 2017]
+1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
 1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
-
+---
+##### Papers using BERT Model
+1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
 
 ## Downloads
 1. [*Word2Vec*](https://github.com/mmihaltz/word2vec-GoogleNews-vectors/)
@@ -41,7 +44,6 @@
 ## Food For Thought
 1. While the chosen neural achitecture is important, the techniques used for training the problem objective e.g.[*Word2Vec*][Mikolov et al. 2013b] or the techniques used while doing loss optimization e.g.[*OpenAI Transformer*][Radford et al. 2018] play a significant role in both fast as well as a good convergence.
 1. Commonality between Language Modelling, Machine Translation and Word2vec: All of them have a huge vocabulary size at the output and there is a need to alleviate computing of the huge sized softmax layer! See [Ruder's page](http://ruder.io/word-embeddings-softmax/index.html) for a quick-read.
-
 
 [Mikolov et al. 2013a]: https://arxiv.org/abs/1301.3781
 [Mikolov et al. 2013b]: https://arxiv.org/abs/1310.4546
@@ -65,3 +67,7 @@
 [Zihang et al. 2019]: https://arxiv.org/abs/1901.02860v2
 [Victor et al. 2018]: https://arxiv.org/abs/1811.06031
 [Andrew and Quoc 2015]: https://arxiv.org/abs/1511.01432
+[Chen et al. 2019]: https://arxiv.org/abs/1902.10909
+[Zhao et al. 2018]: https://arxiv.org/abs/1804.00538
+[Conneau eta al. 2017]: https://arxiv.org/abs/1705.02364
+[Wieting et al. 2019]: https://arxiv.org/abs/1901.10444
