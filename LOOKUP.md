@@ -208,6 +208,10 @@ tensorboard --logdir .
 mkdir <folder_path>
 curl -L "https://tfhub.dev/google/elmo/2?tf-hub-format=compressed" | tar -zxvC <folder_path>
 ```
+```
+sess.run(tf.global_variables_initializer())
+sess.run(tf.tables_initializer())
+```
 
 
 
