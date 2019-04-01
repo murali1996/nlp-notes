@@ -36,6 +36,7 @@
 ---
 ##### Papers using BERT Model
 1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
+1. [SciBERT: Pretrained Contextualized Embeddings for Scientific Text, Beltagy et al. 2019][Beltagy et al. 2019]
 
 ## Downloads
 1. [*Word2Vec*](https://github.com/mmihaltz/word2vec-GoogleNews-vectors/)
@@ -71,3 +72,4 @@
 [Zhao et al. 2018]: https://arxiv.org/abs/1804.00538
 [Conneau eta al. 2017]: https://arxiv.org/abs/1705.02364
 [Wieting et al. 2019]: https://arxiv.org/abs/1901.10444
+[Beltagy et al. 2019]: https://arxiv.org/abs/1903.10676
