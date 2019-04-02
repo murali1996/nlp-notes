@@ -29,14 +29,16 @@
 1. [*BERT*, BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al. 2018][Devlin et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
 ---
+##### Papers using Transformer and BERT Models
+1. [Practical Text Classification With Large Pre-Trained Language Models, NeelKant et al. 2018][NeelKant et al. 2018]
+1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
+1. [SciBERT: Pretrained Contextualized Embeddings for Scientific Text, Beltagy et al. 2019][Beltagy et al. 2019]
+---
 ##### Papers using Capsule Networks
 1. [*Capsule-Nets*, Dynamic Routing Between Capsules, Sabour et al. 2017][Sabour et al. 2017]
 1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
 1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
----
-##### Papers using BERT Model
-1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
-1. [SciBERT: Pretrained Contextualized Embeddings for Scientific Text, Beltagy et al. 2019][Beltagy et al. 2019]
+
 
 ## Downloads
 1. [*Word2Vec*](https://github.com/mmihaltz/word2vec-GoogleNews-vectors/)
@@ -73,3 +75,4 @@
 [Conneau eta al. 2017]: https://arxiv.org/abs/1705.02364
 [Wieting et al. 2019]: https://arxiv.org/abs/1901.10444
 [Beltagy et al. 2019]: https://arxiv.org/abs/1903.10676
+[NeelKant et al. 2018]: https://arxiv.org/abs/1812.01207
