@@ -198,6 +198,12 @@ session = tf.Session(config=config, ...)
 echo $CUDA_VISIBLE_DEVICES
 export CUDA_VISIBLE_DEVICES=1,2
 python3 -c "from tensorflow.python.client import device_lib; print(device_lib.list_local_devices())"
+
+You need to specify different variable scopes for the LSTM cells.
+with tf.variable_scope('forward'):
+    self.lstm_fw_cell = rnn_cell.BasicLSTMCell(dim_hidden)   
+with tf.variable_scope('backward'):
+    self.lstm_bw_cell = rnn_cell.BasicLSTMCell(dim_hidden)
 ```
 #### TensorBoard
 ```
