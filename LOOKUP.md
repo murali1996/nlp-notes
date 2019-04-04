@@ -11,6 +11,9 @@ ps -aux | grep python
 rm -rf <folder name>
 cp filename dirname
 
+Shorten prompt length in cmd
+>> PS1='\u:\W\$ '
+
 conda info --envs
 source activate conda_env_murali
 set -a ; . /usr/local/nvidia_cuda/scripts/set_cuda9.0_cudnn7.0 ; set +a
