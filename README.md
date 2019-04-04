@@ -89,4 +89,4 @@
 [Bowman et al. 2018]: https://arxiv.org/abs/1812.10860
 [Tang et al. 2019]: https://arxiv.org/abs/1903.12136
 
-[how_i_met_your_paper]: https://github.com/murali1996/nlp/blob/master/how_i_met_your_paper.png "Connections"
+[how_i_met_your_paper]: https://github.com/murali1996/nlp/blob/master/images/how_i_met_your_paper.png "Connections"
