@@ -1,16 +1,20 @@
 ## Some Interesting Papers in NLP
-##### Word Embedding
+
+![alt text][how_i_met_your_paper]
+
+##### Selected Word Embedding Techniques
 1. [*Word2Vec*, Efficient Estimation of Word Representations in Vector Space, Mikolov et al. 2013a][Mikolov et al. 2013a]
 1. [*Word2Vec*, Distributed Representations of Words and Phrases and their Compositionality, Mikolov et al. 2013b][Mikolov et al. 2013b]
 1. [*GloVe*, GloVe: Global Vectors for Word Representation, Pennington et al. 2014][Pennington et al. 2014]
 1. [*FastText*, Enriching Word Vectors with Subword Information, Bojanowski et al. 2016][Bojanowski et al. 2016]
 1. [*FLAIR*, Contextual String Embeddings for Sequence Labeling, Akbik et al. 2018][Akbik et al. 2018] [[Code]](https://github.com/zalandoresearch/flair)
 ---
-##### Sentence Encoding
+##### Selected Sentence Encoding Techniques
 1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
 1. [Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
 1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Alexis et al. 2017][Alexis et al. 2017]
 1. [*USE*, Universal Sentence Encoder, Daniel et al. 2018][Daniel et al. 2018]
+1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
 ---
 ##### Neural Architectures
 1. [*Transformer*, Attention Is All You Need, Vaswami et al. 2017][Vaswami et al. 2017]
@@ -24,26 +28,26 @@
 1. [*GPT-1 aka OpenAI Transformer*, Improving Language Understanding by Generative Pre-Training, Radford et al. 2018][Radford et al. 2018]
 1. [*BERT*, BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al. 2018][Devlin et al. 2018]
 1. [Looking for ELMo's Friends: Sentence-Level Pretraining Beyond Language Modeling, Bowman et al. 2018][Bowman et al. 2018]
+1. [Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]
 ---
 ##### Multi-Task Learning for NLU
 1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Sandeep et al. 2018][Sandeep et al. 2018]
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering, McCann et al. 2018][McCann et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
-1. [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2019][Wang et al. 2019]
+1. [*GLUE*, GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2019][Wang et al. 2019]
 1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019]
 ---
-##### Intent Classification and Slot Filling
-1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
-1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
+##### Objectives Built On Top Of Pre-trained Models
 1. [Practical Text Classification With Large Pre-Trained Language Models, NeelKant et al. 2018][NeelKant et al. 2018]
 1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
-1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
----
-##### NMT
-1. [Achieving Human Parity on Automatic Chinese to English News Translation, Hassan et al. 2018][Hassan et al. 2018]
----
-##### Yet to Classify
 1. [SciBERT: Pretrained Contextualized Embeddings for Scientific Text, Beltagy et al. 2019][Beltagy et al. 2019]
+---
+##### Objectives Built On Top of Word/Character/BPE vectors or Built From Scratch
+1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
+1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
+---
+##### Selected Cross-Lingual Tasks' Works like NMT, XNLI, etc.
+1. [Achieving Human Parity on Automatic Chinese to English News Translation, Hassan et al. 2018][Hassan et al. 2018]
 
 ## Downloads
 1. [*Word2Vec*](https://github.com/mmihaltz/word2vec-GoogleNews-vectors/)
@@ -83,3 +87,6 @@
 [Wang et al. 2019]: https://arxiv.org/abs/1804.07461
 [Hassan et al. 2018]: https://arxiv.org/abs/1803.05567
 [Bowman et al. 2018]: https://arxiv.org/abs/1812.10860
+[Tang et al. 2019]: https://arxiv.org/abs/1903.12136
+
+[how_i_met_your_paper]: https://github.com/murali1996/nlp/blob/master/how_i_met_your_paper.png "Connections"
