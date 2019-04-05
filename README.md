@@ -32,9 +32,9 @@
 ---
 ##### Multi-Task Learning for NLU
 1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Sandeep et al. 2018][Sandeep et al. 2018]
+1. [*GLUE*, GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018]
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering, McCann et al. 2018][McCann et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
-1. [*GLUE*, GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2019][Wang et al. 2019]
 1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019]
 ---
 ##### Objectives Built On Top Of Pre-trained Models
@@ -85,7 +85,7 @@
 [Wieting et al. 2019]: https://arxiv.org/abs/1901.10444
 [Beltagy et al. 2019]: https://arxiv.org/abs/1903.10676
 [NeelKant et al. 2018]: https://arxiv.org/abs/1812.01207
-[Wang et al. 2019]: https://arxiv.org/abs/1804.07461
+[Wang et al. 2018]: https://arxiv.org/abs/1804.07461
 [Hassan et al. 2018]: https://arxiv.org/abs/1803.05567
 [Bowman et al. 2018]: https://arxiv.org/abs/1812.10860
 [Tang et al. 2019]: https://arxiv.org/abs/1903.12136
