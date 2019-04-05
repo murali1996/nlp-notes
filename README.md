@@ -28,7 +28,7 @@
 1. [*GPT-1 aka OpenAI Transformer*, Improving Language Understanding by Generative Pre-Training, Radford et al. 2018][Radford et al. 2018]
 1. [*BERT*, BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al. 2018][Devlin et al. 2018]
 1. [Looking for ELMo's Friends: Sentence-Level Pretraining Beyond Language Modeling, Bowman et al. 2018][Bowman et al. 2018]
-1. [Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]
+1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]
 ---
 ##### Multi-Task Learning for NLU
 1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Sandeep et al. 2018][Sandeep et al. 2018]
