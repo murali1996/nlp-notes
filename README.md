@@ -47,6 +47,7 @@
 1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
 ---
 ##### Selected Cross-Lingual Tasks' Works like NMT, XNLI, etc.
+1. [Neural Machine Translation of Rare Words with Subword Units, Sennrich et al. 2015][Sennrich et al. 2015]
 1. [Achieving Human Parity on Automatic Chinese to English News Translation, Hassan et al. 2018][Hassan et al. 2018]
 
 ## Downloads
@@ -88,5 +89,6 @@
 [Hassan et al. 2018]: https://arxiv.org/abs/1803.05567
 [Bowman et al. 2018]: https://arxiv.org/abs/1812.10860
 [Tang et al. 2019]: https://arxiv.org/abs/1903.12136
+[Sennrich et al. 2015]: https://arxiv.org/abs/1508.07909
 
 [how_i_met_your_paper]: https://github.com/murali1996/nlp/blob/master/images/how_i_met_your_paper.png "Connections"
