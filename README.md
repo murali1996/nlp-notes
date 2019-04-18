@@ -54,12 +54,13 @@
 1. [*Word2Vec*](https://github.com/mmihaltz/word2vec-GoogleNews-vectors/)
 1. [*Glove*](https://nlp.stanford.edu/projects/glove/)
 
+# Some cool articles
+[Illustrated BERT][Illustrated BERT], [OpenAi GPT-1][OpenAi GPT-1], [OpenAi GPT-2][OpenAi GPT-2], [The Natural Language Decathlon][The Natural Language Decathlon], [ULMFit][ULMFit] </br> 
+[Important AI papers 2018 TOPBOTS][Important AI papers 2018 TOPBOTS], [Chat Smarter with Allo][Chat Smarter with Allo], [Regularization Techniques for NLP][Regularization Techniques for NLP]
+
 # Food For Thought
 1. While the chosen neural achitecture is important, the techniques used for training the problem objective e.g.[*Word2Vec*][Mikolov et al. 2013b] or the techniques used while doing loss optimization e.g.[*OpenAI Transformer*][Radford et al. 2018] play a significant role in both fast as well as a good convergence.
 1. Commonality between Language Modelling, Machine Translation and Word2vec: All of them have a huge vocabulary size at the output and there is a need to alleviate computing of the huge sized softmax layer! See [Ruder's page](http://ruder.io/word-embeddings-softmax/index.html) for a quick-read.
-
-# Some cool articles
-[Illustrated BERT][Illustrated BERT], [OpenAi GPT-1][OpenAi GPT-1], [OpenAi GPT-2][OpenAi GPT-2], [The Natural Language Decathlon][The Natural Language Decathlon], [ULMFit][ULMFit]
 
 [how_i_met_your_paper]: https://github.com/murali1996/nlp/blob/master/images/how_i_met_your_paper.png "Connections"
 
@@ -101,3 +102,6 @@
 [OpenAi GPT-2]: https://openai.com/blog/better-language-models/
 [The Natural Language Decathlon]: https://blog.einstein.ai/the-natural-language-decathlon/
 [ULMFit]: https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/
+[Important AI papers 2018 TOPBOTS]: https://www.topbots.com/most-important-ai-research-papers-2018/
+[Chat Smarter with Allo]: https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html
+[Regularization Techniques for NLP]: http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/
