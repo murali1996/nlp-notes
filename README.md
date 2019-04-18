@@ -8,6 +8,7 @@
 1. [*GloVe*, GloVe: Global Vectors for Word Representation, Pennington et al. 2014][Pennington et al. 2014]
 1. [*FastText*, Enriching Word Vectors with Subword Information, Bojanowski et al. 2016][Bojanowski et al. 2016]
 1. [*FLAIR*, Contextual String Embeddings for Sequence Labeling, Akbik et al. 2018][Akbik et al. 2018] [[Code]](https://github.com/zalandoresearch/flair)
+1. [Learning Gender-Neutral Word Embeddings, Zhao et al. 2018][Zhao et al. 2018]
 ---
 ## Selected Sentence Encoding Techniques
 1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
@@ -98,6 +99,7 @@
 [Tang et al. 2019]: https://arxiv.org/abs/1903.12136
 [Sennrich et al. 2015]: https://arxiv.org/abs/1508.07909
 [Artetxe et al. 2018]: https://arxiv.org/abs/1812.10464
+[Zhao et al. 2018]: https://arxiv.org/abs/1809.01496
 
 [Illustrated BERT]: http://jalammar.github.io/illustrated-bert/
 [OpenAi GPT-1]: https://openai.com/blog/language-unsupervised/
