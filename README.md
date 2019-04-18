@@ -58,6 +58,11 @@
 1. While the chosen neural achitecture is important, the techniques used for training the problem objective e.g.[*Word2Vec*][Mikolov et al. 2013b] or the techniques used while doing loss optimization e.g.[*OpenAI Transformer*][Radford et al. 2018] play a significant role in both fast as well as a good convergence.
 1. Commonality between Language Modelling, Machine Translation and Word2vec: All of them have a huge vocabulary size at the output and there is a need to alleviate computing of the huge sized softmax layer! See [Ruder's page](http://ruder.io/word-embeddings-softmax/index.html) for a quick-read.
 
+# Some cool articles
+[Illustrated BERT][Illustrated BERT], [OpenAi GPT-1][OpenAi GPT-1], [OpenAi GPT-2][OpenAi GPT-2], [The Natural Language Decathlon][The Natural Language Decathlon], [ULMFit][ULMFit]
+
+[how_i_met_your_paper]: https://github.com/murali1996/nlp/blob/master/images/how_i_met_your_paper.png "Connections"
+
 [Mikolov et al. 2013a]: https://arxiv.org/abs/1301.3781
 [Mikolov et al. 2013b]: https://arxiv.org/abs/1310.4546
 [Pennington et al. 2014]: https://www.aclweb.org/anthology/D14-1162
@@ -91,4 +96,8 @@
 [Tang et al. 2019]: https://arxiv.org/abs/1903.12136
 [Sennrich et al. 2015]: https://arxiv.org/abs/1508.07909
 
-[how_i_met_your_paper]: https://github.com/murali1996/nlp/blob/master/images/how_i_met_your_paper.png "Connections"
+[Illustrated BERT]: http://jalammar.github.io/illustrated-bert/
+[OpenAi GPT-1]: https://openai.com/blog/language-unsupervised/
+[OpenAi GPT-2]: https://openai.com/blog/better-language-models/
+[The Natural Language Decathlon]: https://blog.einstein.ai/the-natural-language-decathlon/
+[ULMFit]: https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/
