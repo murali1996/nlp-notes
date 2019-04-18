@@ -49,6 +49,7 @@
 ## Selected Cross-Lingual Tasks' Works like NMT, XNLI, etc.
 1. [Neural Machine Translation of Rare Words with Subword Units, Sennrich et al. 2015][Sennrich et al. 2015]
 1. [Achieving Human Parity on Automatic Chinese to English News Translation, Hassan et al. 2018][Hassan et al. 2018]
+1. [Massively Multilingual Sentence Embeddings for Zero-Shot Cross-Lingual Transfer and Beyond, Artetxe et al. 2018][Artetxe et al. 2018]
 
 # Downloads
 1. [*Word2Vec*](https://github.com/mmihaltz/word2vec-GoogleNews-vectors/)
@@ -96,6 +97,7 @@
 [Bowman et al. 2018]: https://arxiv.org/abs/1812.10860
 [Tang et al. 2019]: https://arxiv.org/abs/1903.12136
 [Sennrich et al. 2015]: https://arxiv.org/abs/1508.07909
+[Artetxe et al. 2018]: https://arxiv.org/abs/1812.10464
 
 [Illustrated BERT]: http://jalammar.github.io/illustrated-bert/
 [OpenAi GPT-1]: https://openai.com/blog/language-unsupervised/
