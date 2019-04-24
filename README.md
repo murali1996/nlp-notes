@@ -14,8 +14,7 @@
 1. [Learning Gender-Neutral Word Embeddings, Zhao et al. 2018][Zhao et al. 2018]
 ## Selected Sentence Encoding Techniques
 1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
-1. [Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
-1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Alexis et al. 2017][Alexis et al. 2017]
+1. *InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
 1. [*USE*, Universal Sentence Encoder, Daniel et al. 2018][Daniel et al. 2018]
 1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Sandeep et al. 2018][Sandeep et al. 2018]
 1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
@@ -92,7 +91,6 @@
 [Sabour et al. 2017]: https://arxiv.org/abs/1710.09829
 [Xia et al. 2018]: https://arxiv.org/abs/1809.00385
 [Daniel et al. 2018]: https://arxiv.org/pdf/1803.11175.pdf
-[Alexis et al. 2017]: https://arxiv.org/abs/1705.02364
 [Sandeep et al. 2018]: https://arxiv.org/abs/1804.00079
 [McCann et al. 2018]: https://arxiv.org/abs/1806.08730
 [Zihang et al. 2019]: https://arxiv.org/abs/1901.02860v2
