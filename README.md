@@ -1,4 +1,4 @@
-# Some Interesting Papers in NLP
+# Interesting Papers in NLP
 
 ![alt text][how_i_met_your_paper]
 
@@ -71,6 +71,7 @@
 [Important AI papers 2018 TOPBOTS][Important AI papers 2018 TOPBOTS], [Chat Smarter with Allo][Chat Smarter with Allo], [Regularization Techniques for NLP][Regularization Techniques for NLP]
 
 # Food For Thought
+1. How good do ranking algorithms, the ones with pointwise/pairwise/listwise learning paradigms, perform when the no. of test classes at the infernece time grow massively? KG Reasoning using Translational/Bilinear/DL techniques is one important area under consideration.
 1. While the chosen neural achitecture is important, the techniques used for training the problem objective e.g.[*Word2Vec*][Mikolov et al. 2013b] or the techniques used while doing loss optimization e.g.[*OpenAI Transformer*][Radford et al. 2018] play a significant role in both fast as well as a good convergence.
 1. Commonality between Language Modelling, Machine Translation and Word2vec: All of them have a huge vocabulary size at the output and there is a need to alleviate computing of the huge sized softmax layer! See [Ruder's page](http://ruder.io/word-embeddings-softmax/index.html) for a quick-read.
 
