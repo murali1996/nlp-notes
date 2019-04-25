@@ -65,9 +65,9 @@
 1. [*Glove*](https://nlp.stanford.edu/projects/glove/)
 
 # Some cool articles/blogs/sites for nlp
-[http://nlpprogress.com/](http://nlpprogress.com/) </br>
-[Illustrated BERT][Illustrated BERT], [OpenAi GPT-1][OpenAi GPT-1], [OpenAi GPT-2][OpenAi GPT-2], [The Natural Language Decathlon][The Natural Language Decathlon], [ULMFit][ULMFit] </br> 
-[Important AI papers 2018 TOPBOTS][Important AI papers 2018 TOPBOTS], [Chat Smarter with Allo][Chat Smarter with Allo], [Regularization Techniques for NLP][Regularization Techniques for NLP]
+- [http://nlpprogress.com/](http://nlpprogress.com/), [GLUE](https://gluebenchmark.com/leaderboard) </br>
+- [Illustrated BERT][Illustrated BERT], [OpenAi GPT-1][OpenAi GPT-1], [OpenAi GPT-2][OpenAi GPT-2], [The Natural Language Decathlon][The Natural Language Decathlon], [ULMFit][ULMFit] </br> 
+- [Important AI papers 2018 TOPBOTS][Important AI papers 2018 TOPBOTS], [Chat Smarter with Allo][Chat Smarter with Allo], [Regularization Techniques for NLP][Regularization Techniques for NLP]
 
 # Food For Thought
 1. How good do ranking algorithms, the ones with pointwise/pairwise/listwise learning paradigms, perform when the no. of test classes at the infernece time grow massively? KG Reasoning using Translational/Bilinear/DL techniques is one important area under consideration.
