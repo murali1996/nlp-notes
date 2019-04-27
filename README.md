@@ -13,6 +13,7 @@
 1. [*FLAIR*, Contextual String Embeddings for Sequence Labeling, Akbik et al. 2018][Akbik et al. 2018] [[CODE]](https://github.com/zalandoresearch/flair)
 1. [Learning Gender-Neutral Word Embeddings, Zhao et al. 2018][Zhao et al. 2018]
 ## Selected Sentence Encoding Techniques
+1. [Skip-Thought Vectors, Kiros et al. 2015][Kiros et al. 2015]
 1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
 1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
 1. [*USE*, Universal Sentence Encoder, Daniel et al. 2018][Daniel et al. 2018]
@@ -113,6 +114,7 @@
 [Zhao et al. 2018]: https://arxiv.org/abs/1809.01496
 [Lample et al. 2019]: https://arxiv.org/abs/1901.07291
 [Conneau eta al. 2018c]: https://arxiv.org/abs/1809.05053
+[Kiros et al. 2015]: https://arxiv.org/abs/1506.06726
 
 [Illustrated BERT]: http://jalammar.github.io/illustrated-bert/
 [OpenAi GPT-1]: https://openai.com/blog/language-unsupervised/
