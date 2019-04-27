@@ -132,9 +132,9 @@ def my_pp(raw_text_df, split_sents=False, remove_fullstops=False, remove_stopwor
         processed = processed.str.replace(key,contractions[key])
     print("In PREPROCESS: contarctions replaced success...")
     #reg ex replacements
+    processed = processed.str.replace(r'£|\$(\ ?\d*\.?\d*)', ' currency ') 
     processed = processed.str.replace(r'\b[\w\-.]+?@\w+?\.\w{2,4}\b',' email ')
     processed = processed.str.replace(r'(http[s]?\S+)|(\w+\.[A-Za-z]{2,4}\S*)',' url ')
-    processed = processed.str.replace(r'£|\$', ' currency ')   
     processed = processed.str.replace(r'(\d{4}[-.]+\d{2}[-.]+\d{2})', ' date ')
     processed = processed.str.replace(r'(\d{2}[:]+\d{2})|(\d{1}[:]+\d{2})|(\d{1}[:]+\d{2}[:]+\d{2})', ' time ')
     processed = processed.str.replace(r'(\b\d{1,2}\D{0,3})?\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|(nov|dec)(?:ember)?)\D?(\d{1,2}\D?)?\D?((19[7-9]\d|20\d{2})|\d{2})', ' date ')  
