@@ -70,12 +70,17 @@
 1. [*Glove*](https://nlp.stanford.edu/projects/glove/)
 
 # Some cool articles/blogs/sites for nlp
-- [http://nlpprogress.com/](http://nlpprogress.com/), [NLP | ML Explained](http://mlexplained.com/category/nlp/), [Ruder's Blogs](http://ruder.io) </br>
-- [Illustrated BERT](http://jalammar.github.io/illustrated-bert/), 
-  [OpenAi GPT-1](https://openai.com/blog/language-unsupervised/), 
+- [http://nlpprogress.com/](http://nlpprogress.com/),
+  [NLP | ML Explained](http://mlexplained.com/category/nlp/),
+  [Ruder's Blogs](http://ruder.io) </br>
+- [Awesome-NLP](https://github.com/keon/awesome-nlp),
+  [NLP-Tutorial](https://github.com/graykode/nlp-tutorial),
+  [lazynlp](https://github.com/chiphuyen/lazynlp) </br>
+- [Illustrated BERT](http://jalammar.github.io/illustrated-bert/),
+  [OpenAi GPT-1](https://openai.com/blog/language-unsupervised/),
   [OpenAi GPT-2](https://openai.com/blog/better-language-models/),
   [The Natural Language Decathlon](https://blog.einstein.ai/the-natural-language-decathlon/),
-  [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/) </br> 
+  [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/) </br>
 - [Regularization Techniques for NLP](http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/),
   [Important AI papers 2018 TOPBOTS](https://www.topbots.com/most-important-ai-research-papers-2018/),
   [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html) </br>
