@@ -80,7 +80,7 @@
 # Quick Bites
 1. Byte Pair Encoding (BPE) is a data compression technique that iteratively replaces the most frequent pair of symbols (originally bytes) in a given dataset with a single unused symbol. In each iteration, the algorithm finds the most frequent (adjacent) pair of symbols, each can be constructed of a single character or a sequence of characters, and merged them to create a new symbol. All occurences of the selected pair are then replaced with the new symbol before the next iteration. Eventually, frequent sequence of characters, up to a whole word, are replaced with a single symbol, until the algorithm reaches the defined number of iterations (50k in this paper). During inference, if a word isn’t part of the BPE’s pre-built dictionary, it will be split into subwords that are.
 An example code of BPE can be found here. https://gist.github.com/ranihorev/6ba9a88c9e7401b603cd483dd767e783
-
+1. Models can be trained on SNLI in two different ways: (i) sentence encoding-based models that explicitly separate the encoding of the individual sentences and (ii) joint methods that allow to use encoding of both sentences (to use cross-features or attention from one sentence to the other).
 
 [how_i_met_your_paper]: https://github.com/murali1996/nlp/blob/master/images/how_i_met_your_paper.png "Connections"
 
