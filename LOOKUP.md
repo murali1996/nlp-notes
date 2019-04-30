@@ -98,6 +98,7 @@ git status
 ```
 #### Step-2: Creating a new_branch (say for example to fix a bug or to add a new feature) and pushing files to remote
 ```
+git branch -r
 git checkout -b new_br_name_ origin/master
 -----<modify files>---
 git add .
