@@ -16,8 +16,8 @@
 1. [Skip-Thought Vectors, Kiros et al. 2015][Kiros et al. 2015]
 1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
 1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
-1. [*USE*, Universal Sentence Encoder, Daniel et al. 2018][Daniel et al. 2018]
-1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Sandeep et al. 2018][Sandeep et al. 2018]
+1. [*USE*, Universal Sentence Encoder, Cer et al. 2018][Cer et al. 2018]
+1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Subramanian et al. 2018][Subramanian et al. 2018]
 1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
 ## Objectives Built On Top of Word/Character/BPE vectors or Built From Scratch
 1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
@@ -35,7 +35,7 @@
 1. [*Transformer-XL*, Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context, Zihang et al. 2019][Zihang et al. 2019]
 1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]
 ## Multi-Task Learning for NLU
-1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Sandeep et al. 2018][Sandeep et al. 2018]
+1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Subramanian et al. 2018][Subramanian et al. 2018]
 1. [*GLUE*, GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018]
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering, McCann et al. 2018][McCann et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
@@ -98,8 +98,8 @@ An example code of BPE can be found here. https://gist.github.com/ranihorev/6ba9
 [Radford et al. 2019]: https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf
 [Sabour et al. 2017]: https://arxiv.org/abs/1710.09829
 [Xia et al. 2018]: https://arxiv.org/abs/1809.00385
-[Daniel et al. 2018]: https://arxiv.org/pdf/1803.11175.pdf
-[Sandeep et al. 2018]: https://arxiv.org/abs/1804.00079
+[Cer et al. 2018]: https://arxiv.org/pdf/1803.11175.pdf
+[Subramanian et al. 2018]: https://arxiv.org/abs/1804.00079
 [McCann et al. 2018]: https://arxiv.org/abs/1806.08730
 [Zihang et al. 2019]: https://arxiv.org/abs/1901.02860v2
 [Victor et al. 2018]: https://arxiv.org/abs/1811.06031
