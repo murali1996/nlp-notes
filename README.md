@@ -75,7 +75,8 @@
 - [http://nlpprogress.com/](http://nlpprogress.com/),
   [NLP | ML Explained](http://mlexplained.com/category/nlp/),
   [Ruder's Blogs](http://ruder.io) </br>
-- [Awesome-NLP](https://github.com/keon/awesome-nlp),
+- [Awesome-Sentence-Embedding](https://github.com/Separius/awesome-sentence-embedding),
+  [Awesome-NLP](https://github.com/keon/awesome-nlp),
   [NLP-Tutorial](https://github.com/graykode/nlp-tutorial),
   [lazynlp](https://github.com/chiphuyen/lazynlp) </br>
 - [Illustrated BERT](http://jalammar.github.io/illustrated-bert/),
