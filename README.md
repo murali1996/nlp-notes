@@ -54,8 +54,8 @@
 ## Evaluation for XLU
 1. [XNLI: Evaluating Cross-lingual Sentence Representations, Conneau eta al. 2018c][Conneau eta al. 2018c]
 ## Cross-Lingual Works like NMT, XLU, etc.
-1. [*Transformer*, Attention Is All You Need, Vaswami et al. 2017][Vaswami et al. 2017]
 1. [Neural Machine Translation of Rare Words with Subword Units, Sennrich et al. 2015][Sennrich et al. 2015]
+1. [*Transformer*, Attention Is All You Need, Vaswami et al. 2017][Vaswami et al. 2017]
 1. [Achieving Human Parity on Automatic Chinese to English News Translation, Hassan et al. 2018][Hassan et al. 2018]
 1. [Massively Multilingual Sentence Embeddings for Zero-Shot Cross-Lingual Transfer and Beyond, Artetxe et al. 2018][Artetxe et al. 2018]
 1. [Cross-lingual Language Model Pretraining, Lample et al. 2019][Lample et al. 2019]
