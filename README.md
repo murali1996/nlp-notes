@@ -2,52 +2,49 @@
 
 ![alt text][how_i_met_your_paper]
 
----
----
----
-## Selected Word Embedding Techniques
+## Some common evaluation for NLU
+1. [SentEval: An Evaluation Toolkit for Universal Sentence Representations, Conneau et al. 2018a][Conneau et al. 2018a] [[Site]](https://github.com/facebookresearch/SentEval)
+1. [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018] [[Site]](https://gluebenchmark.com/leaderboard)
+1. [What you can cram into a single $&!#\* vector: Probing sentence embeddings for linguistic properties, Conneau et al 2018b][Conneau et al 2018b]
+## The \*Word Embeddings\* Wrapper
 1. [*Word2Vec*, Efficient Estimation of Word Representations in Vector Space, Mikolov et al. 2013a][Mikolov et al. 2013a]
 1. [*Word2Vec*, Distributed Representations of Words and Phrases and their Compositionality, Mikolov et al. 2013b][Mikolov et al. 2013b]
-1. [*GloVe*, GloVe: Global Vectors for Word Representation, Pennington et al. 2014][Pennington et al. 2014]
+1. [GloVe: Global Vectors for Word Representation, Pennington et al. 2014][Pennington et al. 2014]
 1. [*FastText*, Enriching Word Vectors with Subword Information, Bojanowski et al. 2016][Bojanowski et al. 2016]
 1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018] 
 1. [*FLAIR*, Contextual String Embeddings for Sequence Labeling, Akbik et al. 2018][Akbik et al. 2018] [[CODE]](https://github.com/zalandoresearch/flair)
 1. [Learning Gender-Neutral Word Embeddings, Zhao et al. 2018][Zhao et al. 2018]
-## Selected Sentence Encoding Techniques
-1. [Skip-Thought Vectors, Kiros et al. 2015][Kiros et al. 2015]
-1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
-1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
-1. [*USE*, Universal Sentence Encoder, Cer et al. 2018][Cer et al. 2018]
-1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Subramanian et al. 2018][Subramanian et al. 2018]
-1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
-## Objectives Built On Top of Word/Character/BPE vectors or Built From Scratch
-1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
-1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
----
----
----
-## Evaluation for NLU
-1. [SentEval: An Evaluation Toolkit for Universal Sentence Representations, Conneau & Kiela 2018][Conneau & Kiela 2018] [[Site]](https://github.com/facebookresearch/SentEval)
-1. [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018] [[Site]](https://gluebenchmark.com/leaderboard)
-## Language Modeling for NLU
+## The \*Language Modeling\* Wrapper
+###### Notes: Typically, these *pre-training* methods involve an unsupervised (also called semi-supervised in this context) learning followed by a supervised learning. This is unlike CV domain where *pre-training* is mainly supervised learning.
+###### Notes: There is no standard input method for all these works. Typically, you would find Word/Character embeddings or Byte-Pair Encoding(BPE) as input methods.
 1. [Semi-supervised Sequence Learning, Andrew and Quoc 2015][Andrew and Quoc 2015]
 1. [*ULM-FiT*, Universal Language Model Fine-tuning for Text Classification, Howard and Ruder 2018][Howard and Ruder 2018]
 1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018] 
 1. [*GPT-1 aka OpenAI Transformer*, Improving Language Understanding by Generative Pre-Training, Radford et al. 2018][Radford et al. 2018]
 1. [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al. 2018][Devlin et al. 2018] [[SLIDES]](https://nlp.stanford.edu/seminar/details/jdevlin.pdf)
-1. [Looking for ELMo's Friends: Sentence-Level Pretraining Beyond Language Modeling, Bowman et al. 2018][Bowman et al. 2018]
+1. [Practical Text Classification With Large Pre-Trained Language Models, NeelKant et al. 2018][NeelKant et al. 2018]
 1. [Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context, Zihang et al. 2019][Zihang et al. 2019]
-## Multi-Task Learning for NLU
+1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019]
+## The \*SNLI\* Wrapper
+1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
+1. [*USE*, Universal Sentence Encoder, Cer et al. 2018][Cer et al. 2018]
+1. [Sentence Encoders on STILTs: Supplementary Training on Intermediate Labeled-data Tasks, Phang et al. 2018][Phang et al. 2018]
+## Other ways of sentence encoding
+###### Notes: Some of these techniques include *MULTI-TASK* learning
+1. [Skip-Thought Vectors, Kiros et al. 2015][Kiros et al. 2015]
+1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
 1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Subramanian et al. 2018][Subramanian et al. 2018]
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering, McCann et al. 2018][McCann et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
-1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019]
-## Objectives Built On Top Of Pre-trained Models
-1. [Practical Text Classification With Large Pre-Trained Language Models, NeelKant et al. 2018][NeelKant et al. 2018]
-1. [Sentence Encoders on STILTs: Supplementary Training on Intermediate Labeled-data Tasks, Phang et al. 2018][Phang et al. 2018]
+1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
+## Derivatives of above papers
+1. [Looking for ELMo's Friends: Sentence-Level Pretraining Beyond Language Modeling, Bowman et al. 2018][Bowman et al. 2018]
 1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
 1. [SciBERT: Pretrained Contextualized Embeddings for Scientific Text, Beltagy et al. 2019][Beltagy et al. 2019]
 1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]
+## Miscellaneous
+1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
+1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
 ---
 ---
 ---
@@ -136,8 +133,9 @@
 [Lample et al. 2019]: https://arxiv.org/abs/1901.07291
 [Conneau eta al. 2018c]: https://arxiv.org/abs/1809.05053
 [Kiros et al. 2015]: https://arxiv.org/abs/1506.06726
-[Conneau & Kiela 2018]: https://arxiv.org/abs/1803.05449
+[Conneau et al. 2018a]: https://arxiv.org/abs/1803.05449
 [Phang et al. 2018]: https://arxiv.org/abs/1811.01088
+[Conneau et al 2018b]: https://arxiv.org/abs/1805.01070
 
 [Illustrated BERT]: http://jalammar.github.io/illustrated-bert/
 [OpenAi GPT-1]: https://openai.com/blog/language-unsupervised/
