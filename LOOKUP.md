@@ -208,7 +208,13 @@ with tf.variable_scope('forward'):
     self.lstm_fw_cell = rnn_cell.BasicLSTMCell(dim_hidden)   
 with tf.variable_scope('backward'):
     self.lstm_bw_cell = rnn_cell.BasicLSTMCell(dim_hidden)
+       
+# HINT: Please add all tensor connections before calling session inline. Else, new tensor connections cannot be added at runtime.
+train_sess = tf.Session(config=configs.tf_config, graph=myGraph)
+If you want new connections at runtime, you should do tf.Session(...) as sess:
 ```
+
+
 #### TensorBoard
 ```
 tensorboard --logdir .
