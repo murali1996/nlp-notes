@@ -1,21 +1,20 @@
-# Interesting Papers in NLP
-
+# Interesting Works in NLP
 ![alt text][how_i_met_your_paper]
-
-## Some common evaluation for NLU
+## NLU for English Language
+### Some common evaluation for NLU
 1. [SentEval: An Evaluation Toolkit for Universal Sentence Representations, Conneau et al. 2018a][Conneau et al. 2018a] [[Site]](https://github.com/facebookresearch/SentEval)
 1. [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018] [[Site]](https://gluebenchmark.com/leaderboard)
 1. [What you can cram into a single $&!#\* vector: Probing sentence embeddings for linguistic properties, Conneau et al 2018b][Conneau et al 2018b]
-## The \*Word Embeddings\* Wrapper
+### The \*Word Embeddings\* Wrapper
 1. [*Word2Vec*, Efficient Estimation of Word Representations in Vector Space, Mikolov et al. 2013a][Mikolov et al. 2013a]
 1. [*Word2Vec*, Distributed Representations of Words and Phrases and their Compositionality, Mikolov et al. 2013b][Mikolov et al. 2013b]
 1. [GloVe: Global Vectors for Word Representation, Pennington et al. 2014][Pennington et al. 2014]
 1. [*FastText*, Enriching Word Vectors with Subword Information, Bojanowski et al. 2016][Bojanowski et al. 2016]
 1. [*FLAIR*, Contextual String Embeddings for Sequence Labeling, Akbik et al. 2018][Akbik et al. 2018] [[CODE]](https://github.com/zalandoresearch/flair)
 1. [Learning Gender-Neutral Word Embeddings, Zhao et al. 2018][Zhao et al. 2018]
-## The \*Language Modeling\* Wrapper
-###### Notes: Typically, these *pre-training* methods involve an unsupervised (also called semi-supervised in this context) learning followed by a supervised learning. This is unlike CV domain where *pre-training* is mainly supervised learning.
-###### Notes: There is no standard input method for all these works. Typically, you would find Word/Character embeddings or Byte-Pair Encoding(BPE) as input methods.
+### The \*Language Modeling\* Wrapper
+:bulb: Typically, these *pre-training* methods involve an unsupervised (also called semi-supervised in this context) learning followed by a supervised learning. This is unlike CV domain where *pre-training* is mainly supervised learning.   
+:bulb: There is no standard input method for all these works. Typically, you would find Word/Character embeddings or Byte-Pair Encoding(BPE) as input methods.
 1. [Semi-supervised Sequence Learning, Andrew and Quoc 2015][Andrew and Quoc 2015]
 1. [*ULM-FiT*, Universal Language Model Fine-tuning for Text Classification, Howard and Ruder 2018][Howard and Ruder 2018]
 1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018] 
@@ -24,49 +23,44 @@
 1. [Practical Text Classification With Large Pre-Trained Language Models, NeelKant et al. 2018][NeelKant et al. 2018]
 1. [Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context, Zihang et al. 2019][Zihang et al. 2019]
 1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019]
-## The \*SNLI\* Wrapper
+### The \*Beyond-Language-Modeling\* Wrapper
 1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
 1. [*USE*, Universal Sentence Encoder, Cer et al. 2018][Cer et al. 2018]
 1. [Sentence Encoders on STILTs: Supplementary Training on Intermediate Labeled-data Tasks, Phang et al. 2018][Phang et al. 2018]
-## Other ways of sentence encoding
-###### Notes: Some of these techniques include *MULTI-TASK* learning
+1. [Looking for ELMo's Friends: Sentence-Level Pretraining Beyond Language Modeling, Bowman et al. 2018][Bowman et al. 2018]
+### Other ways of sentence encoding
+:bulb: Some of these techniques include *MULTI-TASK* learning
 1. [Skip-Thought Vectors, Kiros et al. 2015][Kiros et al. 2015]
 1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
 1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Subramanian et al. 2018][Subramanian et al. 2018]
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering, McCann et al. 2018][McCann et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
 1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
-## Derivatives of above papers
-1. [Looking for ELMo's Friends: Sentence-Level Pretraining Beyond Language Modeling, Bowman et al. 2018][Bowman et al. 2018]
+### Miscellaneous
 1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
 1. [SciBERT: Pretrained Contextualized Embeddings for Scientific Text, Beltagy et al. 2019][Beltagy et al. 2019]
 1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]
-## Miscellaneous
 1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
 1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
 ---
 ---
 ---
-## Evaluation for XLU
+## NLU for Multiple Languages
+### Evaluation for XLU
 1. [XNLI: Evaluating Cross-lingual Sentence Representations, Conneau eta al. 2018c][Conneau eta al. 2018c]
-## Cross-Lingual Works like NMT, XLU, etc.
+### Cross-Lingual Works like NMT, XLU, etc.
 1. [Neural Machine Translation of Rare Words with Subword Units, Sennrich et al. 2015][Sennrich et al. 2015]
 1. [*Transformer*, Attention Is All You Need, Vaswami et al. 2017][Vaswami et al. 2017]
 1. [Achieving Human Parity on Automatic Chinese to English News Translation, Hassan et al. 2018][Hassan et al. 2018]
 1. [Massively Multilingual Sentence Embeddings for Zero-Shot Cross-Lingual Transfer and Beyond, Artetxe et al. 2018][Artetxe et al. 2018]
 1. [Cross-lingual Language Model Pretraining, Lample et al. 2019][Lample et al. 2019]
----
----
----
-## Miscellaneous
-1. [*Capsule-Nets*, Dynamic Routing Between Capsules, Sabour et al. 2017][Sabour et al. 2017]
----
----
----
+
 
 # Downloads
 1. [*Word2Vec*](https://github.com/mmihaltz/word2vec-GoogleNews-vectors/)
 1. [*Glove*](https://nlp.stanford.edu/projects/glove/)
+
+
 
 # Some cool articles/blogs/sites for nlp
 - [http://nlpprogress.com/](http://nlpprogress.com/),
@@ -85,14 +79,26 @@
   [Important AI papers 2018 TOPBOTS](https://www.topbots.com/most-important-ai-research-papers-2018/),
   [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html) </br>
 
+
+
+
 # Food For Thought
 1. How good do ranking algorithms, the ones with pointwise/pairwise/listwise learning paradigms, perform when the no. of test classes at the infernece time grow massively? KG Reasoning using Translational/Bilinear/DL techniques is one important area under consideration.
 1. While the chosen neural achitecture is important, the techniques used for training the problem objective e.g.[*Word2Vec*][Mikolov et al. 2013b] or the techniques used while doing loss optimization e.g.[*OpenAI Transformer*][Radford et al. 2018] play a significant role in both fast as well as a good convergence.
 1. Commonality between Language Modelling, Machine Translation and Word2vec: All of them have a huge vocabulary size at the output and there is a need to alleviate computing of the huge sized softmax layer! See [Ruder's page](http://ruder.io/word-embeddings-softmax/index.html) for a quick-read.
 
+
+
+
+
 # Quick Bites
 1. Byte Pair Encoding (BPE) is a data compression technique that iteratively replaces the most frequent pair of symbols (originally bytes) in a given dataset with a single unused symbol. In each iteration, the algorithm finds the most frequent (adjacent) pair of symbols, each can be constructed of a single character or a sequence of characters, and merged them to create a new symbol. All occurences of the selected pair are then replaced with the new symbol before the next iteration. Eventually, frequent sequence of characters, up to a whole word, are replaced with a single symbol, until the algorithm reaches the defined number of iterations (50k can be an example figure). During inference, if a word isn’t part of the BPE’s pre-built dictionary, it will be split into subwords that are. An example code of BPE can be found here. https://gist.github.com/ranihorev/6ba9a88c9e7401b603cd483dd767e783
 1. Models can be trained on SNLI in two different ways: (i) sentence encoding-based models that explicitly separate the encoding of the individual sentences and (ii) joint methods that allow to use encoding of both sentences (to use cross-features or attention from one sentence to the other).
+
+
+
+
+
 
 [how_i_met_your_paper]: https://github.com/murali1996/nlp/blob/master/images/how_i_met_your_paper.png "Connections"
 
@@ -108,7 +114,6 @@
 [Howard and Ruder 2018]: https://arxiv.org/abs/1801.06146
 [Devlin et al. 2018]:https://arxiv.org/abs/1810.04805
 [Radford et al. 2019]: https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf
-[Sabour et al. 2017]: https://arxiv.org/abs/1710.09829
 [Xia et al. 2018]: https://arxiv.org/abs/1809.00385
 [Cer et al. 2018]: https://arxiv.org/pdf/1803.11175.pdf
 [Subramanian et al. 2018]: https://arxiv.org/abs/1804.00079
