@@ -230,6 +230,18 @@ sess.run(tf.tables_initializer())
 ```
 
 
-
-
-
+#### Progressbar
+```python
+def progressBar(value, endvalue, names, values, bar_length=20):
+	assert(len(names)==len(values));
+	percent = float(value) / endvalue
+	arrow = '-' * int(round(percent * bar_length)-1) + '>'
+	spaces = ' ' * (bar_length - len(arrow));
+	string = '';
+	for name, value in zip(names,values):
+		temp = '|| {0}: {1:.4f} '.format(name, value);
+		string+=temp;
+	sys.stdout.write("\rPercent: [{0}] {1}% {2}".format(arrow + spaces, int(round(percent * 100)), string))
+	sys.stdout.flush()
+	return
+```
