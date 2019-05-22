@@ -1,7 +1,5 @@
-# Interesting Works in NLP
-![alt text][how_i_met_your_paper]
-
-# Contents
+## Contents
+* [Some connections at a glance](#Some-connections-at-a-glance)
 * [Mono-Lingual NLU (Mainly English)](#Mono-Lingual-NLU-Mainly-English)
   * [Some common evaluation for NLU](#Some-common-evaluation-for-NLU)
   * [The \*Word Embeddings\* Wrapper](#The-Word-Embeddings-Wrapper)
@@ -15,6 +13,10 @@
 * [Downloads](#Downloads)
 * [Some Cool Bookmarks for NLP](#Some-Cool-Bookmarks-for-NLP)
 * [Food For Thought](#Food-For-Thought)
+
+
+## Some connections at a glance
+![alt text][how_i_met_your_paper]
 
 
 
