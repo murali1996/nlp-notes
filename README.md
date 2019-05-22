@@ -1,6 +1,6 @@
 # Interesting Works in NLP
 ![alt text][how_i_met_your_paper]
-## NLU for English Language
+## Mono-Lingual NLU (Mainly English)
 ### Some common evaluation for NLU
 1. [SentEval: An Evaluation Toolkit for Universal Sentence Representations, Conneau et al. 2018a][Conneau et al. 2018a] [[Site]](https://github.com/facebookresearch/SentEval)
 1. [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018] [[Site]](https://gluebenchmark.com/leaderboard)
@@ -45,7 +45,7 @@
 ---
 ---
 ---
-## NLU for Multiple Languages
+## Cross-Lingual NLU
 ### Evaluation for XLU
 1. [XNLI: Evaluating Cross-lingual Sentence Representations, Conneau eta al. 2018c][Conneau eta al. 2018c]
 ### Cross-Lingual Works like NMT, XLU, etc.
