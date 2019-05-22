@@ -1,5 +1,23 @@
 # Interesting Works in NLP
 ![alt text][how_i_met_your_paper]
+
+# Contents
+* [Mono-Lingual NLU (Mainly English)](#Mono-Lingual-NLU-Mainly-English)
+  * [Some common evaluation for NLU](#Some-common-evaluation-for-NLU)
+  * [The \*Word Embeddings\* Wrapper](#The-Word-Embeddings-Wrapper)
+  * [The \*Language Modeling\* Wrapper](#The-Language-Modeling-Wrapper)
+  * [The \*Beyond-Language-Modeling\* Wrapper](#The-Beyond-Language-Modeling-Wrapper)
+  * [Other Neural Models for Sentence Encoding](#Other-Neural-Models-for-Sentence-Encoding)
+  * [Miscellaneous](#Miscellaneous)
+* [Cross-Lingual NLU](#Cross-Lingual-NLU)
+  * [Evaluation for XLU](#Evaluation-for-XLU)
+  * [Cross-Lingual Works](#Cross-Lingual-Works)
+* [Downloads](#Downloads)
+* [Some Cool Bookmarks for NLP](#Some-Cool-Bookmarks-for-NLP)
+* [Food For Thought](#Food-For-Thought)
+
+
+
 ## Mono-Lingual NLU (Mainly English)
 ### Some common evaluation for NLU
 1. [SentEval: An Evaluation Toolkit for Universal Sentence Representations, Conneau et al. 2018a][Conneau et al. 2018a] [[Site]](https://github.com/facebookresearch/SentEval)
@@ -28,7 +46,7 @@
 1. [*USE*, Universal Sentence Encoder, Cer et al. 2018][Cer et al. 2018]
 1. [Sentence Encoders on STILTs: Supplementary Training on Intermediate Labeled-data Tasks, Phang et al. 2018][Phang et al. 2018]
 1. [Looking for ELMo's Friends: Sentence-Level Pretraining Beyond Language Modeling, Bowman et al. 2018][Bowman et al. 2018]
-### Other ways of sentence encoding
+### Other Neural Models for Sentence Encoding
 :bulb: Some of these techniques include *MULTI-TASK* learning
 1. [Skip-Thought Vectors, Kiros et al. 2015][Kiros et al. 2015]
 1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
@@ -42,13 +60,13 @@
 1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]
 1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
 1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
----
----
----
+
+
+
 ## Cross-Lingual NLU
 ### Evaluation for XLU
 1. [XNLI: Evaluating Cross-lingual Sentence Representations, Conneau eta al. 2018c][Conneau eta al. 2018c]
-### Cross-Lingual Works like NMT, XLU, etc.
+### Cross-Lingual Works
 1. [Neural Machine Translation of Rare Words with Subword Units, Sennrich et al. 2015][Sennrich et al. 2015]
 1. [*Transformer*, Attention Is All You Need, Vaswami et al. 2017][Vaswami et al. 2017]
 1. [Achieving Human Parity on Automatic Chinese to English News Translation, Hassan et al. 2018][Hassan et al. 2018]
@@ -56,13 +74,14 @@
 1. [Cross-lingual Language Model Pretraining, Lample et al. 2019][Lample et al. 2019]
 
 
-# Downloads
+
+## Downloads
 1. [*Word2Vec*](https://github.com/mmihaltz/word2vec-GoogleNews-vectors/)
 1. [*Glove*](https://nlp.stanford.edu/projects/glove/)
 
 
 
-# Some cool articles/blogs/sites for nlp
+## Some Cool Bookmarks for NLP
 - [http://nlpprogress.com/](http://nlpprogress.com/),
   [NLP | ML Explained](http://mlexplained.com/category/nlp/),
   [Ruder's Blogs](http://ruder.io) </br>
@@ -82,7 +101,7 @@
 
 
 
-# Food For Thought
+## Food For Thought
 1. How good do ranking algorithms, the ones with pointwise/pairwise/listwise learning paradigms, perform when the no. of test classes at the infernece time grow massively? KG Reasoning using Translational/Bilinear/DL techniques is one important area under consideration.
 1. While the chosen neural achitecture is important, the techniques used for training the problem objective e.g.[*Word2Vec*][Mikolov et al. 2013b] or the techniques used while doing loss optimization e.g.[*OpenAI Transformer*][Radford et al. 2018] play a significant role in both fast as well as a good convergence.
 1. Commonality between Language Modelling, Machine Translation and Word2vec: All of them have a huge vocabulary size at the output and there is a need to alleviate computing of the huge sized softmax layer! See [Ruder's page](http://ruder.io/word-embeddings-softmax/index.html) for a quick-read.
