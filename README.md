@@ -15,7 +15,7 @@
 ### The \*Language Modeling\* Wrapper
 :bulb: Typically, these *pre-training* methods involve an unsupervised (also called semi-supervised in this context) learning followed by a supervised learning. This is unlike CV domain where *pre-training* is mainly supervised learning.   
 :bulb: There is no standard input method for all these works. Typically, you would find Word/Character embeddings or Byte-Pair Encoding(BPE) as input methods.
-1. [Semi-supervised Sequence Learning, Andrew and Quoc 2015][Andrew and Quoc 2015]
+1. [Semi-supervised Sequence Learning, Dai et al. 2015][Dai et al. 2015]
 1. [*ULM-FiT*, Universal Language Model Fine-tuning for Text Classification, Howard and Ruder 2018][Howard and Ruder 2018]
 1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018] 
 1. [*GPT-1 aka OpenAI Transformer*, Improving Language Understanding by Generative Pre-Training, Radford et al. 2018][Radford et al. 2018]
@@ -120,7 +120,7 @@
 [McCann et al. 2018]: https://arxiv.org/abs/1806.08730
 [Zihang et al. 2019]: https://arxiv.org/abs/1901.02860v2
 [Victor et al. 2018]: https://arxiv.org/abs/1811.06031
-[Andrew and Quoc 2015]: https://arxiv.org/abs/1511.01432
+[Dai et al. 2015]: https://arxiv.org/abs/1511.01432
 [Chen et al. 2019]: https://arxiv.org/abs/1902.10909
 [Zhao et al. 2018]: https://arxiv.org/abs/1804.00538
 [Conneau eta al. 2017]: https://arxiv.org/abs/1705.02364
