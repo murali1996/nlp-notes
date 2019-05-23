@@ -193,7 +193,7 @@ print("Predicted model: {.3f}x + {.3f}".format(w_value[0], w_value[1]))
 ```
 ## Tensorflow
 #### General
-```
+```python
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True #takes the min required memory or
 config.gpu_options.per_process_gpu_memory_fraction = 0.4 #fixed memory - 40% of total memory
@@ -213,7 +213,15 @@ with tf.variable_scope('backward'):
 train_sess = tf.Session(config=configs.tf_config, graph=myGraph)
 If you want new connections at runtime, you should do tf.Session(...) as sess:
 ```
-
+```python
+max_len = tf.shape(A_before_softmax)[-1]
+A = tf.map_fn(
+		lambda x: tf.concat(  [ tf.nn.softmax(tf.gather(x[1],tf.range(tf.reshape(x[0],[])),axis=-1)), tf.gather(x[1],tf.range(start=tf.reshape(x[0],[]),limit=max_len,delta=1),axis=-1) ], axis=-1  ), 
+		(self.s_len, A_before_softmax),
+		dtype=tf.float32,
+		name='self_attn_softmax'
+	)
+```
 
 #### TensorBoard
 ```
