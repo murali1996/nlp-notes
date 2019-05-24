@@ -183,13 +183,16 @@ pip freeze > requirements.txt
 
 # Look Up for Libraries
 ## Numpy
-```
+```python
 np.ravel() # to flatten
 np.hstack(), vstack(), stack() # from list to array or join arrays
 enumerate(), np.ndenumerate()
 Display of objects not supported in spyder: convert arrays to lists .tolist() and print
 print("Predicted model: {a:.3f}x + {b:.3f}".format(a=w_value[0], b=w_value[1]))
 print("Predicted model: {.3f}x + {.3f}".format(w_value[0], w_value[1]))
+```
+```python
+[*FLAGS.__flags.keys()]
 ```
 ## Progressbar
 ```python
