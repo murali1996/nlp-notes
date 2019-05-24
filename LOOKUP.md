@@ -191,6 +191,21 @@ Display of objects not supported in spyder: convert arrays to lists .tolist() an
 print("Predicted model: {a:.3f}x + {b:.3f}".format(a=w_value[0], b=w_value[1]))
 print("Predicted model: {.3f}x + {.3f}".format(w_value[0], w_value[1]))
 ```
+## Progressbar
+```python
+def progressBar(value, endvalue, names, values, bar_length=20):
+	assert(len(names)==len(values));
+	percent = float(value) / endvalue
+	arrow = '-' * int(round(percent * bar_length)-1) + '>'
+	spaces = ' ' * (bar_length - len(arrow));
+	string = '';
+	for name, value in zip(names,values):
+		temp = '|| {0}: {1:.4f} '.format(name, value);
+		string+=temp;
+	sys.stdout.write("\rPercent: [{0}] {1}% {2}".format(arrow + spaces, int(round(percent * 100)), string))
+	sys.stdout.flush()
+	return
+```
 ## Tensorflow
 #### General
 ```python
@@ -222,7 +237,6 @@ A = tf.map_fn(
 		name='self_attn_softmax'
 	)
 ```
-
 #### TensorBoard
 ```
 tensorboard --logdir .
@@ -236,20 +250,44 @@ curl -L "https://tfhub.dev/google/elmo/2?tf-hub-format=compressed" | tar -zxvC <
 sess.run(tf.global_variables_initializer())
 sess.run(tf.tables_initializer())
 ```
-
-
-#### Progressbar
+#### Tensorflow tSNE
 ```python
-def progressBar(value, endvalue, names, values, bar_length=20):
-	assert(len(names)==len(values));
-	percent = float(value) / endvalue
-	arrow = '-' * int(round(percent * bar_length)-1) + '>'
-	spaces = ' ' * (bar_length - len(arrow));
-	string = '';
-	for name, value in zip(names,values):
-		temp = '|| {0}: {1:.4f} '.format(name, value);
-		string+=temp;
-	sys.stdout.write("\rPercent: [{0}] {1}% {2}".format(arrow + spaces, int(round(percent * 100)), string))
-	sys.stdout.flush()
+def tsne_projections(
+	FLAGS,
+	mySess: "tf.Session()",
+	myName: str,
+	myEmbeddings: "array of vectors",
+	metadata_names: "list of names which indicate corresponding data to be seen in metadata",
+	metadata: "np array of shape: [len(myEmbeddings),len(metadata_names)]"):
+	#
+	# tensorboard --logdir='checkpoints/' --port=8870
+	assert len(myEmbeddings)==metadata.shape[0]
+	assert len(metadata_names)==metadata.shape[1]
+	save_dir = os.path.join(FLAGS.ckpt_dir, myName)
+	if not os.path.exists(save_dir):
+		os.makedirs(save_dir)
+	#
+	with tf.variable_scope('tf_board', reuse=tf.AUTO_REUSE):
+		myEmbeddings_tensor = tf.get_variable(name=myName, shape=myEmbeddings.shape, initializer=tf.constant_initializer(myEmbeddings), trainable=False)
+		print(myEmbeddings_tensor)
+	mySess.run(myEmbeddings_tensor.initializer)
+	projection_saver = tf.train.Saver([myEmbeddings_tensor]) # Save only this variable
+	projection_saver.save(mySess, os.path.join(save_dir, myName+'.ckpt'))
+	#
+	tsv_path_local = str(myName)+'_labels.tsv'
+	tsv_path = os.path.join(save_dir, tsv_path_local);
+	with open(tsv_path, 'w', encoding='utf8') as tsv_file:
+		tsv_writer = csv.writer(tsv_file, delimiter='\t', lineterminator='\n')
+		if len(metadata_names)>1:
+			tsv_writer.writerow(metadata_names)
+		for row in metadata:
+			tsv_writer.writerow([i for i in row]) # [label, cnt] # [label]
+	#
+	config_projector = projector.ProjectorConfig()
+	embedding = config_projector.embeddings.add()
+	embedding.tensor_name = myEmbeddings_tensor.name
+	embedding.metadata_path = tsv_path_local
+	projector.visualize_embeddings(tf.summary.FileWriter(save_dir), config_projector) # Saves a config file that TensorBoard will read during startup.
+	print('Visualization Data Saved at: {}'.format(save_dir))
 	return
 ```
