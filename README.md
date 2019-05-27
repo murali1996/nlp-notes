@@ -1,12 +1,14 @@
 ## Contents
 * [Some connections at a glance](#Some-connections-at-a-glance)
-* [Mono-Lingual NLU (Mainly English)](#Mono-Lingual-NLU-Mainly-English)
+* [Natural Language Understanding and Processing - English](#Natural-Language-Understanding-and-Processing-English)
   * [Some common evaluation for NLU](#Some-common-evaluation-for-NLU)
   * [The \*Word Embeddings\* Wrapper](#The-Word-Embeddings-Wrapper)
   * [The \*Language Modeling\* Wrapper](#The-Language-Modeling-Wrapper)
   * [The \*Beyond-Language-Modeling\* Wrapper](#The-Beyond-Language-Modeling-Wrapper)
-  * [Other Neural Models for Sentence Encoding](#Other-Neural-Models-for-Sentence-Encoding)
-  * [Miscellaneous](#Miscellaneous)
+  * [Some more neural models for Sentence Encoding](#Some-more-neural-models-for-Sentence-Encoding)
+  * [Derivatives](#Derivatives)
+  * [Dialouge Systems and Chatbots](#Dialouge-Systems-and-Chatbots)
+  * [Sequence Labeling and Chunking](#Sequence-Labeling-and-Chunking)
 * [Cross-Lingual NLU](#Cross-Lingual-NLU)
   * [Evaluation for XLU](#Evaluation-for-XLU)
   * [Cross-Lingual Works](#Cross-Lingual-Works)
@@ -20,7 +22,7 @@
 
 
 
-## Mono-Lingual NLU (Mainly English)
+## Natural Language Understanding and Processing - English
 ### Some common evaluation for NLU
 1. [SentEval: An Evaluation Toolkit for Universal Sentence Representations, Conneau et al. 2018a][Conneau et al. 2018a] [[Site]](https://github.com/facebookresearch/SentEval)
 1. [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018] [[Site]](https://gluebenchmark.com/leaderboard)
@@ -44,24 +46,28 @@
 1. [Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context, Zihang et al. 2019][Zihang et al. 2019]
 1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019]
 ### The \*Beyond-Language-Modeling\* Wrapper
+:bulb: Some of these techniques include *MULTI-TASK* learning
 1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
 1. [*USE*, Universal Sentence Encoder, Cer et al. 2018][Cer et al. 2018]
 1. [Sentence Encoders on STILTs: Supplementary Training on Intermediate Labeled-data Tasks, Phang et al. 2018][Phang et al. 2018]
 1. [Looking for ELMo's Friends: Sentence-Level Pretraining Beyond Language Modeling, Bowman et al. 2018][Bowman et al. 2018]
-### Other Neural Models for Sentence Encoding
-:bulb: Some of these techniques include *MULTI-TASK* learning
-1. [Skip-Thought Vectors, Kiros et al. 2015][Kiros et al. 2015]
-1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
 1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Subramanian et al. 2018][Subramanian et al. 2018]
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering, McCann et al. 2018][McCann et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
+### Some more neural models for Sentence Encoding
+1. [Skip-Thought Vectors, Kiros et al. 2015][Kiros et al. 2015]
+1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
 1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
-### Miscellaneous
-1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
+### Derivatives
 1. [SciBERT: Pretrained Contextualized Embeddings for Scientific Text, Beltagy et al. 2019][Beltagy et al. 2019]
 1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]
-1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
+### Dialouge Systems and Chatbots
 1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
+1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
+1. [Few-Shot Generalization Across Dialogue Tasks, Vlasov et al. 2019][Vlasov et al. 2019]
+1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
+### Sequence Labeling and Chunking
+1. [Neural Models for Sequence Chunking, Zhai et at. 2017] 
 
 
 
@@ -161,6 +167,8 @@
 [Conneau et al. 2018a]: https://arxiv.org/abs/1803.05449
 [Phang et al. 2018]: https://arxiv.org/abs/1811.01088
 [Conneau et al 2018b]: https://arxiv.org/abs/1805.01070
+[Vlasov et al. 2019]: https://arxiv.org/abs/1811.11707
+[Zhai et at. 2017]: https://arxiv.org/abs/1701.04027
 
 [Illustrated BERT]: http://jalammar.github.io/illustrated-bert/
 [OpenAi GPT-1]: https://openai.com/blog/language-unsupervised/
