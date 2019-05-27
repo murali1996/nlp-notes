@@ -1,6 +1,6 @@
 ## Contents
 * [Some connections at a glance](#Some-connections-at-a-glance)
-* [Natural Language Understanding and Processing - English](#Natural-Language-Understanding-and-Processing-English)
+* [Natural Language Understanding and Processing - English](#Natural-Language-Understanding-and-Processing---English)
   * [Some common evaluation for NLU](#Some-common-evaluation-for-NLU)
   * [The \*Word Embeddings\* Wrapper](#The-Word-Embeddings-Wrapper)
   * [The \*Language Modeling\* Wrapper](#The-Language-Modeling-Wrapper)
