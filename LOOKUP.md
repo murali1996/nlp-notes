@@ -8,23 +8,16 @@
 
 
 # Linux
-https://dev.to/awwsmm/101-bash-commands-and-tips-for-beginners-to-experts-30je#basic-bash-scripting
+- https://dev.to/awwsmm/101-bash-commands-and-tips-for-beginners-to-experts-30je#basic-bash-scripting
+- https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners
+
 #### Shorten prompt length in cmd
 ```bash
 PS1='\u:\W\$ '
 ```
-#### Files and Processes
+#### Files
 ```bash
-nvcc --version
-python --version
-echo ".py"
-htop
-top -H -p <PID>
-ps -A # to know all existing PIDs
-ps -aux | grep python
-
-pwd, cd, ls, mkdir, rmdir, rm, rm -r, rm -rf, mv, cp, apt-get, sudo #https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners
-touch # to create files # example: touch new.txt, touch main.py
+pwd, cd, ls, mkdir, rmdir, rm, rm -r, rm -rf, mv, cp, apt-get, sudo touch # to create files # example: touch new.txt, touch main.py
 man, --help # get maunal # example: man cd, cd -help
 locate # use locate -i new.txt to search in a case insensitive way
 echo # The "echo" command helps us move some data, usually text into a file
@@ -34,6 +27,16 @@ chmod +x <filename> # change permissions to directly execute, ex: chmod +x main.
 tar # https://www.tecmint.com/18-tar-command-examples-in-linux/
 tar -zxvf file_name.tar.gz # examples: tar -cvf, tar -xvf, tar -tvf, etc.
 unzip tecmint_files.zip -d /tmp/unziped, zip -r tecmint_files.zip tecmint_files # Use zip to compress files into a zip archive, and unzip to extract files from a zip archive.
+```
+#### Processes
+```bash
+nvcc --version
+python --version
+echo ".py"
+htop
+top -H -p <PID>
+ps -A # to know all existing PIDs
+ps -aux | grep python
 ```
 #### Network
 ```bash
