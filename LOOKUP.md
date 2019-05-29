@@ -1,6 +1,20 @@
-# Look Up for System
-## Linux
+# Contents
+- [Linux](#Linux)
+- [Git Help](#Git-Help)
+- [Chrome Issues](#Chrome-Issues)
+- [Python](#Python)
+- [Tensorflow](#Tensorflow)
+
+
+
+# Linux
+https://dev.to/awwsmm/101-bash-commands-and-tips-for-beginners-to-experts-30je#basic-bash-scripting
+#### Shorten prompt length in cmd
+```bash
+PS1='\u:\W\$ '
 ```
+#### Files and Processes
+```bash
 nvcc --version
 python --version
 echo ".py"
@@ -8,23 +22,11 @@ htop
 top -H -p <PID>
 ps -A # to know all existing PIDs
 ps -aux | grep python
-rm -rf <folder name>
-cp filename dirname
 
-Shorten prompt length in cmd
->> PS1='\u:\W\$ '
-
-conda info --envs
-source activate conda_env_murali
-set -a ; . /usr/local/nvidia_cuda/scripts/set_cuda9.0_cudnn7.0 ; set +a
-jupyter notebook --no-browser --ip '*'
-
-pwd, cd, ls, mkdir, rmdir, rm, rm -r, mv, cp, apt-get, sudo #https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners
+pwd, cd, ls, mkdir, rmdir, rm, rm -r, rm -rf, mv, cp, apt-get, sudo #https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners
 touch # to create files # example: touch new.txt, touch main.py
 man, --help # get maunal # example: man cd, cd -help
 locate # use locate -i new.txt to search in a case insensitive way
-cp -a path_src path_dest
-
 echo # The "echo" command helps us move some data, usually text into a file
 cat # Use the cat command to display the contents of a file. It is usually used to easily view programs.
 chmod +x <filename> # change permissions to directly execute, ex: chmod +x main.py 
@@ -32,15 +34,14 @@ chmod +x <filename> # change permissions to directly execute, ex: chmod +x main.
 tar # https://www.tecmint.com/18-tar-command-examples-in-linux/
 tar -zxvf file_name.tar.gz # examples: tar -cvf, tar -xvf, tar -tvf, etc.
 unzip tecmint_files.zip -d /tmp/unziped, zip -r tecmint_files.zip tecmint_files # Use zip to compress files into a zip archive, and unzip to extract files from a zip archive.
-
-wget https://tfhub.dev/google/universal-sentence-encoder/2'?tf-hub-format=compressed' -P use2
-wget https://tfhub.dev/google/universal-sentence-encoder/2'?tf-hub-format=compressed' -O <dir/dir/file_name>
-
+```
+#### Network
+```bash
 hostname -I # to get IP
 ping
 ```
-## TMUX
-```
+#### TMUX
+```bash
 tmux (https://hackernoon.com/a-gentle-introduction-to-tmux-8d784c404340)
 tmux ls # lists active sessions
 tmux attach-session -t session_name || tmux new-session -s session_name
@@ -64,17 +65,15 @@ To re-open...
 ```
 
 
-# Look Up for Tools
-## Conda & its SSL
-```
-C:\ProgramData\Anaconda3\Lib\site-packages\skfuzzy\cluster
-set http_proxy=http://IP:PORT
-set https_proxy=http://IP:PORT
-conda config --set ssl_verify <pathToYourFile>.crt
-conda config --set ssl_verify false
-Defauly Python path: C:\ProgramData\Anaconda3\python
-```
-## Git Help
+
+
+
+
+
+
+
+
+# Git Help
 #### Step-0: Create a URL for your repo
 #### Step-1: Cloning a repo; I'm sill working on master branch in local repo and since I did clone, i need not git init again
 ```
@@ -170,31 +169,46 @@ $ git log | grep "commit\|Author\|Date" > filename.csv
 2. Windows
 > git log | findstr "Author Date commit" > filename.csv
 ```
-## PIP
-#### pip freeze
-```
-# This command is incredibly useful if you need to recreate your project from scratch and need to know the exact libraries/versions you need to install.
-cd project_folder
-pip freeze > requirements.txt
-```
-## Chrome Issues
+
+
+
+
+
+
+
+
+
+
+# Chrome Issues
 "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" -no-sandbox
 
 
-# Look Up for Libraries
-## Numpy
+
+
+
+
+
+
+
+
+# Python
+#### pip
+```bash
+cd project_folder
+pip freeze > requirements.txt
+```
+#### Numpy
 ```python
 np.ravel() # to flatten
 np.hstack(), vstack(), stack() # from list to array or join arrays
 enumerate(), np.ndenumerate()
-Display of objects not supported in spyder: convert arrays to lists .tolist() and print
+
 print("Predicted model: {a:.3f}x + {b:.3f}".format(a=w_value[0], b=w_value[1]))
 print("Predicted model: {.3f}x + {.3f}".format(w_value[0], w_value[1]))
-```
-```python
+
 [*FLAGS.__flags.keys()]
 ```
-## Progressbar
+#### Progressbar
 ```python
 def progressBar(value, endvalue, names, values, bar_length=20):
 	assert(len(names)==len(values));
@@ -209,28 +223,94 @@ def progressBar(value, endvalue, names, values, bar_length=20):
 	sys.stdout.flush()
 	return
 ```
-## Tensorflow
-#### General
+
+
+
+
+
+
+
+
+
+
+
+# Conda
+#### SSL
+Default Python path: C:\ProgramData\Anaconda3\python
+C:\ProgramData\Anaconda3\Lib\site-packages\skfuzzy\cluster
+``` bash
+set http_proxy=http://IP:PORT
+set https_proxy=http://IP:PORT
+conda config --set ssl_verify <pathToYourFile>.crt
+conda config --set ssl_verify false
+```
+#### Evironments
+```bash
+conda info --envs
+source activate conda_env_murali
+set -a ; . /usr/local/nvidia_cuda/scripts/set_cuda9.0_cudnn7.0 ; set +a
+```
+#### Jupyter
+```bash
+jupyter notebook --no-browser --ip '*'
+```
+#### Spyder
+```
+Display of objects not supported in spyder: convert arrays to lists .tolist() and print
+```
+
+
+
+
+
+
+
+
+# Tensorflow
+#### GPU Settings
 ```python
+import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '1,2' 
+```
+Or...
+```bash
+export CUDA_VISIBLE_DEVICES=1,2 && echo $CUDA_VISIBLE_DEVICES
+```
+And then...
+```python
+import tensorflow as tf
 config = tf.ConfigProto()
-config.gpu_options.allow_growth = True #takes the min required memory or
+config.gpu_options.allow_growth = True
 config.gpu_options.per_process_gpu_memory_fraction = 0.4 #fixed memory - 40% of total memory
 session = tf.Session(config=config, ...)
 
-echo $CUDA_VISIBLE_DEVICES
-export CUDA_VISIBLE_DEVICES=1,2
+# And Assign operations as
+with tf.device('/cpu:0'):
+with tf.device('/gpu:1'):
+with tf.device('/gpu:2')
+```
+```bash
 python3 -c "from tensorflow.python.client import device_lib; print(device_lib.list_local_devices())"
-
-You need to specify different variable scopes for the LSTM cells.
-with tf.variable_scope('forward'):
-    self.lstm_fw_cell = rnn_cell.BasicLSTMCell(dim_hidden)   
-with tf.variable_scope('backward'):
-    self.lstm_bw_cell = rnn_cell.BasicLSTMCell(dim_hidden)
-       
+```
+#### tf.variable_scope()
+You need to specify different variable scopes for the LSTM cells if you are using multiple of them
+```python
+with tf.variable_scope('Layer_1'):
+	with tf.variable_scope('forward'):
+	    self.lstm_fw_cell = rnn_cell.BasicLSTMCell(dim_hidden)   
+	with tf.variable_scope('backward'):
+	    self.lstm_bw_cell = rnn_cell.BasicLSTMCell(dim_hidden)
+```
+#### tf.Session()
+```python
 # HINT: Please add all tensor connections before calling session inline. Else, new tensor connections cannot be added at runtime.
 train_sess = tf.Session(config=configs.tf_config, graph=myGraph)
 If you want new connections at runtime, you should do tf.Session(...) as sess:
+
+sess.run(tf.global_variables_initializer())
+sess.run(tf.tables_initializer())
 ```
+#### Softmax upon masking in tensorflow
 ```python
 max_len = tf.shape(A_before_softmax)[-1]
 A = tf.map_fn(
@@ -241,19 +321,18 @@ A = tf.map_fn(
 	)
 ```
 #### TensorBoard
-```
+```bash
 tensorboard --logdir .
 ```
-#### TensorflowHub
-```
+#### Tensorflow Hub
+```bash
 mkdir <folder_path>
 curl -L "https://tfhub.dev/google/elmo/2?tf-hub-format=compressed" | tar -zxvC <folder_path>
+
+wget https://tfhub.dev/google/universal-sentence-encoder/2'?tf-hub-format=compressed' -P use2
+wget https://tfhub.dev/google/universal-sentence-encoder/2'?tf-hub-format=compressed' -O <dir/dir/file_name>
 ```
-```
-sess.run(tf.global_variables_initializer())
-sess.run(tf.tables_initializer())
-```
-#### Tensorflow tSNE
+#### Tensorflow Hub tSNE
 ```python
 def tsne_projections(
 	FLAGS,
