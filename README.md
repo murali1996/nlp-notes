@@ -38,6 +38,7 @@
 :bulb: Typically, these *pre-training* methods involve an unsupervised (also called semi-supervised in this context) learning followed by a supervised learning. This is unlike CV domain where *pre-training* is mainly supervised learning.   
 :bulb: There is no standard input method for all these works. Typically, you would find Word/Character embeddings or Byte-Pair Encoding(BPE) as input methods.
 1. [Semi-supervised Sequence Learning, Dai et al. 2015][Dai et al. 2015]
+1. [Unsupervised Pretraining for Sequence to Sequence Learning, Ramachandran et al. 2016][Ramachandran et al. 2016]
 1. [*ULM-FiT*, Universal Language Model Fine-tuning for Text Classification, Howard and Ruder 2018][Howard and Ruder 2018]
 1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018] 
 1. [*GPT-1 aka OpenAI Transformer*, Improving Language Understanding by Generative Pre-Training, Radford et al. 2018][Radford et al. 2018]
@@ -169,6 +170,7 @@
 [Conneau et al 2018b]: https://arxiv.org/abs/1805.01070
 [Vlasov et al. 2019]: https://arxiv.org/abs/1811.11707
 [Zhai et at. 2017]: https://arxiv.org/abs/1701.04027
+[Ramachandran et al. 2016]: https://arxiv.org/abs/1611.02683
 
 [Illustrated BERT]: http://jalammar.github.io/illustrated-bert/
 [OpenAi GPT-1]: https://openai.com/blog/language-unsupervised/
