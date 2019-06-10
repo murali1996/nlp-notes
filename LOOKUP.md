@@ -303,11 +303,11 @@ if __name__=="__main__":
 import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '1,2' 
 ```
-Or...
+###### Or...
 ```bash
 export CUDA_VISIBLE_DEVICES=1,2 && echo $CUDA_VISIBLE_DEVICES
 ```
-And then...
+###### And then...
 ```python
 import tensorflow as tf
 config = tf.ConfigProto()
@@ -318,8 +318,9 @@ session = tf.Session(config=config, ...)
 # And Assign operations as
 with tf.device('/cpu:0'):
 with tf.device('/gpu:1'):
-with tf.device('/gpu:2')
+with tf.device('/gpu:2'):
 ```
+#### Check devices available
 ```bash
 python3 -c "from tensorflow.python.client import device_lib; print(device_lib.list_local_devices())"
 ```
@@ -338,8 +339,25 @@ with tf.variable_scope('Layer_1'):
 train_sess = tf.Session(config=configs.tf_config, graph=myGraph)
 If you want new connections at runtime, you should do tf.Session(...) as sess:
 
-sess.run(tf.global_variables_initializer())
-sess.run(tf.tables_initializer())
+myGraph = tf.Graph()
+with myGraph.as_default():
+	avg_training_loss = tf.placeholder(tf.float32, shape=(), name='avg_training_loss');
+	training_loss_summary = tf.summary.scalar('training_loss_summary', avg_training_loss);
+
+with tf.Session(graph=myGraph, config=...) as sess:
+    saver = tf.train.Saver()
+    writer = tf.summary.FileWriter('logs_path_dir');
+    writer.add_graph(sess.graph)
+    
+    sess.run(tf.global_variables_initializer())
+    sess.run(tf.tables_initializer())
+    
+    # while training
+    mean_batch_loss = ...
+    writer.add_summary(sess.run([training_loss_summary],feed_dict={avg_training_loss:mean_batch_loss})[0],epoch);
+```
+```bash
+tensorboard --logdir .
 ```
 #### Softmax upon masking in tensorflow
 ```python
@@ -350,10 +368,6 @@ A = tf.map_fn(
 		dtype=tf.float32,
 		name='self_attn_softmax'
 	)
-```
-#### TensorBoard
-```bash
-tensorboard --logdir .
 ```
 #### Tensorflow Hub
 ```bash
@@ -371,7 +385,8 @@ def tsne_projections(
 	myName: str,
 	myEmbeddings: "array of vectors",
 	metadata_names: "list of names which indicate corresponding data to be seen in metadata",
-	metadata: "np array of shape: [len(myEmbeddings),len(metadata_names)]"):
+	metadata: "np array of shape: [len(myEmbeddings),len(metadata_names)]"
+	):
 	#
 	# tensorboard --logdir='checkpoints/' --port=8870
 	assert len(myEmbeddings)==metadata.shape[0]
