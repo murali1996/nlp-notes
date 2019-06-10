@@ -3,6 +3,7 @@
 - [Git Help](#Git-Help)
 - [Chrome Issues](#Chrome-Issues)
 - [Python](#Python)
+- [Flask](#Flask)
 - [Tensorflow](#Tensorflow)
 
 
@@ -261,6 +262,33 @@ jupyter notebook --no-browser --ip '*'
 ```
 Display of objects not supported in spyder: convert arrays to lists .tolist() and print
 ```
+
+
+
+
+
+
+
+
+# Flask
+```python
+from flask import Flask,jsonify,request
+from flask_cors import CORS
+from json import dumps
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/myPathName') # Call as http://<>/myPathName?argname_1=argval_1&argname_2=argval_2
+def my_function(): # need not be same as path name
+	# do something and get myResponseDict
+	return dumps(myResponseDict, sort_keys=True, indent=2, ensure_ascii=False)
+	
+if __name__=="__main__":
+	print("Flask Server")
+	app.run(debug=True, host='0.0.0.0', port = 5006)
+```
+
 
 
 
