@@ -1,12 +1,12 @@
 ## Contents
 * [Some connections at a glance](#Some-connections-at-a-glance)
-* [Natural Language Understanding and Processing - English](#Natural-Language-Understanding-and-Processing---English)
-  * [Some common evaluation for NLU](#Some-common-evaluation-for-NLU)
+* [Mono-Lingual NLU](#Mono-Lingual-NLU)
+  * [Evaluation for NLU](#Evaluation-for-NLU)
   * [The \*Word Embeddings\* Wrapper](#The-Word-Embeddings-Wrapper)
   * [The \*Language Modeling\* Wrapper](#The-Language-Modeling-Wrapper)
   * [The \*Beyond-Language-Modeling\* Wrapper](#The-Beyond-Language-Modeling-Wrapper)
   * [Some more neural models for Sentence Encoding](#Some-more-neural-models-for-Sentence-Encoding)
-  * [Derivatives](#Derivatives)
+  * [Direct Derivatives](#Direct-Derivatives)
   * [Dialouge Systems and Chatbots](#Dialouge-Systems-and-Chatbots)
   * [Sequence Labeling and Chunking](#Sequence-Labeling-and-Chunking)
 * [Cross-Lingual NLU](#Cross-Lingual-NLU)
@@ -22,8 +22,9 @@
 
 
 
-## Natural Language Understanding and Processing - English
-### Some common evaluation for NLU
+## Mono-Lingual NLU
+:bulb: Many of these works consider English Language datasets and tasks
+### Evaluation for NLU
 1. [SentEval: An Evaluation Toolkit for Universal Sentence Representations, Conneau et al. 2018a][Conneau et al. 2018a] [[Site]](https://github.com/facebookresearch/SentEval)
 1. [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018] [[Site]](https://gluebenchmark.com/leaderboard)
 1. [What you can cram into a single $&!#\* vector: Probing sentence embeddings for linguistic properties, Conneau et al 2018b][Conneau et al 2018b]
@@ -43,7 +44,6 @@
 1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018] 
 1. [*GPT-1 aka OpenAI Transformer*, Improving Language Understanding by Generative Pre-Training, Radford et al. 2018][Radford et al. 2018]
 1. [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al. 2018][Devlin et al. 2018] [[SLIDES]](https://nlp.stanford.edu/seminar/details/jdevlin.pdf)
-1. [Practical Text Classification With Large Pre-Trained Language Models, NeelKant et al. 2018][NeelKant et al. 2018]
 1. [Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context, Zihang et al. 2019][Zihang et al. 2019]
 1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019]
 ### The \*Beyond-Language-Modeling\* Wrapper
@@ -55,13 +55,15 @@
 1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Subramanian et al. 2018][Subramanian et al. 2018]
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering, McCann et al. 2018][McCann et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
+### Direct Derivatives
+1. [Practical Text Classification With Large Pre-Trained Language Models, NeelKant et al. 2018][NeelKant et al. 2018]
+1. [SciBERT: Pretrained Contextualized Embeddings for Scientific Text, Beltagy et al. 2019][Beltagy et al. 2019]
+1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]
+
 ### Some more neural models for Sentence Encoding
 1. [Skip-Thought Vectors, Kiros et al. 2015][Kiros et al. 2015]
 1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
 1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
-### Derivatives
-1. [SciBERT: Pretrained Contextualized Embeddings for Scientific Text, Beltagy et al. 2019][Beltagy et al. 2019]
-1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]
 ### Dialouge Systems and Chatbots
 1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
 1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
