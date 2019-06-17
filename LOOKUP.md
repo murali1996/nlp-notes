@@ -227,7 +227,12 @@ def progressBar(value, endvalue, names, values, bar_length=20):
 	sys.stdout.flush()
 	return
 ```
-
+#### Refer a relative path
+```
+import module1
+module1_path = module1.__file__
+module1_parent_path = os.path.abspath(os.path.join(module1_path,".."))
+```
 
 
 
