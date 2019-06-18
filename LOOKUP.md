@@ -334,9 +334,11 @@ You need to specify different variable scopes for the LSTM cells if you are usin
 ```python
 with tf.variable_scope('Layer_1'):
 	with tf.variable_scope('forward'):
-	    self.lstm_fw_cell = rnn_cell.BasicLSTMCell(dim_hidden)   
+	    cell_fw_L1 = rnn_cell.BasicLSTMCell(dim_hidden)   
 	with tf.variable_scope('backward'):
-	    self.lstm_bw_cell = rnn_cell.BasicLSTMCell(dim_hidden)
+	    cell_bw_L1 = rnn_cell.BasicLSTMCell(dim_hidden)
+	H_L1__, _ = tf.nn.bidirectional_dynamic_rnn(cell_fw_L1,cell_bw_L1,<<input_embed_tensor>>,<<s_len>>,dtype=tf.float32)
+	H_L1_ = tf.concat([H_L1__[0], H_L1__[1]], axis=2)
 ```
 #### tf.Session()
 ```python
