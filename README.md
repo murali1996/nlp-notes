@@ -67,8 +67,9 @@
 ### Dialouge Systems and Chatbots
 1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
 1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
-1. [Few-Shot Generalization Across Dialogue Tasks, Vlasov et al. 2019][Vlasov et al. 2019]
+1. [Few-Shot Generalization Across Dialogue Tasks, Vlasov et al. 2019][Vlasov et al. 2019] [RASA Research]
 1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
+1. [Towards Open Intent Discovery for Conversational Text, Vedula et al. 2019][Vedula et al. 2019]
 ### Sequence Labeling and Chunking
 1. [Neural Models for Sequence Chunking, Zhai et at. 2017] 
 
@@ -173,6 +174,7 @@
 [Vlasov et al. 2019]: https://arxiv.org/abs/1811.11707
 [Zhai et at. 2017]: https://arxiv.org/abs/1701.04027
 [Ramachandran et al. 2016]: https://arxiv.org/abs/1611.02683
+[Vedula et al. 2019]: https://arxiv.org/abs/1904.08524
 
 [Illustrated BERT]: http://jalammar.github.io/illustrated-bert/
 [OpenAi GPT-1]: https://openai.com/blog/language-unsupervised/
