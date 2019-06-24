@@ -49,6 +49,7 @@
 ### The \*Beyond-Language-Modeling\* Wrapper
 :bulb: Some of these techniques include *MULTI-TASK* learning
 1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
+1. [DisSent: Sentence Representation Learning from Explicit Discourse Relations, Nie et al. 2017][Nie et al. 2017]
 1. [*USE*, Universal Sentence Encoder, Cer et al. 2018][Cer et al. 2018]
 1. [Sentence Encoders on STILTs: Supplementary Training on Intermediate Labeled-data Tasks, Phang et al. 2018][Phang et al. 2018]
 1. [Looking for ELMo's Friends: Sentence-Level Pretraining Beyond Language Modeling, Bowman et al. 2018][Bowman et al. 2018]
@@ -175,6 +176,7 @@
 [Zhai et at. 2017]: https://arxiv.org/abs/1701.04027
 [Ramachandran et al. 2016]: https://arxiv.org/abs/1611.02683
 [Vedula et al. 2019]: https://arxiv.org/abs/1904.08524
+[Nie et al. 2017]: https://arxiv.org/abs/1710.04334
 
 [Illustrated BERT]: http://jalammar.github.io/illustrated-bert/
 [OpenAi GPT-1]: https://openai.com/blog/language-unsupervised/
