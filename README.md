@@ -72,7 +72,7 @@
 1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
 1. [Towards Open Intent Discovery for Conversational Text, Vedula et al. 2019][Vedula et al. 2019]
 ### Sequence Labeling and Chunking
-1. [Neural Models for Sequence Chunking, Zhai et at. 2017] 
+1. [Neural Models for Sequence Chunking, Zhai et at. 2017][Zhai et at. 2017]
 
 
 
