@@ -1,30 +1,37 @@
 import numpy as np, os, pandas as pd, re, csv
-from tqdm import tqdm
 from nltk.corpus import stopwords
-import tensorflow as tf
-import tensorflow_hub as hub
+from tqdm import tqdm
 from tensorflow.contrib.tensorboard.plugins import projector
-
-checkpoint_directory = './checkpoints/'
-glove_directory = '../../DATA/WORD_EMBEDDINGS/glove.6B/'
-use2_directory = '../../DATA/TFHUB_MODELS/use2/'
-use3_directory = '../../DATA/TFHUB_MODELS/use3/'
-elmo2_directory = '../../DATA/TFHUB_MODELS/elmo2/'
-
-
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+import tensorflow as tf
 tf_config = tf.ConfigProto()
 tf_config.allow_soft_placement = True # Choose alternative device if specified device not found
 tf_config.log_device_placement = False
 tf_config.gpu_options.allow_growth = True
 tf_config.gpu_options.per_process_gpu_memory_fraction = 0.9
 
+
+import sys
+sys.path.append('..')
+import tensorflow_hub as hub
+from BERTSiamese_ZSL_IntentClassifier.bert_wrapper_tf.wrapper import Model as BERTModelWrapper
+
+
 class Module(object):
-	def __init__(self,
-		use3_directory=None,
-		elmo2_directory=None,
-		glove_directory=None
-		):
+	def __init__(self, gpu_devices: "can be empty list or a list of device numbers", use3_directory=None, elmo2_directory=None, glove_directory=None):
+		#
+		self.gpu_devices = gpu_devices
+		if len(self.gpu_devices)>1:
+			os.environ['CUDA_VISIBLE_DEVICES']=','.join(str(device) for device in self.gpu_devices)
+			for i, num in enumerate(self.gpu_devices):
+				setattr(self, 'gpu_devices_n{}'.format(i), '/gpu:{}'.format(num))
+		elif len(self.gpu_devices)==1:
+			os.environ['CUDA_VISIBLE_DEVICES'] = str(self.gpu_devices[0])
+			setattr(self, 'gpu_devices_n1', '/gpu:{}'.format(self.gpu_devices[0]))
+		else:
+			os.environ['CUDA_VISIBLE_DEVICES'] = ''
+			setattr(self, 'gpu_devices_n1', '/cpu:0')
+		print("GPU DEVICE SETTINGS:: {}".format(self.gpu_devices))
+		#
 		self.cachedStopWords = stopwords.words("english")
 		if use3_directory:
 			self.init_use3_hub_model(use3_directory, trainable=False)
@@ -60,7 +67,8 @@ class Module(object):
 		self.use3_hub_model_graph, self.use3_hub_model, self.use3_hub_model_sess = None, None, None
 		self.use3_hub_model_graph = tf.Graph()
 		with self.use3_hub_model_graph.as_default():
-			self.use3_hub_model = hub.Module(use3_directory, trainable=trainable)
+			with tf.device(self.gpu_devices_n1):
+				self.use3_hub_model = hub.Module(use3_directory, trainable=trainable)
 		self.use3_hub_model_sess = tf.Session(config=tf_config, graph=self.use3_hub_model_graph)
 		self.use3_hub_model_sess.__enter__()
 		self.use3_hub_model_sess.run(tf.global_variables_initializer())
@@ -96,12 +104,13 @@ class Module(object):
 		self.elmo2_hub_model_graph, self.elmo2_hub_model, self.elmo2_hub_model_sess = None, None, None
 		self.elmo2_hub_model_graph = tf.Graph()
 		with self.elmo2_hub_model_graph.as_default():
-			self.elmo2_hub_model = hub.Module(elmo2_directory, trainable=trainable)
-			self.input_x_elmo_tokens = tf.placeholder(tf.string, shape=[None, None])
-			self.s_len = tf.placeholder(tf.int32, shape=[None])
-			self.elmo2_sentlevel_embeddings_tensor = \
-				self.elmo2_hub_model(inputs={"tokens": self.input_x_elmo_tokens,"sequence_len": self.s_len},
-					signature="tokens",as_dict=True)["default"]
+			with tf.device(self.gpu_devices_n1):
+				self.elmo2_hub_model = hub.Module(elmo2_directory, trainable=trainable)
+				self.input_x_elmo_tokens = tf.placeholder(tf.string, shape=[None, None])
+				self.s_len = tf.placeholder(tf.int32, shape=[None])
+				self.elmo2_sentlevel_embeddings_tensor = \
+					self.elmo2_hub_model(inputs={"tokens": self.input_x_elmo_tokens,"sequence_len": self.s_len},
+						signature="tokens",as_dict=True)["default"]
 		self.elmo2_hub_model_sess = tf.Session(config=tf_config, graph=self.elmo2_hub_model_graph)
 		self.elmo2_hub_model_sess.__enter__()
 		self.elmo2_hub_model_sess.run(tf.global_variables_initializer())
@@ -159,6 +168,56 @@ class Module(object):
 					elmo2_vecs = np.vstack((elmo2_vecs,batch_elmo2_vecs))
 		print("obtaining elmo2 sentence vector end")
 		return elmo2_vecs # np array with shape [n_list_rows, 1024]	
+	##########################################################
+	# BERT PRETRAINED [CLS] embeddings
+	def get_bert_cls_sentence_vector(self, list_sentences):
+		print("obtaining bert cls sentence vector start")
+		model = BERTModelWrapper(gpu_devices=self.gpu_devices)
+		model.restore_pretrained_bert_config()
+		inputFeatures = model.get_InputFeatures(text_a_list=list_sentences)
+		inputFeatures= np.asarray(inputFeatures)
+		# each feature object has input_ids, input_mask, segment_ids, label_id, is_real_example attributes
+
+		model.set_base_ops()
+		model.restore_weights()
+
+		import math
+		INFER_NUM = len(list_sentences)
+		BATCH_SIZE = 50
+		cls_outputs = []
+		full_outputs = []
+		with tf.Session(graph = model.tf_graph, config=tf_config) as sess:
+			#
+			sess.run(model.get_init_ops())
+			#
+			n_infer_batches = int(math.ceil(INFER_NUM/BATCH_SIZE))
+			all_indices = np.arange(INFER_NUM)
+			for i in tqdm(range(n_infer_batches)):   
+				begin_index = i * BATCH_SIZE
+				end_index = min((i + 1) * BATCH_SIZE, INFER_NUM)
+				batch_index = all_indices[begin_index : end_index]
+				#
+				batch_input_ids = np.asarray([f.input_ids for f in inputFeatures[batch_index]], dtype=np.int32)
+				batch_input_mask = np.asarray([f.input_mask for f in inputFeatures[batch_index]], dtype=np.int32)
+				batch_token_type_ids = np.asarray([f.segment_ids for f in inputFeatures[batch_index]], dtype=np.int32)
+				#
+				batch_cls_outputs, batch_full_outputs = \
+					sess.run([model.cls_output, model.full_output],
+								feed_dict={
+											model.batch_input_ids__tensor:batch_input_ids,
+											model.batch_input_mask__tensor:batch_input_mask,
+											model.batch_token_type_ids__tensor:batch_token_type_ids
+										  }
+							)
+				#
+				if i==0:
+					cls_outputs = batch_cls_outputs
+					full_outputs = batch_full_outputs
+				else:
+					cls_outputs = np.concatenate((cls_outputs, batch_cls_outputs), axis=0)
+					full_outputs = np.concatenate((full_outputs, batch_full_outputs), axis=0)
+		print("obtaining bert cls sentence vector start")
+		return cls_outputs
 	##########################################################
 	# mean-pooled glove embeddings
 	def init_glove_embedding(self, glove_directory):
@@ -236,7 +295,7 @@ class Module(object):
 		metadata_names: "list of names which indicate corresponding data to be seen in metadata" = []
 		):
 		# bash commands to launch tensorboard
-		# cd './checkpoints'
+		# cd './projections_checkpoints/<myName>'
 		# tensorboard --logdir=. --port=8870
 		if not len(metadata)==0:
 			assert len(myEmbeddings)==metadata.shape[0]
@@ -246,7 +305,7 @@ class Module(object):
 			assert len(metadata_names)==metadata.shape[1]
 		else:
 			metadata_names = ["column_number_{}".format(i+1) for i in range(metadata.shape[1])]
-		save_dir = ckpt_dir
+		save_dir = os.path.join(ckpt_dir,myName)
 		if not os.path.exists(save_dir):
 			os.makedirs(save_dir)
 
@@ -286,29 +345,37 @@ class Module(object):
 
 
 if __name__=="__main__":
-	"""
-	from tfboard_sent_emb import Module
-	import tfboard_sent_emb as content
-	module = Module(elmo2_directory=content.elmo2_directory)
 
-	list_sentences = []
-	file = open("list_sentences.txt", "r")
-	for row in file:
-		list_sentences.append(row.split("\t")[0].strip())	
-	file.close()	
-	
-	myEmbs = module.get_elmo2_sentence_vector(list_sentences)
-	module.tfboard_projections(ckpt_dir=content.checkpoint_directory, myEmbeddings=myEmbs, myName="elmo2_list_sentences", metadata=np.asarray(list_sentences).reshape(-1,1), metadata_names=np.asarray(["train_labels"]))
-	"""
 	print("in main")
-	module = Module(elmo2_directory=elmo2_directory)
 
+	# ======================================================================
+	# Set Paths
+	# ======================================================================
+	DATA_FOLDER = '../../DATA'
+	glove_directory = os.path.join(DATA_FOLDER, 'WORD_EMBEDDINGS/glove.6B/')
+	use3_directory = os.path.join(DATA_FOLDER, 'TFHUB_MODELS/use3/')
+	elmo2_directory = os.path.join(DATA_FOLDER, 'TFHUB_MODELS/elmo2/')
+
+	# ======================================================================
+	# Get Sentences
+	# ======================================================================
 	list_sentences = []
-	file = open("list_sentences.txt", "r")
+	file = open("sentences.txt", "r")
 	for row in file:
 		list_sentences.append(row.split("\t")[0].strip())	
 	file.close()
-	
+
+	# ======================================================================
+	# Execute required model(s)
+	# ======================================================================	
+	projections_ckpt_dir = './projections_checkpoints/'
+	# elmo
+	module = Module(gpu_devices=[0], elmo2_directory=elmo2_directory)
 	myEmbs = module.get_elmo2_sentence_vector(list_sentences)
-	module.tfboard_projections(ckpt_dir=checkpoint_directory, myEmbeddings=myEmbs, myName="elmo2_list_sentences", metadata=np.asarray(list_sentences).reshape(-1,1), metadata_names=np.asarray(["train_labels"]))
+	module.tfboard_projections(ckpt_dir=projections_ckpt_dir, myEmbeddings=myEmbs, myName="elmo2_hhp_train_intents", metadata=np.asarray(list_sentences).reshape(-1,1), metadata_names=np.asarray(["train_labels"]))
+	# bert cls
+	module = Module(gpu_devices=[0])
+	myEmbs = module.get_bert_cls_sentence_vector(list_sentences)
+	module.tfboard_projections(ckpt_dir=projections_ckpt_dir, myEmbeddings=myEmbs, myName="bert_cls_hhp_train_intents", metadata=np.asarray(list_sentences).reshape(-1,1), metadata_names=np.asarray(["train_labels"]))
+	
 
