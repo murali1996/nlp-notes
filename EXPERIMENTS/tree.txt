@@ -1,0 +1,50 @@
+.
+├── bert_wrapper_tf
+│   ├── bert_master
+│   │   ├── CONTRIBUTING.md
+│   │   ├── create_pretraining_data.py
+│   │   ├── extract_features.py
+│   │   ├── __init__.py
+│   │   ├── LICENSE
+│   │   ├── modeling.py
+│   │   ├── modeling_test.py
+│   │   ├── multilingual.md
+│   │   ├── optimization.py
+│   │   ├── optimization_test.py
+│   │   ├── predicting_movie_reviews_with_bert_on_tf_hub.ipynb
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-36.pyc
+│   │   │   ├── modeling.cpython-36.pyc
+│   │   │   ├── optimization.cpython-36.pyc
+│   │   │   ├── run_classifier.cpython-36.pyc
+│   │   │   └── tokenization.cpython-36.pyc
+│   │   ├── README.md
+│   │   ├── requirements.txt
+│   │   ├── run_classifier.py
+│   │   ├── run_classifier_with_tfhub.py
+│   │   ├── run_pretraining.py
+│   │   ├── run_squad.py
+│   │   ├── sample_text.txt
+│   │   ├── tokenization.py
+│   │   └── tokenization_test.py
+│   ├── checkpoints
+│   │   ├── BERT_PRETRAINED_MODELS
+│   │   │   ├── cased_L-12_H-768_A-12
+│   │   │   │   ├── bert_config.json
+│   │   │   │   ├── bert_model.ckpt.data-00000-of-00001
+│   │   │   │   ├── bert_model.ckpt.index
+│   │   │   │   ├── bert_model.ckpt.meta
+│   │   │   │   └── vocab.txt
+│   │   │   └── uncased_L-12_H-768_A-12
+│   │   │       ├── bert_config.json
+│   │   │       ├── bert_model.ckpt.data-00000-of-00001
+│   │   │       ├── bert_model.ckpt.index
+│   │   │       ├── bert_model.ckpt.meta
+│   │   │       └── vocab.txt
+│   │   └── README.md
+│   ├── __init__.py
+│   └── wrapper.py
+├── sent_embs.py
+└── tree.txt
+
+7 directories, 40 files
