@@ -102,8 +102,6 @@ class BertConfig(object):
   def to_json_string(self):
     """Serializes this instance to a JSON string."""
     return json.dumps(self.to_dict(), indent=2, sort_keys=True) + "\n"
-
-
 class BertModel(object):
   """BERT model ("Bidirectional Encoder Representations from Transformers").
 
@@ -127,15 +125,15 @@ class BertModel(object):
   ...
   ```
   """
-
-  def __init__(self,
-               config,
-               is_training,
-               input_ids,
-               input_mask=None,
-               token_type_ids=None,
-               use_one_hot_embeddings=False,
-               scope=None):
+  def __init__(
+    self,
+    config,
+    is_training,
+    input_ids,
+    input_mask=None,
+    token_type_ids=None,
+    use_one_hot_embeddings=False,
+    scope=None):
     """Constructor for BertModel.
 
     Args:
@@ -157,18 +155,14 @@ class BertModel(object):
     if not is_training:
       config.hidden_dropout_prob = 0.0
       config.attention_probs_dropout_prob = 0.0
-
     input_shape = get_shape_list(input_ids, expected_rank=2)
     batch_size = input_shape[0]
     seq_length = input_shape[1]
-
     if input_mask is None:
       input_mask = tf.ones(shape=[batch_size, seq_length], dtype=tf.int32)
-
     if token_type_ids is None:
       token_type_ids = tf.zeros(shape=[batch_size, seq_length], dtype=tf.int32)
-
-    with tf.variable_scope(scope, default_name="bert"):
+    with tf.variable_scope(scope, default_name="bert", reuse=tf.AUTO_REUSE):
       with tf.variable_scope("embeddings"):
         # Perform embedding lookup on the word ids.
         (self.embedding_output, self.embedding_table) = embedding_lookup(
@@ -178,7 +172,6 @@ class BertModel(object):
             initializer_range=config.initializer_range,
             word_embedding_name="word_embeddings",
             use_one_hot_embeddings=use_one_hot_embeddings)
-
         # Add positional embeddings and token type embeddings, then layer
         # normalize and perform dropout.
         self.embedding_output = embedding_postprocessor(
@@ -192,14 +185,11 @@ class BertModel(object):
             initializer_range=config.initializer_range,
             max_position_embeddings=config.max_position_embeddings,
             dropout_prob=config.hidden_dropout_prob)
-
       with tf.variable_scope("encoder"):
         # This converts a 2D mask of shape [batch_size, seq_length] to a 3D
         # mask of shape [batch_size, seq_length, seq_length] which is used
         # for the attention scores.
-        attention_mask = create_attention_mask_from_input_mask(
-            input_ids, input_mask)
-
+        attention_mask = create_attention_mask_from_input_mask(input_ids, input_mask)
         # Run the stacked transformer.
         # `sequence_output` shape = [batch_size, seq_length, hidden_size].
         self.all_encoder_layers = transformer_model(
@@ -214,7 +204,6 @@ class BertModel(object):
             attention_probs_dropout_prob=config.attention_probs_dropout_prob,
             initializer_range=config.initializer_range,
             do_return_all_layers=True)
-
       self.sequence_output = self.all_encoder_layers[-1]
       # The "pooler" converts the encoded sequence tensor of shape
       # [batch_size, seq_length, hidden_size] to a tensor of shape
@@ -234,7 +223,6 @@ class BertModel(object):
     return self.first_token_tensor
   def get_pooled_output(self):
     return self.pooled_output
-
   def get_sequence_output(self):
     """Gets final hidden layer of encoder.
 
@@ -243,10 +231,8 @@ class BertModel(object):
       to the final hidden of the transformer encoder.
     """
     return self.sequence_output
-
   def get_all_encoder_layers(self):
     return self.all_encoder_layers
-
   def get_embedding_output(self):
     """Gets output of the embedding lookup (i.e., input to the transformer).
 
@@ -257,10 +243,8 @@ class BertModel(object):
       then performing layer normalization. This is the input to the transformer.
     """
     return self.embedding_output
-
   def get_embedding_table(self):
     return self.embedding_table
-
 
 def gelu(x):
   """Gaussian Error Linear Unit.
@@ -378,12 +362,14 @@ def create_initializer(initializer_range=0.02):
   return tf.truncated_normal_initializer(stddev=initializer_range)
 
 
-def embedding_lookup(input_ids,
-                     vocab_size,
-                     embedding_size=128,
-                     initializer_range=0.02,
-                     word_embedding_name="word_embeddings",
-                     use_one_hot_embeddings=False):
+def embedding_lookup(
+  input_ids,
+  vocab_size,
+   embedding_size=128,
+   initializer_range=0.02,
+   word_embedding_name="word_embeddings",
+   use_one_hot_embeddings=False
+   ):
   """Looks up words embeddings for id tensor.
 
   Args:
@@ -426,16 +412,18 @@ def embedding_lookup(input_ids,
   return (output, embedding_table)
 
 
-def embedding_postprocessor(input_tensor,
-                            use_token_type=False,
-                            token_type_ids=None,
-                            token_type_vocab_size=16,
-                            token_type_embedding_name="token_type_embeddings",
-                            use_position_embeddings=True,
-                            position_embedding_name="position_embeddings",
-                            initializer_range=0.02,
-                            max_position_embeddings=512,
-                            dropout_prob=0.1):
+def embedding_postprocessor(
+  input_tensor,
+  use_token_type=False,
+  token_type_ids=None,
+  token_type_vocab_size=16,
+  token_type_embedding_name="token_type_embeddings",
+  use_position_embeddings=True,
+  position_embedding_name="position_embeddings",
+  initializer_range=0.02,
+  max_position_embeddings=512,
+  dropout_prob=0.1
+  ):
   """Performs various post-processing on a word embedding tensor.
 
   Args:
@@ -556,20 +544,22 @@ def create_attention_mask_from_input_mask(from_tensor, to_mask):
   return mask
 
 
-def attention_layer(from_tensor,
-                    to_tensor,
-                    attention_mask=None,
-                    num_attention_heads=1,
-                    size_per_head=512,
-                    query_act=None,
-                    key_act=None,
-                    value_act=None,
-                    attention_probs_dropout_prob=0.0,
-                    initializer_range=0.02,
-                    do_return_2d_tensor=False,
-                    batch_size=None,
-                    from_seq_length=None,
-                    to_seq_length=None):
+def attention_layer(
+  from_tensor,
+  to_tensor,
+  attention_mask=None,
+  num_attention_heads=1,
+  size_per_head=512,
+  query_act=None,
+  key_act=None,
+  value_act=None,
+  attention_probs_dropout_prob=0.0,
+  initializer_range=0.02,
+  do_return_2d_tensor=False,
+  batch_size=None,
+  from_seq_length=None,
+  to_seq_length=None
+  ):
   """Performs multi-headed attention from `from_tensor` to `to_tensor`.
 
   This is an implementation of multi-headed attention based on "Attention
@@ -752,17 +742,18 @@ def attention_layer(from_tensor,
   return context_layer
 
 
-def transformer_model(input_tensor,
-                      attention_mask=None,
-                      hidden_size=768,
-                      num_hidden_layers=12,
-                      num_attention_heads=12,
-                      intermediate_size=3072,
-                      intermediate_act_fn=gelu,
-                      hidden_dropout_prob=0.1,
-                      attention_probs_dropout_prob=0.1,
-                      initializer_range=0.02,
-                      do_return_all_layers=False):
+def transformer_model(
+  input_tensor,
+  attention_mask=None,
+  hidden_size=768,
+  num_hidden_layers=12,
+  num_attention_heads=12,
+  intermediate_size=3072,
+  intermediate_act_fn=gelu,
+  hidden_dropout_prob=0.1,
+  attention_probs_dropout_prob=0.1,
+  initializer_range=0.02,
+  do_return_all_layers=False):
   """Multi-headed, multi-layer Transformer from "Attention is All You Need".
 
   This is almost an exact implementation of the original Transformer encoder.
