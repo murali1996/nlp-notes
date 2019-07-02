@@ -226,6 +226,20 @@ def progressBar(value, endvalue, names, values, bar_length=20):
 	sys.stdout.flush()
 	return
 ```
+#### Conditional Printer
+```python
+def myPrinter(print_stats):
+	if print_stats:
+		def conditional_printer(*args):
+			# Print each argument separately so caller doesn't need to
+			# stuff everything to be printed into a single string
+			for arg in args:
+				#print('{}'.format(['=']*30));
+				print(arg)
+	else:
+		conditional_printer = lambda *a: None
+	return conditional_printer
+```
 #### Refer a relative path
 ```
 import module1
