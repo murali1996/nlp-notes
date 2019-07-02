@@ -212,21 +212,21 @@ class Model(object):
 		#
 		print("The following files will be loaded: vocab.txt, bert_config.json")
 		self.VOCAB_FILE = os.path.join(ckpt_dir, 'vocab.txt')
-		self.CONFIG_FILE = os.path.join(ckpt_dir, 'bert_config.json')	
-		self.bert_config = modeling.BertConfig.from_json_file(self.CONFIG_FILE)
 		self.tokenizer = tokenization.FullTokenizer(vocab_file=self.VOCAB_FILE, do_lower_case=self.DO_LOWER_CASE) 
-		print(self.tokenizer.tokenize("This is a simple example of how the BERT tokenizer tokenizes text. "))
+		self.CONFIG_FILE = os.path.join(ckpt_dir, 'bert_config.json')	
+		self.bert_config = modeling.BertConfig.from_json_file(self.CONFIG_FILE)		
+		print(self.tokenizer.tokenize("This is a simple example of how the BERT's FullTokenizer tokenizes text. "))
 		return
 	#
 	# TF GRAPH OPS
-	def set_base_ops(self):
+	def set_base_ops(self, is_training):
 		with self.tf_graph.as_default():
 			with tf.device(self.gpu_devices_n1):
 				self.batch_input_ids__tensor = tf.placeholder(dtype=tf.int32, shape=(None,self.MAX_SEQ_LENGTH), name="batch_input_ids__tensor")
 				self.batch_input_mask__tensor = tf.placeholder(dtype=tf.int32, shape=(None,self.MAX_SEQ_LENGTH), name="batch_input_mask__tensor")
 				self.batch_token_type_ids__tensor = tf.placeholder(dtype=tf.int32, shape=(None,self.MAX_SEQ_LENGTH), name="batch_itoken_type_ids__tensor")
 				self.bertModel = modeling.BertModel(self.bert_config,
-													is_training=True,
+													is_training=is_training,
 													input_ids=self.batch_input_ids__tensor,
 													input_mask=self.batch_input_mask__tensor,
 													token_type_ids=self.batch_token_type_ids__tensor,
@@ -235,7 +235,7 @@ class Model(object):
 				self.cls_output = self.bertModel.get_cls_vector()
 				self.full_output = self.bertModel.get_sequence_output()
 		return
-	def set_custom_ops_BCELoss(self):
+	def set_custom_ops_BCELoss(self, is_training):
 		with self.tf_graph.as_default():
 			with tf.device(self.gpu_devices_n1):
 				with tf.variable_scope("custom_ops"):
@@ -252,7 +252,7 @@ class Model(object):
 					self.init_op = self.get_init_ops()
 					self.set_saver_ops()
 		return
-	def set_custom_ops_TripletLoss(self):
+	def set_custom_ops_TripletLoss(self, is_training):
 		with self.tf_graph.as_default():
 			with tf.device(self.gpu_devices_n1):
 				with tf.variable_scope("custom_ops"):
@@ -307,64 +307,72 @@ class Model(object):
 		return
 
 
-########################################
+if __name__=="__main__":
+	print("in main...")
+	"""
+	test_sentences = []
+	file = open('sentences.txt')
+	for row in file:
+	    test_sentences.append(row.split('\t')[0].strip())
+	file.close()
 
-"""
-test_sentences = []
-file = open('sentences.txt')
-for row in file:
-    test_sentences.append(row.split('\t')[0].strip())
-file.close()
+	model = Model(gpu_devices=[0])
+	model.restore_pretrained_bert_config(max_seq_len=64)
+	inputFeatures = model.get_InputFeatures(text_a_list=test_sentences)
+	inputFeatures = np.asarray(inputFeatures)
+	# each feature object has input_ids, input_mask, segment_ids, label_id, token_len, is_real_example attributes
 
-model = Model(gpu_devices=[0])
-model.restore_pretrained_bert_config(max_seq_len=64)
-inputFeatures = model.get_InputFeatures(text_a_list=test_sentences)
-inputFeatures= np.asarray(inputFeatures)
-# each feature object has input_ids, input_mask, segment_ids, label_id, token_len, is_real_example attributes
+	model.set_base_ops()
+	model.restore_weights()
 
-model.set_base_ops()
-model.restore_weights()
-
-INFER_NUM = len(test_sentences)
-BATCH_SIZE = 50
-cls_outputs = []
-full_outputs = []
-tf_config = tf.ConfigProto()
-tf_config.allow_soft_placement = True
-tf_config.log_device_placement = False
-tf_config.gpu_options.allow_growth = True
-tf_config.gpu_options.per_process_gpu_memory_fraction = 0.9
-with tf.Session(graph = model.tf_graph, config=tf_config) as sess:
-	#
-	sess.run(model.get_init_ops())
-	#
-	n_infer_batches = int(math.ceil(INFER_NUM/BATCH_SIZE))
-	all_indices = np.arange(INFER_NUM)
-	for i in tqdm(range(n_infer_batches)):   
-		begin_index = i * BATCH_SIZE
-		end_index = min((i + 1) * BATCH_SIZE, INFER_NUM)
-		batch_index = all_indices[begin_index : end_index]
+	INFER_NUM = len(test_sentences)
+	BATCH_SIZE = 50
+	cls_outputs = []
+	full_outputs = []
+	tf_config = tf.ConfigProto()
+	tf_config.allow_soft_placement = True
+	tf_config.log_device_placement = False
+	tf_config.gpu_options.allow_growth = True
+	tf_config.gpu_options.per_process_gpu_memory_fraction = 0.9
+	with tf.Session(graph = model.tf_graph, config=tf_config) as sess:
 		#
-		batch_input_ids = np.asarray([f.input_ids for f in inputFeatures[batch_index]], dtype=np.int32)
-		batch_input_mask = np.asarray([f.input_mask for f in inputFeatures[batch_index]], dtype=np.int32)
-		batch_token_type_ids = np.asarray([f.segment_ids for f in inputFeatures[batch_index]], dtype=np.int32)
+		sess.run(model.get_init_ops())
 		#
-		batch_cls_outputs, batch_full_outputs = \
-			sess.run([model.cls_output, model.full_output],
-						feed_dict={
-									model.batch_input_ids__tensor:batch_input_ids,
-									model.batch_input_mask__tensor:batch_input_mask,
-									model.batch_token_type_ids__tensor:batch_token_type_ids
-								  }
-					)
-		#
-		if i==0:
-			cls_outputs = batch_cls_outputs
-			full_outputs = batch_full_outputs
-		else:
-			cls_outputs = np.concatenate((cls_outputs, batch_cls_outputs), axis=0)
-			full_outputs = np.concatenate((full_outputs, batch_full_outputs), axis=0)
-"""
+		n_infer_batches = int(math.ceil(INFER_NUM/BATCH_SIZE))
+		all_indices = np.arange(INFER_NUM)
+		for i in tqdm(range(n_infer_batches)):   
+			begin_index = i * BATCH_SIZE
+			end_index = min((i + 1) * BATCH_SIZE, INFER_NUM)
+			batch_index = all_indices[begin_index : end_index]
+			#
+			batch_input_ids = np.asarray([f.input_ids for f in inputFeatures[batch_index]], dtype=np.int32)
+			batch_input_mask = np.asarray([f.input_mask for f in inputFeatures[batch_index]], dtype=np.int32)
+			batch_token_type_ids = np.asarray([f.segment_ids for f in inputFeatures[batch_index]], dtype=np.int32)
+			#
+			batch_cls_outputs, batch_full_outputs = \
+				sess.run([model.cls_output, model.full_output],
+							feed_dict={
+										model.batch_input_ids__tensor:batch_input_ids,
+										model.batch_input_mask__tensor:batch_input_mask,
+										model.batch_token_type_ids__tensor:batch_token_type_ids
+									  }
+						)
+			#
+			if i==0:
+				cls_outputs = batch_cls_outputs
+				full_outputs = batch_full_outputs
+			else:
+				cls_outputs = np.concatenate((cls_outputs, batch_cls_outputs), axis=0)
+				full_outputs = np.concatenate((full_outputs, batch_full_outputs), axis=0)
+	"""
+
+
+
+
+
+
+
+
 
 
 
