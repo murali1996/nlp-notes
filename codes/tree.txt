@@ -43,8 +43,15 @@
 │   │   │       └── vocab.txt
 │   │   └── README.md
 │   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-36.pyc
+│   │   └── wrapper.cpython-36.pyc
 │   └── wrapper.py
-├── sent_embs.py
+├── elmo_wrapper_tf
+│   └── __init__.py
+├── helpers
+│   ├── __init__.py
+│   └── sent_embs.py
 └── tree.txt
 
-7 directories, 40 files
+10 directories, 44 files
