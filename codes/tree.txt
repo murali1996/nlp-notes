@@ -12,12 +12,6 @@
 │   │   ├── optimization.py
 │   │   ├── optimization_test.py
 │   │   ├── predicting_movie_reviews_with_bert_on_tf_hub.ipynb
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-36.pyc
-│   │   │   ├── modeling.cpython-36.pyc
-│   │   │   ├── optimization.cpython-36.pyc
-│   │   │   ├── run_classifier.cpython-36.pyc
-│   │   │   └── tokenization.cpython-36.pyc
 │   │   ├── README.md
 │   │   ├── requirements.txt
 │   │   ├── run_classifier.py
@@ -43,9 +37,6 @@
 │   │   │       └── vocab.txt
 │   │   └── README.md
 │   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-36.pyc
-│   │   └── wrapper.cpython-36.pyc
 │   └── wrapper.py
 ├── elmo_wrapper_tf
 │   └── __init__.py
@@ -54,4 +45,4 @@
 │   └── sent_embs.py
 └── tree.txt
 
-10 directories, 44 files
+8 directories, 37 files
