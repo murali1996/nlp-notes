@@ -13,7 +13,7 @@ tf_config.gpu_options.per_process_gpu_memory_fraction = 0.9
 import sys
 sys.path.append('..')
 import tensorflow_hub as hub
-from BERTSiamese_ZSL_IntentClassifier.bert_wrapper_tf.wrapper import Model as BERTModelWrapper
+from bert_wrapper_tf.wrapper import Model as BERTModelWrapper
 
 
 class Module(object):
@@ -351,7 +351,7 @@ if __name__=="__main__":
 	# ======================================================================
 	# Set Paths
 	# ======================================================================
-	DATA_FOLDER = '../../DATA'
+	DATA_FOLDER = '../../../DATA'
 	glove_directory = os.path.join(DATA_FOLDER, 'WORD_EMBEDDINGS/glove.6B/')
 	use3_directory = os.path.join(DATA_FOLDER, 'TFHUB_MODELS/use3/')
 	elmo2_directory = os.path.join(DATA_FOLDER, 'TFHUB_MODELS/elmo2/')
