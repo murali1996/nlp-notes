@@ -1,9 +1,11 @@
+
+
 ## Contents
 * [Some connections at a glance](#Some-connections-at-a-glance)
 * [Mono-Lingual NLU](#Mono-Lingual-NLU)
   * [Evaluation for NLU](#Evaluation-for-NLU)
   * [The \*Word Embeddings\* Wrapper](#The-Word-Embeddings-Wrapper)
-  * [The \*Language Modeling\* Wrapper](#The-Language-Modeling-Wrapper)
+  * [The \*Unsupervised Modeling\* Wrapper](#The-Language-Modeling-Wrapper)
   * [The \*Beyond-Language-Modeling\* Wrapper](#The-Beyond-Language-Modeling-Wrapper)
   * [Some more neural models for Sentence Encoding](#Some-more-neural-models-for-Sentence-Encoding)
   * [Direct Derivatives](#Direct-Derivatives)
@@ -17,8 +19,16 @@
 * [Food For Thought](#Food-For-Thought)
 
 
+
+
+
+
 ## Some connections at a glance
 ![alt text][how_i_met_your_paper]
+
+
+
+
 
 
 
@@ -35,9 +45,9 @@
 1. [*FastText*, Enriching Word Vectors with Subword Information, Bojanowski et al. 2016][Bojanowski et al. 2016]
 1. [*FLAIR*, Contextual String Embeddings for Sequence Labeling, Akbik et al. 2018][Akbik et al. 2018] [[CODE]](https://github.com/zalandoresearch/flair)
 1. [Learning Gender-Neutral Word Embeddings, Zhao et al. 2018][Zhao et al. 2018]
-### The \*Language Modeling\* Wrapper
-:bulb: Typically, these *pre-training* methods involve an unsupervised (also called semi-supervised in this context) learning followed by a supervised learning. This is unlike CV domain where *pre-training* is mainly supervised learning.   
-:bulb: There is no standard input method for all these works. Typically, you would find Word/Character embeddings or Byte-Pair Encoding(BPE) as input methods.
+### The \*Unsupervised Modeling\* Wrapper
+:bulb: Typically, these *pre-training* methods involve an unsupervised (also called semi-supervised in some works) learning followed by a supervised learning. This is unlike CV domain where *pre-training* is mainly supervised learning.   
+:bulb: There is no standard text-input-sequence method for all these works. Typically, you would find Word/Character embeddings or Byte-Pair Encoding(BPE) as input methods.
 1. [Semi-supervised Sequence Learning, Dai et al. 2015][Dai et al. 2015]
 1. [Unsupervised Pretraining for Sequence to Sequence Learning, Ramachandran et al. 2016][Ramachandran et al. 2016]
 1. [*ULM-FiT*, Universal Language Model Fine-tuning for Text Classification, Howard and Ruder 2018][Howard and Ruder 2018]
@@ -60,7 +70,6 @@
 1. [Practical Text Classification With Large Pre-Trained Language Models, NeelKant et al. 2018][NeelKant et al. 2018]
 1. [SciBERT: Pretrained Contextualized Embeddings for Scientific Text, Beltagy et al. 2019][Beltagy et al. 2019]
 1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]
-
 ### Some more neural models for Sentence Encoding
 1. [Skip-Thought Vectors, Kiros et al. 2015][Kiros et al. 2015]
 1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
@@ -76,6 +85,9 @@
 
 
 
+[Go Back To Contents](#Contents)
+
+
 ## Cross-Lingual NLU
 ### Evaluation for XLU
 1. [XNLI: Evaluating Cross-lingual Sentence Representations, Conneau eta al. 2018c][Conneau eta al. 2018c]
@@ -87,10 +99,18 @@
 1. [Cross-lingual Language Model Pretraining, Lample et al. 2019][Lample et al. 2019]
 
 
+[Go Back To Contents](#Contents)
+
+
 
 ## Downloads
 1. [*Word2Vec*](https://github.com/mmihaltz/word2vec-GoogleNews-vectors/)
 1. [*Glove*](https://nlp.stanford.edu/projects/glove/)
+
+
+
+
+
 
 
 
@@ -114,6 +134,11 @@
 
 
 
+
+
+
+
+
 ## Food For Thought
 1. How good do ranking algorithms, the ones with pointwise/pairwise/listwise learning paradigms, perform when the no. of test classes at the infernece time grow massively? KG Reasoning using Translational/Bilinear/DL techniques is one important area under consideration.
 1. While the chosen neural achitecture is important, the techniques used for training the problem objective e.g.[*Word2Vec*][Mikolov et al. 2013b] or the techniques used while doing loss optimization e.g.[*OpenAI Transformer*][Radford et al. 2018] play a significant role in both fast as well as a good convergence.
@@ -123,9 +148,20 @@
 
 
 
+
+
+
+
+
 # Quick Bites
 1. Byte Pair Encoding (BPE) is a data compression technique that iteratively replaces the most frequent pair of symbols (originally bytes) in a given dataset with a single unused symbol. In each iteration, the algorithm finds the most frequent (adjacent) pair of symbols, each can be constructed of a single character or a sequence of characters, and merged them to create a new symbol. All occurences of the selected pair are then replaced with the new symbol before the next iteration. Eventually, frequent sequence of characters, up to a whole word, are replaced with a single symbol, until the algorithm reaches the defined number of iterations (50k can be an example figure). During inference, if a word isn’t part of the BPE’s pre-built dictionary, it will be split into subwords that are. An example code of BPE can be found here. https://gist.github.com/ranihorev/6ba9a88c9e7401b603cd483dd767e783
 1. Models can be trained on SNLI in two different ways: (i) sentence encoding-based models that explicitly separate the encoding of the individual sentences and (ii) joint methods that allow to use encoding of both sentences (to use cross-features or attention from one sentence to the other).
+
+
+
+
+
+[Go Back To Contents](#Contents)
 
 
 
