@@ -1,4 +1,4 @@
-import numpy as np, os, pandas as pd, re, csv
+import numpy as np, os, pandas as pd, re, csv, sys
 from nltk.corpus import stopwords
 from tqdm import tqdm
 from tensorflow.contrib.tensorboard.plugins import projector
@@ -10,10 +10,26 @@ tf_config.gpu_options.allow_growth = True
 tf_config.gpu_options.per_process_gpu_memory_fraction = 0.9
 
 
-import sys
-sys.path.append('..')
 import tensorflow_hub as hub
-from bert_wrapper_tf.wrapper import Model as BERTModelWrapper
+# 1.
+# if you are running the script directly from helpers/ folder as "python sent_embs.py", then uncomment...
+# sys.path.append('..')
+# from bert_wrapper_tf.wrapper import Model as BERTModelWrapper
+# 2.
+# if you are calling as a package standing in codes/ folder which contains both helpers/ and bert_wrapper_tf/ folders, then uncomment...
+# from bert_wrapper_tf.wrapper import Model as BERTModelWrapper
+# 3.
+# if you are calling from a grandparent folder or above as a package, then uncomment... 
+# note, this way of calling is not applicable for 1. mode and returns __file__ not found
+# sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
+# from bert_wrapper_tf.wrapper import Model as BERTModelWrapper
+# So, in totality...
+try: 
+	sys.path.append('..')
+	from bert_wrapper_tf.wrapper import Model as BERTModelWrapper
+except:
+	sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
+	from bert_wrapper_tf.wrapper import Model as BERTModelWrapper
 
 
 class Module(object):
@@ -178,7 +194,7 @@ class Module(object):
 		inputFeatures= np.asarray(inputFeatures)
 		# each feature object has input_ids, input_mask, segment_ids, label_id, is_real_example attributes
 
-		model.set_base_ops()
+		model.set_base_ops(is_training=False)
 		model.restore_weights()
 
 		import math
@@ -351,7 +367,7 @@ if __name__=="__main__":
 	# ======================================================================
 	# Set Paths
 	# ======================================================================
-	DATA_FOLDER = '../../../DATA'
+	DATA_FOLDER = '../../../../DATA'
 	glove_directory = os.path.join(DATA_FOLDER, 'WORD_EMBEDDINGS/glove.6B/')
 	use3_directory = os.path.join(DATA_FOLDER, 'TFHUB_MODELS/use3/')
 	elmo2_directory = os.path.join(DATA_FOLDER, 'TFHUB_MODELS/elmo2/')
