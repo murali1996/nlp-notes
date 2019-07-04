@@ -1,21 +1,16 @@
 .
+├── bert_semantic_ranking_tf.py
 ├── bert_wrapper_tf
 │   ├── bert_master
-│   │   ├── CONTRIBUTING.md
 │   │   ├── create_pretraining_data.py
 │   │   ├── extract_features.py
 │   │   ├── __init__.py
-│   │   ├── LICENSE
 │   │   ├── modeling.py
 │   │   ├── modeling_test.py
-│   │   ├── multilingual.md
 │   │   ├── optimization.py
 │   │   ├── optimization_test.py
-│   │   ├── predicting_movie_reviews_with_bert_on_tf_hub.ipynb
-│   │   ├── README.md
 │   │   ├── requirements.txt
 │   │   ├── run_classifier.py
-│   │   ├── run_classifier_with_tfhub.py
 │   │   ├── run_pretraining.py
 │   │   ├── run_squad.py
 │   │   ├── sample_text.txt
@@ -29,7 +24,13 @@
 │   │   │   │   ├── bert_model.ckpt.index
 │   │   │   │   ├── bert_model.ckpt.meta
 │   │   │   │   └── vocab.txt
-│   │   │   └── uncased_L-12_H-768_A-12
+│   │   │   ├── uncased_L-12_H-768_A-12
+│   │   │   │   ├── bert_config.json
+│   │   │   │   ├── bert_model.ckpt.data-00000-of-00001
+│   │   │   │   ├── bert_model.ckpt.index
+│   │   │   │   ├── bert_model.ckpt.meta
+│   │   │   │   └── vocab.txt
+│   │   │   └── wwm_cased_L-24_H-1024_A-16
 │   │   │       ├── bert_config.json
 │   │   │       ├── bert_model.ckpt.data-00000-of-00001
 │   │   │       ├── bert_model.ckpt.index
@@ -38,11 +39,15 @@
 │   │   └── README.md
 │   ├── __init__.py
 │   └── wrapper.py
+├── checkpoints
+├── data
+│   └── sentences.txt
 ├── elmo_wrapper_tf
 │   └── __init__.py
 ├── helpers
 │   ├── __init__.py
-│   └── sent_embs.py
+│   ├── sent_embs.py
+│   └── sentences.txt
 └── tree.txt
 
-8 directories, 37 files
+11 directories, 39 files
