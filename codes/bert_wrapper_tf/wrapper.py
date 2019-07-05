@@ -99,7 +99,7 @@ class Model(object):
 			setattr(self, 'gpu_devices_n1', '/cpu:0')
 		#
 		# uncased_L-12_H-768_A-12 or cased_L-12_H-768_A-12 or wwm_cased_L-24_H-1024_A-16
-		self.src_ckpt_dir = os.path.join("/".join(__file__.split("/")[:-1]), './checkpoints/BERT_PRETRAINED_MODELS/cased_L-12_H-768_A-12') # donot put trailing / slash 
+		self.src_ckpt_dir = os.path.join("/".join(__file__.split("/")[:-1]), './checkpoints/BERT_PRETRAINED_MODELS/uncased_L-12_H-768_A-12') # donot put trailing / slash 
 		self.src_model_name = "bert_model.ckpt"
 		self.dest_ckpt_dir = os.path.join("/".join(__file__.split("/")[:-1]), './checkpoints/CUSTOM_MODELS')
 		self.dest_model_name = "bert_model.ckpt"
@@ -146,7 +146,7 @@ class Model(object):
 		# input_ids, input_mask, segment_ids, label_id, is_real_example are the attributes for a inputFeauture object
 		return inputFeatures
 		#
-	def save_tokenized_sents(self, *args : "ex: x_tr_inputFeatures, x_tr_raw, y_tr_inputFeatures, y_tr_raw", column_names, file_title, ckpt_dir=None):
+	def save_tokenized_sents(self, *args : "x_tr_inputFeatures, x_tr_raw, y_tr_inputFeatures, y_tr_raw", column_names, file_title, ckpt_dir=None):
 		n_args = len(args)
 		same_len = -1
 		for arg in args:
@@ -168,7 +168,7 @@ class Model(object):
 		df.to_excel(filepath, index=False)
 		print("Saving tokenized sents: {}".format(filepath))
 		return
-	def dump_json(self, dict_record, file_title, ckpt_dir=None):
+	def dump_json(self, dict_record, file_title, open_mode: "a->append, w->write", ckpt_dir=None):
 		#
 		if ckpt_dir==None:
 			ckpt_dir = self.__get_default_dest_ckpt_dir()
@@ -178,7 +178,7 @@ class Model(object):
 		def default(o):
 			if isinstance(o, np.int64): return int(o)  
 			raise TypeError
-		now_open = open(os.path.join(ckpt_dir, file_title+".json"),"a")
+		now_open = open(os.path.join(ckpt_dir, file_title+".json"),open_mode)
 		now_open.write("\n")
 		now_open.write(json.dumps(dict_record, indent=4, sort_keys=False, default=default))
 		now_open.close()
@@ -208,7 +208,7 @@ class Model(object):
 		self._save_pretrained_bert_config(ckpt_dir=ckpt_dir)
 		#
 		additional_dict = {"DO_LOWER_CASE":self.DO_LOWER_CASE, "MAX_SEQ_LENGTH":self.MAX_SEQ_LENGTH, "append_cased_info_dir_name":self.append_cased_info_dir_name}
-		now_open = open(os.path.join(ckpt_dir, "custom_model_dict.json"),"a")
+		now_open = open(os.path.join(ckpt_dir, "custom_model_dict.json"),"w")
 		now_open.write("\n")
 		now_open.write(json.dumps(additional_dict, indent=4, sort_keys=False))
 		now_open.close()
@@ -226,7 +226,7 @@ class Model(object):
 			print("Couldn't copy files because of exception: {}".format(e))
 			pass
 		return
-	def restore_weights(self, model_name=None, ckpt_dir=None, print_tvars=False, sess=None):
+	def restore_weights(self, sess, model_name=None, ckpt_dir=None, print_tvars=False):
 		if model_name==None:
 			model_name = self.src_model_name
 		if ckpt_dir==None:
@@ -245,6 +245,7 @@ class Model(object):
 						if var.name in initialized_variable_names:
 							init_string = ", *INIT_FROM_CKPT*"
 						tf.logging.info("  name = %s, shape = %s%s", var.name, var.shape, init_string)
+			sess.run(self.init_op)
 		else:
 			ckpt_path = os.path.join(ckpt_dir, model_name)
 			self.tf_saver.restore(sess, ckpt_path)
@@ -341,6 +342,42 @@ class Model(object):
 					self.ndist = tf.reduce_mean(self.batch_ndist)
 					#
 					self.batch_loss = tf.nn.relu(self.margin_gamma+self.batch_pdist-self.batch_ndist)
+					self.loss = tf.reduce_mean(self.batch_loss)
+					self.train_op = self.get_train_ops(self.loss, self.learning_rate)
+					self.init_op = self.get_init_ops()
+					self.set_saver_ops()
+		return
+	def set_custom_ops_PairwiseLoss(self, is_training, hidden_dropout_prob=None):
+		with self.tf_graph.as_default():
+			with tf.device(self.gpu_devices_n1):
+				with tf.variable_scope("custom_ops"):
+					self.part_size = tf.placeholder(tf.int32, shape=(), name="part_size")
+					self.learning_rate = tf.placeholder(tf.float32, shape=(), name="learning_rate")
+					self.margin_gamma = tf.placeholder(tf.float32, shape=(), name="margin_gamma")
+					#
+					self.query_weights = tf.get_variable("query_weights", shape=(self.cls_output.get_shape().as_list()[-1], 256), initializer=modeling.create_initializer(self.bert_config.initializer_range))
+					self.label_weights = tf.get_variable("label_weights", shape=(self.cls_output.get_shape().as_list()[-1], 256), initializer=modeling.create_initializer(self.bert_config.initializer_range))
+					#
+					hidden_dropout_prob = self.bert_config.hidden_dropout_prob if hidden_dropout_prob==None else hidden_dropout_prob
+					hidden_dropout_prob = 0 if not is_training else hidden_dropout_prob
+					self.cls_output =  tf.nn.dropout(self.cls_output, keep_prob=1-hidden_dropout_prob)
+					self.qvec = self.cls_output[:self.part_size,:]
+					self.pvec = self.cls_output[self.part_size:2*self.part_size,:]
+					self.nvec = self.cls_output[2*self.part_size:3*self.part_size,:]
+					self.qvec_prime = tf.matmul(self.qvec, self.query_weights)
+					self.pvec_prime = tf.matmul(self.pvec, self.label_weights)
+					self.nvec_prime = tf.matmul(self.nvec, self.label_weights)
+					#
+					# only for inference
+					self.qvec_prime_inference = tf.matmul(self.cls_output, self.query_weights, name="qvec_prime_inference")
+					self.pvec_prime_inference = tf.matmul(self.cls_output, self.label_weights, name="pvec_prime_inference")
+					#
+					self.batch_pdist = tf.norm(self.qvec_prime-self.pvec_prime, ord="euclidean", axis=-1)
+					self.batch_ndist = tf.norm(self.qvec_prime-self.nvec_prime, ord="euclidean", axis=-1)
+					self.pdist = tf.reduce_mean(self.batch_pdist)
+					self.ndist = tf.reduce_mean(self.batch_ndist)
+					#
+					self.batch_loss = self.batch_pdist + tf.nn.relu(self.margin_gamma-self.batch_ndist)
 					self.loss = tf.reduce_mean(self.batch_loss)
 					self.train_op = self.get_train_ops(self.loss, self.learning_rate)
 					self.init_op = self.get_init_ops()
