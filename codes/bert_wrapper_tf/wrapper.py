@@ -278,6 +278,36 @@ class Model(object):
 		return
 	#
 	# TF GRAPH OPS
+	def __get_init_ops(self):
+		init_op = tf.group([tf.global_variables_initializer(),tf.tables_initializer()])
+		return init_op
+	def __get_train_ops(self, loss, bert_lr: "tf tensor or python scalar", custom_lr: "tf tensor or python scalar"):
+		"""
+		>>> The bert_lr is better kept around 2e-5 in order to avoid catastrophic forgetting and to support training set convergence
+		>>> In alternative to below approach, you can find gradients first using tf.gradients(loss, vars) and then use optimizer.apply_gradients()
+		"""
+		with self.tf_graph.as_default():
+			#_vars = tf.trainable_variables()
+			bert_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES,scope="bert")
+			custom_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES,scope="custom_ops")
+		optimizer1 = tf.train.AdamOptimizer(bert_lr)
+		train_op1 = optimizer1.minimize(loss, var_list=bert_vars)
+		optimizer2 = tf.train.AdamOptimizer(custom_lr)
+		train_op2 = optimizer1.minimize(loss, var_list=custom_vars)
+		#
+		train_op = tf.group([train_op1,train_op2])
+		return train_op 
+	def __set_saver_ops(self):
+		with self.tf_graph.as_default():
+			self.tf_saver = tf.train.Saver()
+			print("tf_saver initialized; any new vars defined after this point will not be saved by attribute tf_saver")
+		return
+	def _get_placeholders_list(self):
+		# [ op for op in self.tf_graph.get_operations() if op.type == "Placeholder"]
+		return [(n.name, n.device) for n in self.tf_graph.as_graph_def().node if n.op=="Placeholder"]
+	def _get_device_assignment_list(self):
+		device_info = [n.device for n in self.tf_graph.as_graph_def().node]
+		return device_info
 	def set_base_ops(self, is_training):
 		with self.tf_graph.as_default():
 			with tf.device(self.gpu_devices_n1):
@@ -297,109 +327,101 @@ class Model(object):
 	def set_custom_ops_BCELoss(self, is_training):
 		with self.tf_graph.as_default():
 			with tf.device(self.gpu_devices_n1):
+				self.true_labels = tf.placeholder(tf.float32, shape=(None, 1), name="true_labels")
+				self.bert_lr = tf.placeholder(tf.float32, shape=(), name="bert_lr")
+				self.custom_lr = tf.placeholder(tf.float32, shape=(), name="custom_lr")
 				with tf.variable_scope("custom_ops"):
-					self.true_labels = tf.placeholder(tf.float32, shape=(None, 1), name="true_labels")
-					self.learning_rate = tf.placeholder(tf.float32, shape=(), name="learning_rate")
-					#
 					self.cls_dense1 = tf.layers.dense(self.cls_output,512,activation=tf.tanh,kernel_initializer=modeling.create_initializer(self.bert_config.initializer_range))
 					self.cls_dense2 = tf.layers.dense(self.cls_dense1,128,activation=tf.tanh,kernel_initializer=modeling.create_initializer(self.bert_config.initializer_range))
 					self.predicted_logits = tf.layers.dense(self.cls_dense2,1,activation=tf.nn.sigmoid,kernel_initializer=modeling.create_initializer(self.bert_config.initializer_range))
 					#
 					self.batch_loss = tf.nn.sigmoid_cross_entropy_with_logits(logits=self.predicted_logits, labels=self.true_labels)
 					self.loss = tf.reduce_mean(self.batch_loss)
-					self.train_op = self.get_train_ops(self.loss, self.learning_rate)
-					self.init_op = self.get_init_ops()
-					self.set_saver_ops()
+					self.train_op = self.__get_train_ops(self.loss, self.bert_lr, self.custom_lr)
+					self.init_op = self.__get_init_ops()
+					self.__set_saver_ops()
+		print("Placeholders defined so far are:")
+		for item in self._get_placeholders_list():
+			print(item)
 		return
 	def set_custom_ops_TripletLoss(self, is_training, hidden_dropout_prob=None):
+		hidden_dropout_prob = self.bert_config.hidden_dropout_prob if hidden_dropout_prob==None else hidden_dropout_prob
+		hidden_dropout_prob = 0 if not is_training else hidden_dropout_prob #over-write
 		with self.tf_graph.as_default():
 			with tf.device(self.gpu_devices_n1):
+				self.part_size = tf.placeholder(tf.int32, shape=(), name="part_size")
+				self.bert_lr = tf.placeholder(tf.float32, shape=(), name="bert_lr")
+				self.custom_lr = tf.placeholder(tf.float32, shape=(), name="custom_lr")
+				self.margin_gamma = tf.placeholder(tf.float32, shape=(), name="margin_gamma")
+				#
 				with tf.variable_scope("custom_ops"):
-					self.part_size = tf.placeholder(tf.int32, shape=(), name="part_size")
-					self.learning_rate = tf.placeholder(tf.float32, shape=(), name="learning_rate")
-					self.margin_gamma = tf.placeholder(tf.float32, shape=(), name="margin_gamma")
-					#
 					self.query_weights = tf.get_variable("query_weights", shape=(self.cls_output.get_shape().as_list()[-1], 256), initializer=modeling.create_initializer(self.bert_config.initializer_range))
 					self.label_weights = tf.get_variable("label_weights", shape=(self.cls_output.get_shape().as_list()[-1], 256), initializer=modeling.create_initializer(self.bert_config.initializer_range))
-					#
-					hidden_dropout_prob = self.bert_config.hidden_dropout_prob if hidden_dropout_prob==None else hidden_dropout_prob
-					hidden_dropout_prob = 0 if not is_training else hidden_dropout_prob
-					self.cls_output =  tf.nn.dropout(self.cls_output, keep_prob=1-hidden_dropout_prob)
-					self.qvec = self.cls_output[:self.part_size,:]
-					self.pvec = self.cls_output[self.part_size:2*self.part_size,:]
-					self.nvec = self.cls_output[2*self.part_size:3*self.part_size,:]
+				with tf.variable_scope("custom_ops"):
+					self.cls_output_ =  tf.nn.dropout(self.cls_output, keep_prob=1-hidden_dropout_prob)
+					self.qvec = self.cls_output_[:self.part_size,:]
+					self.pvec = self.cls_output_[self.part_size:2*self.part_size,:]
+					self.nvec = self.cls_output_[2*self.part_size:3*self.part_size,:]
 					self.qvec_prime = tf.matmul(self.qvec, self.query_weights)
 					self.pvec_prime = tf.matmul(self.pvec, self.label_weights)
 					self.nvec_prime = tf.matmul(self.nvec, self.label_weights)
 					#
-					# only for inference
-					self.qvec_prime_inference = tf.matmul(self.cls_output, self.query_weights, name="qvec_prime_inference")
-					self.pvec_prime_inference = tf.matmul(self.cls_output, self.label_weights, name="pvec_prime_inference")
-					#
 					self.batch_pdist = tf.norm(self.qvec_prime-self.pvec_prime, ord="euclidean", axis=-1)
 					self.batch_ndist = tf.norm(self.qvec_prime-self.nvec_prime, ord="euclidean", axis=-1)
-					self.pdist = tf.reduce_mean(self.batch_pdist)
-					self.ndist = tf.reduce_mean(self.batch_ndist)
-					#
 					self.batch_loss = tf.nn.relu(self.margin_gamma+self.batch_pdist-self.batch_ndist)
 					self.loss = tf.reduce_mean(self.batch_loss)
-					self.train_op = self.get_train_ops(self.loss, self.learning_rate)
-					self.init_op = self.get_init_ops()
-					self.set_saver_ops()
+				with tf.variable_scope("custom_ops"):
+					self.train_op = self.__get_train_ops(self.loss, self.bert_lr, self.custom_lr)
+					self.init_op = self.__get_init_ops()
+					self.__set_saver_ops()
+				with tf.variable_scope("custom_ops"): # extras
+					self.pdist = tf.reduce_mean(self.batch_pdist)
+					self.ndist = tf.reduce_mean(self.batch_ndist)
+					self.qvec_prime_inference = tf.matmul(self.cls_output, self.query_weights, name="qvec_prime_inference")
+					self.pvec_prime_inference = tf.matmul(self.cls_output, self.label_weights, name="pvec_prime_inference")
+		print("Placeholders defined so far are:")
+		for item in self._get_placeholders_list():
+			print(item)
 		return
 	def set_custom_ops_PairwiseLoss(self, is_training, hidden_dropout_prob=None):
+		hidden_dropout_prob = self.bert_config.hidden_dropout_prob if hidden_dropout_prob==None else hidden_dropout_prob
+		hidden_dropout_prob = 0 if not is_training else hidden_dropout_prob #over-write
 		with self.tf_graph.as_default():
 			with tf.device(self.gpu_devices_n1):
+				self.part_size = tf.placeholder(tf.int32, shape=(), name="part_size")
+				self.bert_lr = tf.placeholder(tf.float32, shape=(), name="bert_lr")
+				self.custom_lr = tf.placeholder(tf.float32, shape=(), name="custom_lr")
+				self.margin_gamma = tf.placeholder(tf.float32, shape=(), name="margin_gamma")
+				#
 				with tf.variable_scope("custom_ops"):
-					self.part_size = tf.placeholder(tf.int32, shape=(), name="part_size")
-					self.learning_rate = tf.placeholder(tf.float32, shape=(), name="learning_rate")
-					self.margin_gamma = tf.placeholder(tf.float32, shape=(), name="margin_gamma")
-					#
 					self.query_weights = tf.get_variable("query_weights", shape=(self.cls_output.get_shape().as_list()[-1], 256), initializer=modeling.create_initializer(self.bert_config.initializer_range))
 					self.label_weights = tf.get_variable("label_weights", shape=(self.cls_output.get_shape().as_list()[-1], 256), initializer=modeling.create_initializer(self.bert_config.initializer_range))
-					#
-					hidden_dropout_prob = self.bert_config.hidden_dropout_prob if hidden_dropout_prob==None else hidden_dropout_prob
-					hidden_dropout_prob = 0 if not is_training else hidden_dropout_prob
-					self.cls_output =  tf.nn.dropout(self.cls_output, keep_prob=1-hidden_dropout_prob)
-					self.qvec = self.cls_output[:self.part_size,:]
-					self.pvec = self.cls_output[self.part_size:2*self.part_size,:]
-					self.nvec = self.cls_output[2*self.part_size:3*self.part_size,:]
+				with tf.variable_scope("custom_ops"):
+					self.cls_output_ =  tf.nn.dropout(self.cls_output, keep_prob=1-hidden_dropout_prob)
+					self.qvec = self.cls_output_[:self.part_size,:]
+					self.pvec = self.cls_output_[self.part_size:2*self.part_size,:]
+					self.nvec = self.cls_output_[2*self.part_size:3*self.part_size,:]
 					self.qvec_prime = tf.matmul(self.qvec, self.query_weights)
 					self.pvec_prime = tf.matmul(self.pvec, self.label_weights)
 					self.nvec_prime = tf.matmul(self.nvec, self.label_weights)
 					#
-					# only for inference
-					self.qvec_prime_inference = tf.matmul(self.cls_output, self.query_weights, name="qvec_prime_inference")
-					self.pvec_prime_inference = tf.matmul(self.cls_output, self.label_weights, name="pvec_prime_inference")
-					#
 					self.batch_pdist = tf.norm(self.qvec_prime-self.pvec_prime, ord="euclidean", axis=-1)
 					self.batch_ndist = tf.norm(self.qvec_prime-self.nvec_prime, ord="euclidean", axis=-1)
-					self.pdist = tf.reduce_mean(self.batch_pdist)
-					self.ndist = tf.reduce_mean(self.batch_ndist)
-					#
 					self.batch_loss = self.batch_pdist + tf.nn.relu(self.margin_gamma-self.batch_ndist)
 					self.loss = tf.reduce_mean(self.batch_loss)
-					self.train_op = self.get_train_ops(self.loss, self.learning_rate)
-					self.init_op = self.get_init_ops()
-					self.set_saver_ops()
+				with tf.variable_scope("custom_ops"):
+					self.train_op = self.__get_train_ops(self.loss, self.bert_lr, self.custom_lr)
+					self.init_op = self.__get_init_ops()
+					self.__set_saver_ops()
+				with tf.variable_scope("custom_ops"): # extras
+					self.pdist = tf.reduce_mean(self.batch_pdist)
+					self.ndist = tf.reduce_mean(self.batch_ndist)
+					self.qvec_prime_inference = tf.matmul(self.cls_output, self.query_weights, name="qvec_prime_inference")
+					self.pvec_prime_inference = tf.matmul(self.cls_output, self.label_weights, name="pvec_prime_inference")
+		print("Placeholders defined so far are:")
+		for item in self._get_placeholders_list():
+			print(item)
 		return
-	def get_init_ops(self):
-		init_op = tf.group([tf.global_variables_initializer(),tf.tables_initializer()])
-		return init_op
-	def get_train_ops(self, loss, learning_rate: "can be a tensor value too"):
-		# train_op = tf.train.AdamOptimizer(2e-5).minimize(loss) # values obtained from paper reading 
-		train_op = tf.train.AdamOptimizer(learning_rate).minimize(loss)
-		return train_op
-	def set_saver_ops(self):
-		with self.tf_graph.as_default():
-			self.tf_saver = tf.train.Saver()
-			print("tf_saver initialized; any new vars defined after this point will not be saved by attribute tf_saver")
-		return
-	def get_ops_devices(self):
-		device_info = [n.device for n in self.tf_graph.as_graph_def().node]
-		return device_info
-	#
-	# FINETUNE your data with BERT Objective
 	def finetune_bert_weights(self, data=None):
 		print("Function unavailable as of now...please run with your custom objective with pretrained bert-weights")
 		return
@@ -434,7 +456,7 @@ if __name__=="__main__":
 	tf_config.gpu_options.per_process_gpu_memory_fraction = 0.9
 	with tf.Session(graph = model.tf_graph, config=tf_config) as sess:
 		#
-		sess.run(model.get_init_ops())
+		sess.run(model.__get_init_ops())
 		#
 		n_infer_batches = int(math.ceil(INFER_NUM/BATCH_SIZE))
 		all_indices = np.arange(INFER_NUM)
