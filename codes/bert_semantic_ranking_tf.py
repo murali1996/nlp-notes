@@ -81,7 +81,7 @@ def get_hard_negatives(x_raw, y_raw, dist_mat, y_unique_labels, list_size=1):
 			for ind in neg_sample_idxs:
 				neg_samples.append(y_unique_labels[ind])
 		else:
-			best_k = min_idxs[:3]
+			best_k = min_idxs[:10]
 			try: #idx may or maynot be there!
 				best_k.remove(idx)
 			except:
@@ -196,23 +196,19 @@ def get_bert_prediction_scores_type1(x_raw, y_raw, model, sess, batch_size, y_ra
 
 
 
-
-
 if __name__=="__main__":
-
-
 
 	# ======================================================================
 	# Make data folder and load data
 	# ======================================================================
-	DATASET_NAME = "samsung_all_data" #"samsung_all_data" #"samsung_vde_data"
+	DATASET_NAME = "$$$$$$_all_data" #"$$$$$$_all_data" #"$$$$$$_vde_data"
 	DATASET_TXT =  "all_training.txt" #"all_training.txt" #"vde_training.txt"
 	SRC_DATA_DIR = '../../data/'
 	DST_DATA_DIR = './data/{}'.format(DATASET_NAME)
 	if not os.path.exists(DST_DATA_DIR):
 		split_data.seperate_seen_unseen_classes(
 			inp_as_list = True,
-			src_dir = os.path.join(SRC_DATA_DIR, '_samsung_data'),
+			src_dir = os.path.join(SRC_DATA_DIR, '_$$$$$$_data'),
 			file_paths = [DATASET_TXT],
 			dest_dir = DST_DATA_DIR, #os.path.join(SRC_DATA_DIR, DATASET_NAME)
 			lst=None,
@@ -273,7 +269,7 @@ if __name__=="__main__":
 		#
 		restore_ckpt_dir = None #"./checkpoints/allData_with_hardNegatives_tripletLoss_01/uncased_L-12_H-768_A-12"
 		restore_model_name = None #"wsm_data_with_hard_negs_TripletLoss_lowest_loss_model_0.ckpt"
-		save_ckpt_dir = "./checkpoints/allData_with_hardNegatives_pairwiseLoss_01"
+		save_ckpt_dir = "./checkpoints/allData_with_hardNegatives_TripletLoss_02"
 		save_model_name = "bertModel.ckpt"
 		#
 		model = Model(gpu_devices=[1])
@@ -392,7 +388,8 @@ if __name__=="__main__":
 											model.batch_input_mask__tensor:batch_input_mask,
 											model.batch_token_type_ids__tensor:batch_token_type_ids,
 											model.part_size:len(batch_index),
-											model.learning_rate:0.00002,
+											model.bert_lr:0.00002,
+											model.custom_lr:0.00025,
 											model.margin_gamma:5
 										  }
 							)
@@ -441,7 +438,7 @@ if __name__=="__main__":
 				#
 				acc3, _, _, _, _ = get_bert_prediction_scores_type1(data.x_te_raw, data.y_te_raw, model, sess, batch_size=va_measures["VAL_BATCH_SIZE"])
 				tf.logging.info("Highest Test Accuracy until now: {} at epoch: {}".format(te_measures["highest_acc"],te_measures["highest_acc_epoch"]))
-				tf.logging.info("Epoch Train Accuracy: {}".format(acc1))
+				tf.logging.info("Epoch Test Accuracy: {}".format(acc3))
 				te_measures["epoch_acc"].append((epoch, acc3))
 				if epoch==0 or te_measures["highest_acc"]<=acc3:
 					te_measures["highest_acc"], te_measures["highest_acc_epoch"] = acc3, epoch
