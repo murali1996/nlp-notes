@@ -10,11 +10,12 @@ import tensorflow as tf
 
 from helpers import load_data, split_data
 import sys
-from wrappers.bert_wrapper_tf.wrapper import Model
+from bert_wrapper_tf.wrapper import Model
 
 
-
+# ======================================================================
 # Some Utility methods
+# ======================================================================
 def progressBar(value, endvalue, names, values, bar_length=20):
 	assert(len(names)==len(values));
 	percent = float(value) / endvalue
@@ -35,23 +36,22 @@ def process_txt(list_sentences):
 		sent = " ".join(sent_tokens)
 		list_sentences[i] = sent
 	return list_sentences
-# Some negative sampling methods
-def get_random_negatives(x_raw, y_raw, y_unique_labels=[], list_size=1):
-	assert len(x_raw)==len(y_raw)
+def get_random_negatives(y_raw, y_unique_labels=[], list_size=1):
+	y_unique_labels = copy.deepcopy(y_unique_labels)
 	if len(y_unique_labels)==0:
-		y_unique_labels = np.unique(y_raw)
+		_, idx = np.unique(y_raw, return_index=True)
+		y_unique_labels = np.asarray(y_raw[np.sort(idx)])
 	else:
 		set_a = set(y_unique_labels)
 		set_b = set(np.unique(y_raw))
 		if len(set_b-set_a)!=0:
 			raise Exception("{} names in y_raw unavailable in y_unique_labels: {}".format(len(set_b-set_a),set_b-set_a))
-		y_unique_labels = y_unique_labels
-	assert list_size<len(y_unique_labels)
-	if type(y_unique_labels)!=list:
+	if not isinstance(y_unique_labels, list):
 		y_unique_labels = y_unique_labels.tolist()
+	assert list_size<len(y_unique_labels)
 	#
 	y_raw_negatives =  []
-	for y_ in tqdm(y_raw):
+	for _, y_ in tqdm(enumerate(y_raw)):
 		possible_negs = y_unique_labels.remove(y_)
 		neg_samples = np.random.choice(y_unique_labels, size=list_size, replace=False).tolist()
 		if list_size==1:
@@ -59,13 +59,40 @@ def get_random_negatives(x_raw, y_raw, y_unique_labels=[], list_size=1):
 		y_raw_negatives.append(neg_samples)
 		y_unique_labels+=[y_]
 	return y_raw_negatives
-def get_hard_negatives(x_raw, y_raw, dist_mat, y_unique_labels, list_size=1):
-	#print("IMPORTANT:: indices along each row in dist_mat MUST correspond to the order of labels in y_unique_labels")
-	assert len(x_raw)==len(y_raw)==dist_mat.shape[0]
+def get_nonrandom_negatives(y_raw, dist_mat, y_unique_labels, list_size=1):
+	"""
+	NOTE:
+	Since the dist_mat column indices correspond to preordered y_unique_labels, you must give 
+	appropriate y_unique_labels
+	"""
+	dist_mat = copy.deepcopy(dist_mat)
+	y_unique_labels = copy.deepcopy(y_unique_labels)
+	assert len(y_raw)==dist_mat.shape[0]
 	assert dist_mat.shape[1]==len(y_unique_labels)
+	if not isinstance(y_unique_labels, list):
+		y_unique_labels = y_unique_labels.tolist()
 	assert list_size<len(y_unique_labels)
+	#
+	y_raw_negatives =  []
+	for i, y_ in tqdm(enumerate(y_raw)):
+		dist_row = dist_mat[i,:].reshape(-1)
+		mask_this_idx = y_unique_labels.index(y_)  #np.where(y_unique_labels==y_)[0][0]
+		dist_row[mask_this_idx] = 1
+		dist_row = 1/dist_row
+		dist_row[mask_this_idx] = 0
+		dist_row = dist_row/np.sum(dist_row)
+		neg_samples = np.random.choice(y_unique_labels, size=list_size, replace=False, p=dist_row).tolist()
+		if list_size==1:
+			neg_samples = neg_samples[0]
+		y_raw_negatives.append(neg_samples)
+	return y_raw_negatives
+def get_hard_negatives(y_raw, dist_mat, y_unique_labels, list_size=1):
+	#print("IMPORTANT:: indices along each row in dist_mat MUST correspond to the order of labels in y_unique_labels")
+	assert len(y_raw)==dist_mat.shape[0]
+	assert dist_mat.shape[1]==len(y_unique_labels)
 	if type(y_unique_labels)!=list:
 		y_unique_labels = y_unique_labels.tolist()
+	assert list_size<len(y_unique_labels)
 	#
 	y_raw_negatives =  []
 	for i, y_ in tqdm(enumerate(y_raw)):
@@ -81,7 +108,7 @@ def get_hard_negatives(x_raw, y_raw, dist_mat, y_unique_labels, list_size=1):
 			for ind in neg_sample_idxs:
 				neg_samples.append(y_unique_labels[ind])
 		else:
-			best_k = min_idxs[:10]
+			best_k = min_idxs[:15]
 			try: #idx may or maynot be there!
 				best_k.remove(idx)
 			except:
@@ -90,11 +117,16 @@ def get_hard_negatives(x_raw, y_raw, dist_mat, y_unique_labels, list_size=1):
 			neg_samples = y_unique_labels[neg_sample_idx]
 		y_raw_negatives.append(neg_samples)
 	return y_raw_negatives
+
+
+
+# ======================================================================
 # Some methods with respect to bert_wrapper_tf.wrapper
+# ======================================================================
 def get_representations_type1(model, sess, find_query_vectors, inputFeatures, BATCH_SIZE):
 	#
-	get_this_attribute = getattr(model, "qvec_prime_inference") if find_query_vectors else getattr(model, "pvec_prime_inference")
-	print("Obtaing vectors from the attribute: {}".format(get_this_attribute))
+	get_this_attribute = getattr(model, "qvec_prime_infer") if find_query_vectors else getattr(model, "pvec_prime_infer")
+	print("Obtaining vectors from the attribute: {}".format(get_this_attribute))
 	#
 	vectors = []
 	INFER_NUM = len(inputFeatures)
@@ -125,7 +157,8 @@ def get_representations_type1(model, sess, find_query_vectors, inputFeatures, BA
 			vectors = np.concatenate((vectors, batch_vectors), axis=0)
 	print("Shape Obtained: {}".format(vectors.shape))
 	return np.asarray(vectors)
-def get_bert_prediction_scores_type1(x_raw, y_raw, model, sess, batch_size, y_raw_merged=[], excel_title="", ckpt_dir=None, return_thresScores=False):
+def get_bert_prediction_scores_type1(x_raw, y_raw, model, sess, batch_size,
+									 y_raw_merged=[], excel_title="", ckpt_dir=None, return_thresScores=False):
 	assert len(x_raw)==len(y_raw)
 	x_raw = copy.deepcopy(x_raw)
 	y_raw = copy.deepcopy(y_raw)
@@ -192,23 +225,18 @@ def get_bert_prediction_scores_type1(x_raw, y_raw, model, sess, batch_size, y_ra
 
 
 
-
-
-
-
-if __name__=="__main__":
-
-	# ======================================================================
-	# Make data folder and load data
-	# ======================================================================
-	DATASET_NAME = "$$$$$$_all_data" #"$$$$$$_all_data" #"$$$$$$_vde_data"
+# ======================================================================
+# Make data folder and load data
+# ======================================================================
+def data_func():
+	DATASET_NAME = "$$$$$$$_all_data" #"$$$$$$$_all_data" #"$$$$$$$_vde_data"
 	DATASET_TXT =  "all_training.txt" #"all_training.txt" #"vde_training.txt"
 	SRC_DATA_DIR = '../../data/'
 	DST_DATA_DIR = './data/{}'.format(DATASET_NAME)
 	if not os.path.exists(DST_DATA_DIR):
 		split_data.seperate_seen_unseen_classes(
 			inp_as_list = True,
-			src_dir = os.path.join(SRC_DATA_DIR, '_$$$$$$_data'),
+			src_dir = os.path.join(SRC_DATA_DIR, '_$$$$$$$_data'),
 			file_paths = [DATASET_TXT],
 			dest_dir = DST_DATA_DIR, #os.path.join(SRC_DATA_DIR, DATASET_NAME)
 			lst=None,
@@ -221,7 +249,12 @@ if __name__=="__main__":
 			train_size=.7)
 	data = load_data.Data(use3_directory=None, elmo2_directory=None, glove_directory=None)
 	data( data_dir = DST_DATA_DIR,  files = ["train_shuffle.txt","validation_shuffle.txt","test.txt"], codes= ["tr","va","te"])
+	return data
 
+
+if __name__=="__main__":
+
+	data = data_func()
 
 
 	# ======================================================================
@@ -233,230 +266,257 @@ if __name__=="__main__":
 	# BATCH_SIZE of corresponding negative lables (3 items in total)
 	# to BERT pre-trained architecture.
 	# ======================================================================
-	do_training, do_validation = True, True
-	do_evaluation = False # consists of methods more than just validation
-
-
-
 	# ======================================================================
 	# Training
 	# ======================================================================
-	if do_training:
+	tf_config = tf.ConfigProto()
+	tf_config.allow_soft_placement = True
+	tf_config.log_device_placement = False
+	tf_config.gpu_options.allow_growth = True
+	tf_config.gpu_options.per_process_gpu_memory_fraction = 0.9
+	tf.logging.set_verbosity(tf.logging.INFO)
+	#
+	tr_measures = { "TRAIN_BATCH_SIZE":50,
+	 				"START_EPOCH":0,
+	 				"N_EPOCHS":500,
+	 				"SAVE_EVERY_Nth_EPOCH":50,
+	 				"epoch_losses":[], "epoch_L2dists":[], "lowest_loss":None, "lowest_loss_epoch":None, 
+					"epoch_acc":[], "highest_acc":None, "highest_acc_epoch":None
+					}
+	va_measures = { "VAL_BATCH_SIZE":50,
+					"VAL_EVERY_Nth_EPOCH":10,
+					"epoch_acc":[], "highest_acc":None, "highest_acc_epoch":None
+					}
+	te_measures = { "epoch_acc":[], "highest_acc":None, "highest_acc_epoch":None }
+	#
+	restore_ckpt_dir = None #"./checkpoints/allData_TripletLoss_01/uncased_L-12_H-768_A-12"
+	restore_model_name = None #"wsm_data_with_hard_negs_TripletLoss_lowest_loss_model_0.ckpt"
+	save_ckpt_dir = "./checkpoints/allData_SquashAndTripletLoss_01" #"./checkpoints/allData_TripletLoss_01_vde"
+	save_model_name = "bertModel.ckpt"
+	#
+	train_model = Model(gpu_devices=[1,2])
+	train_model.restore_pretrained_bert_config(ckpt_dir=restore_ckpt_dir, max_seq_len=35, cased=None)
+	train_model.set_base_ops(is_training=True)
+	#train_model.set_custom_ops_TripletLoss(is_training=True)
+	train_model.set_custom_ops_SquashAndTripletLoss(is_training=True)
+	train_sess = tf.Session(graph = train_model.tf_graph, config=tf_config)
+	train_sess.__enter__()
+	train_model.restore_weights(sess=train_sess, model_name=restore_model_name, ckpt_dir=restore_ckpt_dir)
+	#
+	#
+	infer_model = Model(gpu_devices=[2,1])
+	infer_model.restore_pretrained_bert_config(ckpt_dir=restore_ckpt_dir, max_seq_len=35, cased=None)
+	infer_model.set_base_ops(is_training=False)
+	#infer_model.set_custom_ops_TripletLoss(is_training=False)
+	infer_model.set_custom_ops_SquashAndTripletLoss(is_training=False)
+	infer_sess = tf.Session(graph = infer_model.tf_graph, config=tf_config)
+	infer_sess.__enter__()
+	#
+	try:
+		x_tr_processed = process_txt(data.x_tr_raw)
+		x_tr_inputFeatures = np.asarray( train_model.get_InputFeatures(text_a_list=x_tr_processed) )
+		x_tr_inputFeatureTokenized = np.asarray([f.joined_tokens for f in x_tr_inputFeatures])
+		y_tr_processed = process_txt(data.y_tr_raw)
+		y_tr_inputFeatures = np.asarray( train_model.get_InputFeatures(text_a_list=y_tr_processed) )
+		y_tr_inputFeatureTokenized = np.asarray([f.joined_tokens for f in y_tr_inputFeatures])
+		_, idx = np.unique(data.y_tr_raw, return_index=True)
+		unique_y_tr_raw = np.asarray(data.y_tr_raw[np.sort(idx)])
+		unique_y_tr_processed = process_txt(unique_y_tr_raw)
+		unique_y_tr_inputFeatures = np.asarray( train_model.get_InputFeatures(text_a_list=unique_y_tr_processed) )
+		unique_y_tr_inputFeatureTokenized = np.asarray([f.joined_tokens for f in unique_y_tr_inputFeatures])
+		train_model.dump_tokenized_sents(
+			data.x_tr_raw, x_tr_processed, x_tr_inputFeatureTokenized, data.y_tr_raw, y_tr_processed, y_tr_inputFeatureTokenized,
+			column_names=["raw_query","processed_query","tokenized_query","raw_label","processed_label","tokenized_label"],
+			file_title="tr_data",
+			ckpt_dir=save_ckpt_dir
+			)
+	except:
+		raise Exception("tr data could not be made")
+	try:
+		x_va_processed = process_txt(data.x_va_raw)
+		x_va_inputFeatures = np.asarray( train_model.get_InputFeatures(text_a_list=x_va_processed) )
+		x_va_inputFeatureTokenized = np.asarray([f.joined_tokens for f in x_va_inputFeatures])
+		y_va_processed = process_txt(data.y_va_raw)
+		y_va_inputFeatures = np.asarray( train_model.get_InputFeatures(text_a_list=y_va_processed) )
+		y_va_inputFeatureTokenized = np.asarray([f.joined_tokens for f in y_va_inputFeatures])
+		_, idx = np.unique(data.y_va_raw, return_index=True)
+		unique_y_va_raw = np.asarray(data.y_va_raw[np.sort(idx)])
+		unique_y_va_processed = process_txt(unique_y_va_raw)
+		unique_y_va_inputFeatures = np.asarray( train_model.get_InputFeatures(text_a_list=unique_y_va_processed) )
+		unique_y_va_inputFeatureTokenized = np.asarray([f.joined_tokens for f in unique_y_va_inputFeatures])
+		train_model.dump_tokenized_sents(
+			data.x_va_raw, x_va_processed, x_va_inputFeatureTokenized, data.y_va_raw, y_va_processed, y_va_inputFeatureTokenized,
+			column_names=["raw_query","processed_query","tokenized_query","raw_label","processed_label","tokenized_label"],
+			file_title="va_data",
+			ckpt_dir=save_ckpt_dir
+			)
+	except:
+		raise Exception("va data could not be made")
+	try:
+		x_te_processed = process_txt(data.x_te_raw)
+		x_te_inputFeatures = np.asarray( train_model.get_InputFeatures(text_a_list=x_te_processed) )
+		x_te_inputFeatureTokenized = np.asarray([f.joined_tokens for f in x_te_inputFeatures])
+		y_te_processed = process_txt(data.y_te_raw)
+		y_te_inputFeatures = np.asarray( train_model.get_InputFeatures(text_a_list=y_te_processed) )
+		y_te_inputFeatureTokenized = np.asarray([f.joined_tokens for f in y_te_inputFeatures])
+		_, idx = np.unique(data.y_te_raw, return_index=True)
+		unique_y_te_raw = np.asarray(data.y_te_raw[np.sort(idx)])
+		unique_y_te_processed = process_txt(unique_y_te_raw)
+		unique_y_te_inputFeatures = np.asarray( train_model.get_InputFeatures(text_a_list=unique_y_te_processed) )
+		unique_y_te_inputFeatureTokenized = np.asarray([f.joined_tokens for f in unique_y_te_inputFeatures])
+		train_model.dump_tokenized_sents(
+			data.x_te_raw, x_te_processed, x_te_inputFeatureTokenized, data.y_te_raw, y_te_processed, y_te_inputFeatureTokenized,
+			column_names=["raw_query","processed_query","tokenized_query","raw_label","processed_label","tokenized_label"],
+			file_title="te_data",
+			ckpt_dir=save_ckpt_dir
+			)
+	except:
+		raise Exception("te data could not be made")
+	#
+	for epoch in np.arange(tr_measures["START_EPOCH"], tr_measures["N_EPOCHS"]):
+		print("=======================================================================")
+		print("=======================================================================")
+		tf.logging.info("Epoch: {}".format(epoch))
 		#
-		tf_config = tf.ConfigProto()
-		tf_config.allow_soft_placement = True
-		tf_config.log_device_placement = False
-		tf_config.gpu_options.allow_growth = True
-		tf_config.gpu_options.per_process_gpu_memory_fraction = 0.9
-		tf.logging.set_verbosity(tf.logging.INFO)
-		#
-		tr_measures = {
-						"TRAIN_BATCH_SIZE":50,
-		 				"START_EPOCH":0,
-		 				"N_EPOCHS":500,
-		 				"SAVE_EVERY_Nth_EPOCH":50,
-		 				"epoch_losses":[], "epoch_L2dists":[], "lowest_loss":None, "lowest_loss_epoch":None, 
-						"epoch_acc":[], "highest_acc":None, "highest_acc_epoch":None
-						}
-		va_measures = {
-						"VAL_BATCH_SIZE":128,
-						"VAL_EVERY_Nth_EPOCH":50,
-						"epoch_acc":[], "highest_acc":None, "highest_acc_epoch":None
-						}
-		te_measures = {
-						"epoch_acc":[], "highest_acc":None, "highest_acc_epoch":None
-						}
-		#
-		restore_ckpt_dir = None #"./checkpoints/allData_with_hardNegatives_tripletLoss_01/uncased_L-12_H-768_A-12"
-		restore_model_name = None #"wsm_data_with_hard_negs_TripletLoss_lowest_loss_model_0.ckpt"
-		save_ckpt_dir = "./checkpoints/allData_with_hardNegatives_TripletLoss_02"
-		save_model_name = "bertModel.ckpt"
-		#
-		model = Model(gpu_devices=[1])
-		model.restore_pretrained_bert_config(ckpt_dir=restore_ckpt_dir, max_seq_len=35, cased=None)
-		model.set_base_ops(is_training=True)
-		model.set_custom_ops_TripletLoss(is_training=True)
-		sess = tf.Session(graph = model.tf_graph, config=tf_config)
-		sess.__enter__()
-		model.restore_weights(sess=sess, model_name=restore_model_name, ckpt_dir=restore_ckpt_dir)
-		#
-		try:
-			x_tr_processed = process_txt(data.x_tr_raw)
-			x_tr_inputFeatures = np.asarray( model.get_InputFeatures(text_a_list=x_tr_processed) )
-			x_tr_inputFeatureTokenized = np.asarray([f.joined_tokens for f in x_tr_inputFeatures])
-			y_tr_processed = process_txt(data.y_tr_raw)
-			y_tr_inputFeatures = np.asarray( model.get_InputFeatures(text_a_list=y_tr_processed) )
-			y_tr_inputFeatureTokenized = np.asarray([f.joined_tokens for f in y_tr_inputFeatures])
-			_, idx = np.unique(data.y_tr_raw, return_index=True)
-			unique_y_tr_raw = np.asarray(data.y_tr_raw[np.sort(idx)])
-			unique_y_tr_processed = process_txt(unique_y_tr_raw)
-			unique_y_tr_inputFeatures = np.asarray( model.get_InputFeatures(text_a_list=unique_y_tr_processed) )
-			unique_y_tr_inputFeatureTokenized = np.asarray([f.joined_tokens for f in unique_y_tr_inputFeatures])
-			model.save_tokenized_sents(
-				data.x_tr_raw, x_tr_processed, x_tr_inputFeatureTokenized, data.y_tr_raw, y_tr_processed, y_tr_inputFeatureTokenized,
-				column_names=["raw_query","processed_query","tokenized_query","raw_label","processed_label","tokenized_label"],
-				file_title="tr_data",
-				ckpt_dir=save_ckpt_dir
-				)
-		except:
-			raise Exception("tr data could not be made")
-		try:
-			x_va_processed = process_txt(data.x_va_raw)
-			x_va_inputFeatures = np.asarray( model.get_InputFeatures(text_a_list=x_va_processed) )
-			x_va_inputFeatureTokenized = np.asarray([f.joined_tokens for f in x_va_inputFeatures])
-			y_va_processed = process_txt(data.y_va_raw)
-			y_va_inputFeatures = np.asarray( model.get_InputFeatures(text_a_list=y_va_processed) )
-			y_va_inputFeatureTokenized = np.asarray([f.joined_tokens for f in y_va_inputFeatures])
-			_, idx = np.unique(data.y_va_raw, return_index=True)
-			unique_y_va_raw = np.asarray(data.y_va_raw[np.sort(idx)])
-			unique_y_va_processed = process_txt(unique_y_va_raw)
-			unique_y_va_inputFeatures = np.asarray( model.get_InputFeatures(text_a_list=unique_y_va_processed) )
-			unique_y_va_inputFeatureTokenized = np.asarray([f.joined_tokens for f in unique_y_va_inputFeatures])
-			model.save_tokenized_sents(
-				data.x_va_raw, x_va_processed, x_va_inputFeatureTokenized, data.y_va_raw, y_va_processed, y_va_inputFeatureTokenized,
-				column_names=["raw_query","processed_query","tokenized_query","raw_label","processed_label","tokenized_label"],
-				file_title="va_data",
-				ckpt_dir=save_ckpt_dir
-				)
-		except:
-			raise Exception("va data could not be made")
-		try:
-			x_te_processed = process_txt(data.x_te_raw)
-			x_te_inputFeatures = np.asarray( model.get_InputFeatures(text_a_list=x_te_processed) )
-			x_te_inputFeatureTokenized = np.asarray([f.joined_tokens for f in x_te_inputFeatures])
-			y_te_processed = process_txt(data.y_te_raw)
-			y_te_inputFeatures = np.asarray( model.get_InputFeatures(text_a_list=y_te_processed) )
-			y_te_inputFeatureTokenized = np.asarray([f.joined_tokens for f in y_te_inputFeatures])
-			_, idx = np.unique(data.y_te_raw, return_index=True)
-			unique_y_te_raw = np.asarray(data.y_te_raw[np.sort(idx)])
-			unique_y_te_processed = process_txt(unique_y_te_raw)
-			unique_y_te_inputFeatures = np.asarray( model.get_InputFeatures(text_a_list=unique_y_te_processed) )
-			unique_y_te_inputFeatureTokenized = np.asarray([f.joined_tokens for f in unique_y_te_inputFeatures])
-			model.save_tokenized_sents(
-				data.x_te_raw, x_te_processed, x_te_inputFeatureTokenized, data.y_te_raw, y_te_processed, y_te_inputFeatureTokenized,
-				column_names=["raw_query","processed_query","tokenized_query","raw_label","processed_label","tokenized_label"],
-				file_title="te_data",
-				ckpt_dir=save_ckpt_dir
-				)
-		except:
-			raise Exception("te data could not be made")
-		#
-		for epoch in np.arange(tr_measures["START_EPOCH"], tr_measures["N_EPOCHS"]):
-			print("=======================================================================")
-			print("=======================================================================")
-			tf.logging.info("Epoch: {}".format(epoch))
-			#
-			if epoch<=10:
-				prob_hardNegs = 0
-			elif epoch>10 and epoch<=50:
-				prob_hardNegs = (epoch-10)*0.75/40
-			elif epoch>50:
-				prob_hardNegs = 0.75
-			if random.uniform(0, 1)>=prob_hardNegs:
+		# negative samples generation
+		if epoch<=10:
+			tf.logging.info("Generating Random Negative Samples")
+			y_tr_negs_processed = get_random_negatives(y_tr_processed, y_unique_labels=unique_y_tr_processed, list_size=1)
+		elif epoch>10 and epoch<=20:
+			if random.uniform(0, 1)>=0.5:
 				tf.logging.info("Generating Random Negative Samples")
-				y_tr_negs_processed = get_random_negatives(x_tr_processed, y_tr_processed, y_unique_labels=unique_y_tr_processed, list_size=1)
-				y_tr_negs_inputFeatures = np.asarray( model.get_InputFeatures(text_a_list=y_tr_negs_processed) )
+				y_tr_negs_processed = get_random_negatives(y_tr_processed, y_unique_labels=unique_y_tr_processed, list_size=1)
 			else:
-				tf.logging.info("Generating Hard Negative Samples")
-				vectors1 = get_representations_type1(model=model, sess=sess, find_query_vectors=True, inputFeatures=x_tr_inputFeatures, BATCH_SIZE=va_measures["VAL_BATCH_SIZE"])
-				vectors2 = get_representations_type1(model=model, sess=sess, find_query_vectors=False, inputFeatures=unique_y_tr_inputFeatures, BATCH_SIZE=va_measures["VAL_BATCH_SIZE"])
-				dist_mat = eu_dist(vectors1, vectors2)
-				y_tr_negs_processed = get_hard_negatives(x_tr_processed, y_tr_processed, dist_mat, y_unique_labels=unique_y_tr_processed, list_size=1)
-				y_tr_negs_inputFeatures = np.asarray( model.get_InputFeatures(text_a_list=y_tr_negs_processed) )
-			assert len(x_tr_inputFeatures)==len(y_tr_inputFeatures)==len(y_tr_negs_inputFeatures)
+				tf.logging.info("Generating Non-Random Negative Samples")
+				vectors1 = get_representations_type1(model=train_model, sess=train_sess, find_query_vectors=True, inputFeatures=x_tr_inputFeatures, BATCH_SIZE=va_measures["VAL_BATCH_SIZE"])
+				vectors2 = get_representations_type1(model=train_model, sess=train_sess, find_query_vectors=False, inputFeatures=unique_y_tr_inputFeatures, BATCH_SIZE=va_measures["VAL_BATCH_SIZE"])
+				dist_mat = eu_dist(vectors1, vectors2)					
+				y_tr_negs_processed = get_nonrandom_negatives(y_tr_processed, dist_mat, y_unique_labels=unique_y_tr_processed, list_size=1)
+		elif epoch>20:
+			if random.uniform(0, 1)<=0.15:
+				tf.logging.info("Generating Random Negative Samples")
+				y_tr_negs_processed = get_random_negatives(y_tr_processed, y_unique_labels=unique_y_tr_processed, list_size=1)
+			else:
+				if random.uniform(0, 1)<=0.90:
+					tf.logging.info("Generating Non-Random Negative Samples")
+					vectors1 = get_representations_type1(model=train_model, sess=train_sess, find_query_vectors=True, inputFeatures=x_tr_inputFeatures, BATCH_SIZE=va_measures["VAL_BATCH_SIZE"])
+					vectors2 = get_representations_type1(model=train_model, sess=train_sess, find_query_vectors=False, inputFeatures=unique_y_tr_inputFeatures, BATCH_SIZE=va_measures["VAL_BATCH_SIZE"])
+					dist_mat = eu_dist(vectors1, vectors2)					
+					y_tr_negs_processed = get_nonrandom_negatives(y_tr_processed, dist_mat, y_unique_labels=unique_y_tr_processed, list_size=1)					
+				else:
+					tf.logging.info("Generating Hard Negative Samples")
+					vectors1 = get_representations_type1(model=train_model, sess=train_sess, find_query_vectors=True, inputFeatures=x_tr_inputFeatures, BATCH_SIZE=va_measures["VAL_BATCH_SIZE"])
+					vectors2 = get_representations_type1(model=train_model, sess=train_sess, find_query_vectors=False, inputFeatures=unique_y_tr_inputFeatures, BATCH_SIZE=va_measures["VAL_BATCH_SIZE"])
+					dist_mat = eu_dist(vectors1, vectors2)
+					y_tr_negs_processed = get_hard_negatives(y_tr_processed, dist_mat, y_unique_labels=unique_y_tr_processed, list_size=1)				
+		y_tr_negs_inputFeatures = np.asarray( train_model.get_InputFeatures(text_a_list=y_tr_negs_processed) )
+		assert len(x_tr_inputFeatures)==len(y_tr_inputFeatures)==len(y_tr_negs_inputFeatures)
+		#
+		TRAIN_NUM = len(x_tr_inputFeatures)
+		n_train_batches = int(math.ceil(TRAIN_NUM/tr_measures["TRAIN_BATCH_SIZE"]))
+		all_indices = np.arange(TRAIN_NUM)
+		np.random.shuffle(all_indices)
+		epoch_loss = 0
+		epoch_pdist = 0
+		epoch_ndist = 0
+		for i in tqdm(range(n_train_batches)):
+			begin_index = i * tr_measures["TRAIN_BATCH_SIZE"]
+			end_index = min((i + 1) * tr_measures["TRAIN_BATCH_SIZE"], TRAIN_NUM)
+			batch_index = all_indices[begin_index : end_index]
+			batch_inputFeatures_tr = np.hstack([ x_tr_inputFeatures[batch_index],
+				                                 y_tr_inputFeatures[batch_index],
+				                                 y_tr_negs_inputFeatures[batch_index]
+				                               ])
+			batch_input_ids = np.asarray([f.input_ids for f in batch_inputFeatures_tr], dtype=np.int32)
+			batch_input_mask = np.asarray([f.input_mask for f in batch_inputFeatures_tr], dtype=np.int32)
+			batch_token_type_ids = np.asarray([f.segment_ids for f in batch_inputFeatures_tr], dtype=np.int32)
 			#
-			TRAIN_NUM = len(x_tr_inputFeatures)
-			n_train_batches = int(math.ceil(TRAIN_NUM/tr_measures["TRAIN_BATCH_SIZE"]))
-			all_indices = np.arange(TRAIN_NUM)
-			np.random.shuffle(all_indices)
-			epoch_loss = 0
-			epoch_pdist = 0
-			epoch_ndist = 0
-			for i in tqdm(range(n_train_batches)):
-				begin_index = i * tr_measures["TRAIN_BATCH_SIZE"]
-				end_index = min((i + 1) * tr_measures["TRAIN_BATCH_SIZE"], TRAIN_NUM)
-				batch_index = all_indices[begin_index : end_index]
-				batch_inputFeatures_tr = np.hstack([x_tr_inputFeatures[batch_index],y_tr_inputFeatures[batch_index],y_tr_negs_inputFeatures[batch_index]])
-				batch_input_ids = np.asarray([f.input_ids for f in batch_inputFeatures_tr], dtype=np.int32)
-				batch_input_mask = np.asarray([f.input_mask for f in batch_inputFeatures_tr], dtype=np.int32)
-				batch_token_type_ids = np.asarray([f.segment_ids for f in batch_inputFeatures_tr], dtype=np.int32)
-				#
-				_, mean_loss, mean_pdist, mean_ndist = \
-					sess.run([model.train_op, model.loss, model.pdist, model.ndist],
-								feed_dict={
-											model.batch_input_ids__tensor:batch_input_ids,
-											model.batch_input_mask__tensor:batch_input_mask,
-											model.batch_token_type_ids__tensor:batch_token_type_ids,
-											model.part_size:len(batch_index),
-											model.bert_lr:0.00002,
-											model.custom_lr:0.00025,
-											model.margin_gamma:5
-										  }
-							)
-				#
-				epoch_loss+=mean_loss
-				epoch_pdist+=mean_pdist
-				epoch_ndist+=mean_ndist
-			epoch_loss/=n_train_batches
-			epoch_pdist/=n_train_batches
-			epoch_ndist/=n_train_batches
-			tf.logging.info("Lowest Epoch Loss until now: {} at epoch: {}".format(tr_measures["lowest_loss"],tr_measures["lowest_loss_epoch"]))
-			tf.logging.info("Epoch Loss (avg. over all batches): {}".format(epoch_loss))
-			tf.logging.info("Epoch pos distance (avg. over all batches): {}".format(epoch_pdist))
-			tf.logging.info("Epoch neg distance (avg. over all batches): {}".format(epoch_ndist))
-			tr_measures["epoch_losses"].append((epoch, epoch_loss))
-			tr_measures["epoch_L2dists"].append((epoch, epoch_pdist, epoch_ndist))
+			_, mean_loss, mean_pdist, mean_ndist = \
+				train_sess.run([train_model.train_op, train_model.loss, train_model.pdist, train_model.ndist],
+							feed_dict={ train_model.batch_input_ids__tensor:batch_input_ids,
+										train_model.batch_input_mask__tensor:batch_input_mask,
+										train_model.batch_token_type_ids__tensor:batch_token_type_ids,
+										train_model.part_size:len(batch_index),
+										train_model.bert_lr:0.00002, #2e-5
+										train_model.custom_lr:0.000075, #7.5e-5
+										train_model.margin_gamma:5
+									  }
+						)
+			epoch_loss+=mean_loss
+			epoch_pdist+=mean_pdist
+			epoch_ndist+=mean_ndist
+		epoch_loss/=n_train_batches
+		epoch_pdist/=n_train_batches
+		epoch_ndist/=n_train_batches
+		tf.logging.info("Lowest Epoch Loss until now: {} at epoch: {}". \
+			format(tr_measures["lowest_loss"],tr_measures["lowest_loss_epoch"]))
+		tf.logging.info("Epoch Loss (avg. over all batches): {}".format(epoch_loss))
+		tf.logging.info("Epoch pos distance (avg. over all batches): {}".format(epoch_pdist))
+		tf.logging.info("Epoch neg distance (avg. over all batches): {}".format(epoch_ndist))
+		tr_measures["epoch_losses"].append((epoch, epoch_loss))
+		tr_measures["epoch_L2dists"].append((epoch, epoch_pdist, epoch_ndist))
+		#
+		if epoch%tr_measures["SAVE_EVERY_Nth_EPOCH"]==0:
+			tf.logging.info("Saving weights because of SAVE_EVERY_Nth_EPOCH")
+			model_name = "".join(save_model_name.split(".")[:-1])+"_epoch{}Model.ckpt".format(epoch)
+			train_model.save_weights(train_sess, model_name=model_name, ckpt_dir=save_ckpt_dir)
+		if epoch==0 or epoch_loss<=tr_measures["lowest_loss"]:
+			tr_measures["lowest_loss"], tr_measures["lowest_loss_epoch"] = epoch_loss, epoch
+			tf.logging.info("Saving weights because of lowest_loss while training")
+			model_name = "".join(save_model_name.split(".")[:-1])+"_lowestTrainLossModel.ckpt"
+			train_model.save_weights(train_sess, model_name=model_name, ckpt_dir=save_ckpt_dir)
+		if epoch%va_measures["VAL_EVERY_Nth_EPOCH"]==0:
 			#
-			acc2, _, _, _, _ = get_bert_prediction_scores_type1(data.x_va_raw, data.y_va_raw, model, sess, batch_size=va_measures["VAL_BATCH_SIZE"])
-			tf.logging.info("Highest Validation Accuracy until now: {} at epoch: {}".format(va_measures["highest_acc"],va_measures["highest_acc_epoch"]))
+			# save weights temporarily
+			tf.logging.info("Saving weights temporarily so as to obtain inference results")
+			model_name_temporary = "".join(save_model_name.split(".")[:-1])+"_temporary.ckpt"
+			train_model.save_weights(train_sess, model_name=model_name_temporary, ckpt_dir=save_ckpt_dir)			
+			#
+			# load weights temporarily
+			tf.logging.info("Loading weights temporarily so as to obtain inference results")
+			infer_model.restore_weights(sess=infer_sess, model_name=model_name_temporary, ckpt_dir=save_ckpt_dir)
+			#
+			acc1, _, _, _, _ = get_bert_prediction_scores_type1(data.x_tr_raw, data.y_tr_raw, infer_model, 
+																infer_sess, batch_size=va_measures["VAL_BATCH_SIZE"])
+			tf.logging.info("Highest Train Accuracy until now: {} at epoch: {}".\
+								format(tr_measures["highest_acc"],tr_measures["highest_acc_epoch"]))
+			tf.logging.info("Epoch Train Accuracy: {}".format(acc1))
+			tr_measures["epoch_acc"].append((epoch, acc1))
+			if epoch==0 or tr_measures["highest_acc"]<=acc1:
+				tr_measures["highest_acc"], tr_measures["highest_acc_epoch"] = acc1, epoch
+			#
+			acc2, _, _, _, _ = get_bert_prediction_scores_type1(data.x_va_raw, data.y_va_raw, infer_model, 
+																infer_sess, batch_size=va_measures["VAL_BATCH_SIZE"])
+			tf.logging.info("Highest Validation Accuracy until now: {} at epoch: {}".\
+								format(va_measures["highest_acc"],va_measures["highest_acc_epoch"]))
 			tf.logging.info("Epoch Validation Accuracy: {}".format(acc2))
 			va_measures["epoch_acc"].append((epoch, acc2))
 			if epoch==0 or va_measures["highest_acc"]<=acc2:
 				va_measures["highest_acc"], va_measures["highest_acc_epoch"] = acc2, epoch
-				tf.logging.info("Saving weights because of highest_acc_epoch while validating")
-				model_name = "".join(save_model_name.split(".")[:-1])+"_highestValidationAccModel.ckpt"
-				model.save_weights(sess, model_name=model_name, ckpt_dir=save_ckpt_dir)
 			#
-			save_name = "allData_with_hardNegatives_tripletLoss"
-			if epoch%tr_measures["SAVE_EVERY_Nth_EPOCH"]==0:
-				tf.logging.info("Saving weights because of SAVE_EVERY_Nth_EPOCH")
-				model_name = "".join(save_model_name.split(".")[:-1])+"_epoch{}Model.ckpt".format(epoch)
-				model.save_weights(sess, model_name=model_name, ckpt_dir=save_ckpt_dir)
-			if epoch==0 or epoch_loss<=tr_measures["lowest_loss"]:
-				tr_measures["lowest_loss"], tr_measures["lowest_loss_epoch"] = epoch_loss, epoch
-				tf.logging.info("Saving weights because of lowest_loss while training")
-				model_name = "".join(save_model_name.split(".")[:-1])+"_lowestTrainLossModel.ckpt"
-				model.save_weights(sess, model_name=model_name, ckpt_dir=save_ckpt_dir)
-			if do_validation and epoch%va_measures["VAL_EVERY_Nth_EPOCH"]==0:
-				#
-				acc1, _, _, _, _ = get_bert_prediction_scores_type1(data.x_tr_raw, data.y_tr_raw, model, sess, batch_size=va_measures["VAL_BATCH_SIZE"])
-				tf.logging.info("Highest Train Accuracy until now: {} at epoch: {}".format(tr_measures["highest_acc"],tr_measures["highest_acc_epoch"]))
-				tf.logging.info("Epoch Train Accuracy: {}".format(acc1))
-				tr_measures["epoch_acc"].append((epoch, acc1))
-				if epoch==0 or tr_measures["highest_acc"]<=acc1:
-					tr_measures["highest_acc"], tr_measures["highest_acc_epoch"] = acc1, epoch
-				#
-				acc3, _, _, _, _ = get_bert_prediction_scores_type1(data.x_te_raw, data.y_te_raw, model, sess, batch_size=va_measures["VAL_BATCH_SIZE"])
-				tf.logging.info("Highest Test Accuracy until now: {} at epoch: {}".format(te_measures["highest_acc"],te_measures["highest_acc_epoch"]))
-				tf.logging.info("Epoch Test Accuracy: {}".format(acc3))
-				te_measures["epoch_acc"].append((epoch, acc3))
-				if epoch==0 or te_measures["highest_acc"]<=acc3:
-					te_measures["highest_acc"], te_measures["highest_acc_epoch"] = acc3, epoch
-			#
-			tf.logging.info("Dumping tr_, va_ and te_ measures in temp files for record-keeping")
-			model.dump_json(tr_measures, "tr_measures_temp", open_mode="w", ckpt_dir=save_ckpt_dir)
-			model.dump_json(va_measures, "va_measures_temp", open_mode="w", ckpt_dir=save_ckpt_dir)
-			model.dump_json(te_measures, "te_measures_temp", open_mode="w", ckpt_dir=save_ckpt_dir)
+			acc3, _, _, _, _ = get_bert_prediction_scores_type1(data.x_te_raw, data.y_te_raw, infer_model, 
+																infer_sess, batch_size=va_measures["VAL_BATCH_SIZE"])
+			tf.logging.info("Highest Test Accuracy until now: {} at epoch: {}".\
+								format(te_measures["highest_acc"],te_measures["highest_acc_epoch"]))
+			tf.logging.info("Epoch Test Accuracy: {}".format(acc3))
+			te_measures["epoch_acc"].append((epoch, acc3))
+			if epoch==0 or te_measures["highest_acc"]<=acc3:
+				te_measures["highest_acc"], te_measures["highest_acc_epoch"] = acc3, epoch
 		#
-		tf.logging.info("Training Complete...")
-		model.dump_json(tr_measures, "tr_measures", open_mode="a", ckpt_dir=save_ckpt_dir)
-		model.dump_json(va_measures, "va_measures", open_mode="a", ckpt_dir=save_ckpt_dir)
-		model.dump_json(te_measures, "te_measures", open_mode="a", ckpt_dir=save_ckpt_dir)
-		sess.close()
-
+		tf.logging.info("Dumping tr_, va_ and te_ measures in temp files for record-keeping")
+		train_model.dump_json(tr_measures, "tr_measures_temp", open_mode="w", ckpt_dir=save_ckpt_dir)
+		train_model.dump_json(va_measures, "va_measures_temp", open_mode="w", ckpt_dir=save_ckpt_dir)
+		train_model.dump_json(te_measures, "te_measures_temp", open_mode="w", ckpt_dir=save_ckpt_dir)
+	#
+	tf.logging.info("Training Complete...")
+	train_model.dump_json(tr_measures, "tr_measures", open_mode="a", ckpt_dir=save_ckpt_dir)
+	train_model.dump_json(va_measures, "va_measures", open_mode="a", ckpt_dir=save_ckpt_dir)
+	train_model.dump_json(te_measures, "te_measures", open_mode="a", ckpt_dir=save_ckpt_dir)
+	train_sess.close()
 	# ======================================================================
-	# Inference
+	# Inferencel; consists of methods more than just validation
 	# ======================================================================
+	do_evaluation = False 
 	if do_evaluation:
 		tf_config = tf.ConfigProto()
 		tf_config.allow_soft_placement = True
@@ -466,8 +526,11 @@ if __name__=="__main__":
 		#
 		batch_size = 32
 		#
-		restore_ckpt_dir = "./checkpoints/allData_with_hardNegatives_tripletLoss_01_vde" #"./checkpoints/allData_with_hardNegatives_tripletLoss_01/uncased_L-12_H-768_A-12"
-		restore_model_name = "bertModel_lowestTrainLossModel.ckpt" #"wsm_data_with_hard_negs_TripletLoss_lowest_loss_model_0.ckpt"
+		# :examples:
+		# "./checkpoints/allData_with_hardNegatives_tripletLoss_01/uncased_L-12_H-768_A-12"
+		# "wsm_data_with_hard_negs_TripletLoss_lowest_loss_model_0.ckpt"
+		restore_ckpt_dir = "./checkpoints/allData_with_hardNegatives_tripletLoss_01_vde" 
+		restore_model_name = "bertModel_lowestTrainLossModel.ckpt" 
 		model = Model(gpu_devices=[2])
 		model.restore_pretrained_bert_config(ckpt_dir=restore_ckpt_dir, max_seq_len=35, cased=None)
 		model.set_base_ops(is_training=False)
@@ -478,11 +541,17 @@ if __name__=="__main__":
 		#
 		# Test Labels and Train Labels aren't combined for predictions (a less practical scenario)
 		tr_acc, ranks_tr, tr_labels, _, vectors_tr_label, tr_labels_thresList, tr_labels_thresMax, tr_labels_thresMin = \
-			get_bert_prediction_scores_type1(data.x_tr_raw, data.y_tr_raw, model, sess, batch_size=batch_size, excel_title="train_set_uncombinedLabels", ckpt_dir=restore_ckpt_dir, return_thresScores=True)
+			get_bert_prediction_scores_type1(data.x_tr_raw, data.y_tr_raw, model, sess, batch_size=batch_size, 
+											 excel_title="train_set_uncombinedLabels", 
+											 ckpt_dir=restore_ckpt_dir, return_thresScores=True)
 		va_acc, ranks_va, va_labels, _, _, va_labels_thresList, va_labels_thresMax, va_labels_thresMin= \
-			get_bert_prediction_scores_type1(data.x_va_raw, data.y_va_raw, model, sess, batch_size=batch_size, excel_title="validation_set_uncombinedLabels", ckpt_dir=restore_ckpt_dir, return_thresScores=True)
+			get_bert_prediction_scores_type1(data.x_va_raw, data.y_va_raw, model, sess, batch_size=batch_size,
+											 excel_title="validation_set_uncombinedLabels",
+											 ckpt_dir=restore_ckpt_dir, return_thresScores=True)
 		te_acc, ranks_te, _, vectors_te_query, _ = \
-			get_bert_prediction_scores_type1(data.x_te_raw, data.y_te_raw, model, sess, batch_size=batch_size, excel_title="test_set_uncombinedLabels", ckpt_dir=restore_ckpt_dir)
+			get_bert_prediction_scores_type1(data.x_te_raw, data.y_te_raw, model, sess, batch_size=batch_size,
+											 excel_title="test_set_uncombinedLabels",
+											 ckpt_dir=restore_ckpt_dir)
 		#
 		# Test Labels and Train Labels are combined for predictions (a more practical scenario)
 		all_labels = np.hstack([data.y_tr_raw,data.y_va_raw,data.y_te_raw])
@@ -517,165 +586,3 @@ if __name__=="__main__":
 
 
 
-'''
-	# ======================================================================
-	# Approach abandoned because of inference time complexity
-	# ======================================================================
-	# ======================================================================
-	# BERT CLS embedding to 0-1 classification with BCE
-	# ======================================================================
-	do_training = True
-	
-	# ======================================================================
-	# Training
-	# ======================================================================
-	if do_training:
-		BATCH_SIZE = 50
-		N_EPOCHS = 100
-		tf_config = tf.ConfigProto()
-		tf_config.allow_soft_placement = True
-		tf_config.log_device_placement = False
-		tf_config.gpu_options.allow_growth = True
-		tf_config.gpu_options.per_process_gpu_memory_fraction = 0.9
-
-		model = Model(gpu_devices=[0])
-		model.restore_pretrained_bert_config(max_seq_len=64)
-		model.set_base_ops(is_training=True)
-		model.set_custom_ops_BCELoss(is_training=True)
-		model.restore_weights()
-
-		epoch_losses = []
-		lowest_loss = -1
-		lowest_loss_epoch = -1
-		with tf.Session(graph = model.tf_graph, config=tf_config) as sess:
-			sess.run(model.init_op)
-			#
-			for epoch in np.arange(N_EPOCHS):
-				#
-				print("=======================================================================")
-				print("=======================================================================")
-				print("Epoch: {}".format(epoch))
-				#
-				y_unique_labels = [*data.label2id_tr.keys()]
-				y_tr_negs_processed = get_random_negatives(data.x_tr_raw, data.y_tr_raw, y_unique_labels=y_unique_labels, list_size=1)
-				"""
-				for i, triplet in enumerate(zip(data.x_tr_raw, data.y_tr_raw, y_tr_raw_negatives)):
-					print(triplet)
-					if i!=0 and i%20==0:
-						break;
-				"""
-				all_unique_labels = ["neg", "pos"] # neg-0, pos-1
-				label_list = ["pos"]*len(data.x_tr_raw)
-				y_tr_inputFeatures = model.get_InputFeatures(text_a_list=data.x_tr_raw, text_b_list=data.y_tr_raw, label_list=label_list, all_unique_labels=all_unique_labels)
-				y_tr_inputFeatures = np.asarray(y_tr_inputFeatures)
-
-				all_unique_labels = ["neg", "pos"] # neg-0, pos-1
-				label_list = ["neg"]*len(data.x_tr_raw)
-				inputFeatures_tr_neg = model.get_InputFeatures(text_a_list=data.x_tr_raw, text_b_list=y_tr_negs_processed, label_list=label_list, all_unique_labels=all_unique_labels)	
-				inputFeatures_tr_neg = np.asarray(inputFeatures_tr_neg)
-
-				inputFeatures_tr = np.hstack([y_tr_inputFeatures,inputFeatures_tr_neg]) # each feature object has input_ids, input_mask, segment_ids, label_id, is_real_example attributes
-				#
-				TRAIN_NUM = len(inputFeatures_tr)
-				n_train_batches = int(math.ceil(TRAIN_NUM/BATCH_SIZE))
-				all_indices = np.arange(TRAIN_NUM)
-				np.random.shuffle(all_indices)
-				epoch_loss = 0
-				for i in tqdm(range(n_train_batches)):
-					begin_index = i * BATCH_SIZE
-					end_index = min((i + 1) * BATCH_SIZE, TRAIN_NUM)
-					batch_index = all_indices[begin_index : end_index]
-					#
-					batch_input_ids = np.asarray([f.input_ids for f in inputFeatures_tr[batch_index]], dtype=np.int32)
-					batch_input_mask = np.asarray([f.input_mask for f in inputFeatures_tr[batch_index]], dtype=np.int32)
-					batch_token_type_ids = np.asarray([f.segment_ids for f in inputFeatures_tr[batch_index]], dtype=np.int32)
-					batch_label_ids = np.asarray([f.label_id for f in inputFeatures_tr[batch_index]], dtype=np.int32).reshape(-1,1)
-					#
-					_, mean_loss = \
-						sess.run([model.train_op, model.loss],
-									feed_dict={
-												model.batch_input_ids__tensor:batch_input_ids,
-												model.batch_input_mask__tensor:batch_input_mask,
-												model.batch_token_type_ids__tensor:batch_token_type_ids,
-												model.true_labels:batch_label_ids,
-												model.learning_rate:0.001
-											  }
-								)
-					#
-					epoch_loss+=mean_loss
-				epoch_loss/=n_train_batches
-				print("Epoch Loss (avg. over all batches): {}".format(epoch_loss))
-				epoch_losses.append(epoch_loss)
-				if epoch==0 or epoch_loss<=lowest_loss:
-					lowest_loss = epoch_loss
-					lowest_loss_epoch = epoch
-					model.save_weights(sess, model_name="wsm_train_model_0.ckpt", ckpt_dir='./checkpoints')
-'''
-
-
-
-
-
-'''
-		x_tr_inputFeatures = model.get_InputFeatures(text_a_list=process_txt(data.x_tr_raw))
-		x_tr_inputFeatures = np.asarray(x_tr_inputFeatures)
-		vectors_tr_query = get_representations_type1(model=model, sess=sess, find_query_vectors=True, inputFeatures=x_tr_inputFeatures, BATCH_SIZE=BATCH_SIZE)
-		tr_labels = [*data.label2id_tr.keys()]
-		inputFeatures_tr_label = model.get_InputFeatures(text_a_list=process_txt(tr_labels))
-		inputFeatures_tr_label = np.asarray(inputFeatures_tr_label)
-		vectors_tr_label = get_representations_type1(model=model, sess=sess, find_query_vectors=False, inputFeatures=inputFeatures_tr_label, BATCH_SIZE=BATCH_SIZE)
-		#
-		inputFeatures_va_query = model.get_InputFeatures(text_a_list=process_txt(data.x_va_raw))
-		inputFeatures_va_query = np.asarray(inputFeatures_va_query)
-		vectors_va_query = get_representations_type1(model=model, sess=sess, find_query_vectors=True, inputFeatures=inputFeatures_va_query, BATCH_SIZE=BATCH_SIZE)
-		va_labels = [*data.label2id_va.keys()]
-		inputFeatures_va_label = model.get_InputFeatures(text_a_list=process_txt(va_labels))
-		inputFeatures_va_label = np.asarray(inputFeatures_va_label)
-		vectors_va_label = get_representations_type1(model=model, sess=sess, find_query_vectors=False, inputFeatures=inputFeatures_va_label, BATCH_SIZE=BATCH_SIZE)
-		#
-		inputFeatures_te_query = model.get_InputFeatures(text_a_list=process_txt(data.x_te_raw))
-		inputFeatures_te_query = np.asarray(inputFeatures_te_query)
-		vectors_te_query = get_representations_type1(model=model, sess=sess, find_query_vectors=True, inputFeatures=inputFeatures_te_query, BATCH_SIZE=BATCH_SIZE)
-		te_labels = [*data.label2id_te.keys()]
-		inputFeatures_te_label = model.get_InputFeatures(text_a_list=process_txt(te_labels))
-		inputFeatures_te_label = np.asarray(inputFeatures_te_label)
-		vectors_te_label = get_representations_type1(model=model, sess=sess, find_query_vectors=False, inputFeatures=inputFeatures_te_label, BATCH_SIZE=BATCH_SIZE)
-		#
-		dist_tr = eu_dist(vectors_tr_query, vectors_tr_label)
-		dist_va = eu_dist(vectors_va_query, vectors_va_label)
-		dist_te = eu_dist(vectors_te_query, vectors_te_label)
-		#
-		predicted_labels_tr = np.argmin(dist_tr, axis=-1)
-		predicted_labels_va = np.argmin(dist_va, axis=-1)
-		predicted_labels_te = np.argmin(dist_te, axis=-1)
-		#
-		# Print Accuracy
-		tr_acc = accuracy_score(data.y_tr, predicted_labels_tr)
-		print("Training Data Accuarcy", tr_acc)
-		va_acc = accuracy_score(data.y_va, predicted_labels_va)
-		print("Validation Data Accuarcy", va_acc)
-		te_acc = accuracy_score(data.y_te, predicted_labels_te)
-		print("Testing Data Accuarcy", te_acc)
-		#
-		# Print Mean Rank
-		idx = np.argsort(dist_tr)
-		ranks_tr = []
-		for i, _ in enumerate(idx):
-			ranks_tr.append(np.where(idx[i,:]==data.y_tr[i])[0][0])
-		ranks_tr = np.asarray(ranks_tr)+1 # converting to 1 base
-		print("Training Mean Rank", np.mean(ranks_tr))
-		idx = np.argsort(dist_va)
-		ranks_va = []
-		for i, _ in enumerate(idx):
-			ranks_va.append(np.where(idx[i,:]==data.y_va[i])[0][0])
-		ranks_va = np.asarray(ranks_va)+1 # converting to 1 base
-		print("Validation Mean Rank", np.mean(ranks_va))
-		idx = np.argsort(dist_te)
-		ranks_te = []
-		for i, _ in enumerate(idx):
-			ranks_te.append(np.where(idx[i,:]==data.y_te[i])[0][0])
-		ranks_te = np.asarray(ranks_te)+1 # converting to 1 base
-		print("Testing Mean Rank", np.mean(ranks_te))	
-		#
-
-'''
