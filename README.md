@@ -5,7 +5,7 @@ I was looking for some way to categorize the massively evolving research studies
 Obviously, the list isn't exhaustive and I'll keep adding new papers that help us in better interpreting and representing textual data. For now, let's walk through this list to find some interesting reads...
 
 ## Related to word-level representations
-1. [*Word2Vec*, Efficient Estimation of Word Representations in Vector Space, Mikolov et al. 2013a][Mikolov et al. 2013a]
+1. [*Word2Vec*, Efficient Estimation of Word Representations in Vector Space, Mikolov et al. 2013a][Mikolov et al. 2013a] \[also see [this](http://ruder.io/word-embeddings-softmax/index.html), [this](http://ruder.io/secret-word2vec/), [this](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/), [this](http://mccormickml.com/2016/04/27/word2vec-resources/) and [this](http://www.claudiobellei.com/2018/01/06/backprop-word2vec/)\] [[vectors]](https://github.com/mmihaltz/word2vec-GoogleNews-vectors/)
 1. [*Word2Vec*, Distributed Representations of Words and Phrases and their Compositionality, Mikolov et al. 2013b][Mikolov et al. 2013b]
 1. [GloVe: Global Vectors for Word Representation, Pennington et al. 2014][Pennington et al. 2014]
 1. [Learning Gender-Neutral Word Embeddings, Zhao et al. 2018][Zhao et al. 2018]
@@ -16,6 +16,7 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 
 ## Related to subword-level representations
 1. [*FastText*, Enriching Word Vectors with Subword Information, Bojanowski et al. 2016][Bojanowski et al. 2016]
+1. [Neural Machine Translation of Rare Words with Subword Units, Sennrich et al. 2015][Sennrich et al. 2015]
 1. [Combating Adversarial Misspellings with Robust Word Recognition, Pruthi et al. 2019](https://arxiv.org/abs/1905.11268)
 1. [Misspelling Oblivious Word Embeddings, Edizel et al. 2019](https://arxiv.org/abs/1905.09755) [[facebook AI]](https://ai.facebook.com/blog/-a-new-model-for-word-embeddings-that-are-resilient-to-misspellings-/)
 
@@ -25,7 +26,7 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 1. [Hierarchical Attention Networks for Document Classification, Yang et al. 2016](http://www.cs.cmu.edu/~./hovy/papers/16HLT-hierarchical-attention-networks.pdf)
 1. [DisSent: Sentence Representation Learning from Explicit Discourse Relations, Nie et al. 2017](https://arxiv.org/abs/1710.04334)
 
-[Go Back To Contents](#Contents)
+# [Go Back To Top](#Contents)
 
 ## Evaluation for representation learning, inductive bias analysis, knowledge distillation and pruning
 1. [SentEval: An Evaluation Toolkit for Universal Sentence Representations, Conneau et al. 2018a][Conneau et al. 2018a] [[Site]](https://github.com/facebookresearch/SentEval)
@@ -66,9 +67,9 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 1. [Practical Text Classification With Large Pre-Trained Language Models, NeelKant et al. 2018][NeelKant et al. 2018]
 1. [SciBERT: Pretrained Contextualized Embeddings for Scientific Text, Beltagy et al. 2019][Beltagy et al. 2019]
 
-[Go Back To Contents](#Contents)
+# [Go Back To Top](#Contents)
 
-## NMT
+## Machine Translation
 1. [Understanding Back-Translation at Scale, Edunov et al. 2018](https://arxiv.org/pdf/1808.09381.pdf)
 1. [Achieving Human Parity on Automatic Chinese to English News Translation, Microsoft Research 2018](https://arxiv.org/abs/1803.05567) [[Bites]](https://github.com/kweonwooj/papers/issues/98)
 1. [Dual Supervised Learning, Xia et al. 2017](https://arxiv.org/pdf/1707.00415.pdf)
@@ -81,12 +82,12 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 ## Neural Dialogue
 1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
 1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
-1. [Few-Shot Generalization Across Dialogue Tasks, Vlasov et al. 2019][Vlasov et al. 2019] [RASA Research]
 1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
+1. [Few-Shot Generalization Across Dialogue Tasks, Vlasov et al. 2019][Vlasov et al. 2019] [RASA Research]
 1. [Towards Open Intent Discovery for Conversational Text, Vedula et al. 2019][Vedula et al. 2019]
 1. [What makes a good conversation? How controllable attributes affect human judgments](https://www.aclweb.org/anthology/N19-1170) [[also see this article]](http://www.abigailsee.com/2019/08/13/what-makes-a-good-conversation.html)
 
-[Go Back To Contents](#Contents)
+# [Go Back To Top](#Contents)
 
 ## Related to XLU, Cross-lingual & Multi-lingual
 1. [XNLI: Evaluating Cross-lingual Sentence Representations, Conneau eta al. 2018c][Conneau eta al. 2018c]
@@ -98,14 +99,22 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 1. [Multilingual Universal Sentence Encoder for Semantic Retrieval, Yang et al. 2019][Yinfei et al. 2019]
 1. [*XLM*, Cross-lingual Language Model Pretraining, Guillaume and Conneau](https://arxiv.org/abs/1901.07291)
 
-[Go Back To Contents](#Contents)
+## Miscellaneous
+1. [ResNet 2015](https://arxiv.org/abs/1512.03385)
+1. [DenseNet 2017](https://arxiv.org/abs/1608.06993)
+1. [Stability Based Filter Pruning for Accelerating Deep CNNs, Pravendra et al. 2018](https://arxiv.org/abs/1811.08321)
+1. <https://towardsdatascience.com/latest-computer-vision-trends-from-cvpr-2019-c07806dd570b>
+1. [Object-driven Text-to-Image Synthesis via Adversarial Training, Li et al. 2019](https://arxiv.org/abs/1902.10740)
+
+# [Go Back To Top](#Contents)
 
 # Bookmarks
 - [See this article from huggingface for more reading pointers :)](https://medium.com/huggingface/the-best-and-most-current-of-modern-natural-language-processing-5055f409a1d1)
 - [NLP Progress Site](http://nlpprogress.com/),
   [NLP | ML Explained](http://mlexplained.com/category/nlp/),
   [Ruder's Blogs](http://ruder.io),
-  [Ppaers with code](https://paperswithcode.com/area/natural-language-processing)
+  [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html),
+  [Papers with code](https://paperswithcode.com/area/natural-language-processing)
   </br>
 - [Awesome-Sentence-Embedding](https://github.com/Separius/awesome-sentence-embedding),
   [Awesome-NLP](https://github.com/keon/awesome-nlp),
@@ -124,8 +133,9 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
   [Important AI papers 2018 TOPBOTS](https://www.topbots.com/most-important-ai-research-papers-2018/),
   [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html)
   </br>
+- [SPACY IRL 2019 Talks](https://www.youtube.com/playlist?list=PLBmcuObd5An4UC6jvK_-eSl6jCvP1gwXc)
 
-[Go Back To Contents](#Contents)
+# [Go Back To Top](#Contents)
 
 ## Food For Thought
 1. How good do ranking algorithms, the ones with pointwise/pairwise/listwise learning paradigms, perform when the no. of test classes at the infernece time grow massively? KG Reasoning using Translational/Bilinear/DL techniques is one important area under consideration.
@@ -135,23 +145,6 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 ## Quick Bites
 1. Byte Pair Encoding (BPE) is a data compression technique that iteratively replaces the most frequent pair of symbols (originally bytes) in a given dataset with a single unused symbol. In each iteration, the algorithm finds the most frequent (adjacent) pair of symbols, each can be constructed of a single character or a sequence of characters, and merged them to create a new symbol. All occurences of the selected pair are then replaced with the new symbol before the next iteration. Eventually, frequent sequence of characters, up to a whole word, are replaced with a single symbol, until the algorithm reaches the defined number of iterations (50k can be an example figure). During inference, if a word isn’t part of the BPE’s pre-built dictionary, it will be split into subwords that are. An example code of BPE can be found here. https://gist.github.com/ranihorev/6ba9a88c9e7401b603cd483dd767e783
 1. Models can be trained on SNLI in two different ways: (i) sentence encoding-based models that explicitly separate the encoding of the individual sentences and (ii) joint methods that allow to use encoding of both sentences (to use cross-features or attention from one sentence to the other).
-
-[Go Back To Contents](#Contents)
-
-## Related to deep nets modeling
-1. [An overview of gradient descent optimization algorithms](http://ruder.io/optimizing-gradient-descent/)
-1. [Cyclical Learning Rates for Training Neural Networks, Smith et al. 2015](https://arxiv.org/abs/1506.01186)
-1. [Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates, Smith et al. 2017](https://arxiv.org/abs/1708.07120)
-1. [How to Escape Saddle Points Efficiently](https://bair.berkeley.edu/blog/2017/08/31/saddle-efficiency/)
-1. [Ongoing Work, *RAdam*, On the variance of adaptive learning rate and beyond](https://arxiv.org/pdf/1908.03265.pdf) [[also see this article]](https://medium.com/@lessw/new-state-of-the-art-ai-optimizer-rectified-adam-radam-5d854730807b)
-
-## Miscellaneous
-1. [ResNet 2015](https://arxiv.org/abs/1512.03385)
-1. [DenseNet 2017](https://arxiv.org/abs/1608.06993)
-1. [Stability Based Filter Pruning for Accelerating Deep CNNs, Pravendra et al. 2018](https://arxiv.org/abs/1811.08321)
-1. <https://towardsdatascience.com/latest-computer-vision-trends-from-cvpr-2019-c07806dd570b>
-1. [Object-driven Text-to-Image Synthesis via Adversarial Training, Li et al. 2019](https://arxiv.org/abs/1902.10740)
-
 
 [Mikolov et al. 2013a]: https://arxiv.org/abs/1301.3781
 [Mikolov et al. 2013b]: https://arxiv.org/abs/1310.4546
