@@ -28,13 +28,17 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 
 # [Go Back To Top](#Contents)
 
-## Evaluation for representation learning, inductive bias analysis, knowledge distillation and pruning
+## Evaluation for representations, inductive bias analysis and interpretability, knowledge distillation and pruning
+###
 1. [SentEval: An Evaluation Toolkit for Universal Sentence Representations, Conneau et al. 2018a][Conneau et al. 2018a] [[Site]](https://github.com/facebookresearch/SentEval)
 1. [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018] [[Site]](https://gluebenchmark.com/leaderboard)
+###
+1. [Dissecting Contextual Word Embeddings: Architecture and Representation, Peters et al. 2018b](https://www.aclweb.org/anthology/D18-1179)
 1. [What you can cram into a single $&!#\* vector: Probing sentence embeddings for linguistic properties, Conneau et al 2018b][Conneau et al 2018b]
-1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
-1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019] [[also see this article]](http://nlp.town/blog/distilling-bert/)
 1. [Are Sixteen Heads Really Better than One?, Paul et al. 2019](https://arxiv.org/abs/1905.10650)
+1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
+###
+1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019] [[also see this article]](http://nlp.town/blog/distilling-bert/)
 1. [Large Batch Optimization for Deep Learning: Training BERT in 76 Minutes](https://arxiv.org/pdf/1904.00962.pdf) [[also see this article]](https://medium.com/syncedreview/new-google-brain-optimizer-reduces-bert-pre-training-time-from-days-to-minutes-b454e54eda1d)
 1. [*RoBERTa*, A Robustly Optimized BERT Pretraining Approach, Liu et al. 2019](https://arxiv.org/abs/1907.11692)
 
@@ -43,7 +47,7 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 1. [Semi-supervised Sequence Learning, Dai et al. 2015][Dai et al. 2015]
 1. [Unsupervised Pretraining for Sequence to Sequence Learning, Ramachandran et al. 2016][Ramachandran et al. 2016]
 1. [*ULM-FiT*, Universal Language Model Fine-tuning for Text Classification, Howard and Ruder 2018][Howard and Ruder 2018]
-1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018] 
+1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018] [work extended from [TagLM](https://arxiv.org/abs/1705.00108)]
 1. [*GPT-1 aka OpenAI Transformer*, Improving Language Understanding by Generative Pre-Training, Radford et al. 2018][Radford et al. 2018]
 1. [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al. 2018][Devlin et al. 2018] [[SLIDES]](https://nlp.stanford.edu/seminar/details/jdevlin.pdf) [[also see Illustrated BERT]][Illustrated BERT]
 1. [Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context, Zihang et al. 2019][Zihang et al. 2019]
@@ -55,7 +59,7 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 1. [*USE*, Universal Sentence Encoder, Cer et al. 2018][Cer et al. 2018] [[also see Multilingual USE]][Yinfei et al. 2019]
 1. [Sentence Encoders on STILTs: Supplementary Training on Intermediate Labeled-data Tasks, Phang et al. 2018][Phang et al. 2018]
 
-:bulb: Some people went further ahead and thought "how about using multi-task learning?!"
+:bulb: And few more walked further and thought "how about using multi-task learning?!"
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering, McCann et al. 2018][McCann et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
 1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Subramanian et al. 2018][Subramanian et al. 2018]
@@ -70,12 +74,13 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 # [Go Back To Top](#Contents)
 
 ## Machine Translation
+1. [Neural Machine Translation of Rare Words with Subword Units, Sennrich et al. 2015][Sennrich et al. 2015]
+1. [*Transformer*, Attention Is All You Need, Vaswami et al. 2017][Vaswami et al. 2017]
 1. [Understanding Back-Translation at Scale, Edunov et al. 2018](https://arxiv.org/pdf/1808.09381.pdf)
-1. [Achieving Human Parity on Automatic Chinese to English News Translation, Microsoft Research 2018](https://arxiv.org/abs/1803.05567) [[Bites]](https://github.com/kweonwooj/papers/issues/98)
-1. [Dual Supervised Learning, Xia et al. 2017](https://arxiv.org/pdf/1707.00415.pdf)
-1. [Deliberation Networks: Sequence Generation Beyond One-Pass Decoding, Xia et al. 2017](https://papers.nips.cc/paper/6775-deliberation-networks-sequence-generation-beyond-one-pass-decoding.pdf)
+1. [Achieving Human Parity on Automatic Chinese to English News Translation, Microsoft Research 2018](https://arxiv.org/abs/1803.05567) [[Bites]](https://github.com/kweonwooj/papers/issues/98) [also see [this](https://arxiv.org/pdf/1707.00415.pdf) and [this](https://papers.nips.cc/paper/6775-deliberation-networks-sequence-generation-beyond-one-pass-decoding.pdf)]
 
 ## Natural Language Generation
+1. [Incorporating Copying Mechanism in Sequence-to-Sequence Learning, Jiatao Gu et al. 2016](https://arxiv.org/abs/1603.06393)
 1. [Unified Language Model Pre-training for Natural Language Understanding and Generation, Dong et al. 2019](https://arxiv.org/abs/1905.03197)
 1. [MASS: Masked Sequence to Sequence Pre-training for Language Generation, Song et al. 2019](https://arxiv.org/abs/1905.02450)
 
@@ -90,10 +95,8 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 # [Go Back To Top](#Contents)
 
 ## Related to XLU, Cross-lingual & Multi-lingual
+1. <http://ruder.io/cross-lingual-embeddings/index.html>
 1. [XNLI: Evaluating Cross-lingual Sentence Representations, Conneau eta al. 2018c][Conneau eta al. 2018c]
-1. [Neural Machine Translation of Rare Words with Subword Units, Sennrich et al. 2015][Sennrich et al. 2015]
-1. [*Transformer*, Attention Is All You Need, Vaswami et al. 2017][Vaswami et al. 2017]
-1. [Achieving Human Parity on Automatic Chinese to English News Translation, Hassan et al. 2018][Hassan et al. 2018]
 1. [Massively Multilingual Sentence Embeddings for Zero-Shot Cross-Lingual Transfer and Beyond, Artetxe et al. 2018][Artetxe et al. 2018]
 1. [Cross-lingual Language Model Pretraining, Lample et al. 2019][Lample et al. 2019]
 1. [Multilingual Universal Sentence Encoder for Semantic Retrieval, Yang et al. 2019][Yinfei et al. 2019]
