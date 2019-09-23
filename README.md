@@ -1,8 +1,14 @@
 
 # Contents
-Hi there!<br>
-I was looking for some way to categorize the massively evolving research studies surrounding NLP (and in the field of DL and CV) and here's my two cents.<br>
-Obviously, the list isn't exhaustive and I'll keep adding new papers that help us in better interpreting and representing textual data. For now, let's walk through this list to find some interesting reads...
+Hi there!
+
+I have been working on categorizing the massively evolving research studies surrounding language representation and understanding, and here's my curated list. The main idea of this categorization is to find the chain of works that result in a research direction. It is always good to know the genesis before starting to adopt any paper in NLP pipelines. The list isn't exhaustive and I'll keep adding new papers that I come across. (Note: Some papers may appear in multiple sub-categories)
+
+So far, I have added papers on different ways to represent text at word, character and sub-word level, teachniques that evolved to have pre-trained modeling in NLP just like Computer Vision domain, some works on analyzing these massive pretrained models such as their inductive bias and if we can distill their learnings somehow, also some works on how the current day pretrained models are prone to adverserial attacks. 
+
+In near future, I plan to add works on conversational nlp and the chain of works that happened in that domain, also on cross-lingual and multi-lingual learnings. The domian of Question Answering and Answer Ranking/Selection is vast and I'm planning to add only pointers to good sites that already have a comprehensive list of them. 
+
+I'm also adding pointers to some blogs that helped me in understanding some of these works in-detail, some github repos that have categorization of plentiful works in NLP and some websites that keep SOTA results updated.
 
 ## Related to word-level representations
 1. [*Word2Vec*, Efficient Estimation of Word Representations in Vector Space, Mikolov et al. 2013a][Mikolov et al. 2013a] \[also see [this](http://ruder.io/word-embeddings-softmax/index.html), [this](http://ruder.io/secret-word2vec/), [this](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/), [this](http://mccormickml.com/2016/04/27/word2vec-resources/) and [this](http://www.claudiobellei.com/2018/01/06/backprop-word2vec/)\] [[vectors]](https://github.com/mmihaltz/word2vec-GoogleNews-vectors/)
@@ -11,6 +17,9 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 1. [Learning Gender-Neutral Word Embeddings, Zhao et al. 2018][Zhao et al. 2018]
 
 ## Related to character-level representations
+1. <https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html>(G Lample et al. 2016)
+1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018]
+    - [Character-Aware Neural Language Models](https://arxiv.org/abs/1508.06615), [Exploring the Limits of Language Modeling](https://arxiv.org/abs/1602.02410), [Highway Networks](https://arxiv.org/abs/1505.00387)
 1. [*FLAIR*, Contextual String Embeddings for Sequence Labeling, Akbik et al. 2018][Akbik et al. 2018] [[CODE]](https://github.com/zalandoresearch/flair)
 1. [Character-Level Language Modeling with Deeper Self-Attention, Rami et al. 2018](https://arxiv.org/pdf/1808.04444.pdf)
 
@@ -18,6 +27,7 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 1. [*FastText*, Enriching Word Vectors with Subword Information, Bojanowski et al. 2016][Bojanowski et al. 2016]
 1. [Neural Machine Translation of Rare Words with Subword Units, Sennrich et al. 2015][Sennrich et al. 2015] [also see [this](https://arxiv.org/pdf/1609.08144.pdf) and [this](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/37842.pdf)]
 1. [Combating Adversarial Misspellings with Robust Word Recognition, Pruthi et al. 2019](https://arxiv.org/abs/1905.11268)
+
 1. [Misspelling Oblivious Word Embeddings, Edizel et al. 2019](https://arxiv.org/abs/1905.09755) [[facebook AI]](https://ai.facebook.com/blog/-a-new-model-for-word-embeddings-that-are-resilient-to-misspellings-/)
 
 ## Related to neural models for Sentence Encoding
@@ -47,12 +57,13 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
 1. [Semi-supervised Sequence Learning, Dai et al. 2015][Dai et al. 2015]
 1. [Unsupervised Pretraining for Sequence to Sequence Learning, Ramachandran et al. 2016][Ramachandran et al. 2016]
 1. [*ULM-FiT*, Universal Language Model Fine-tuning for Text Classification, Howard and Ruder 2018][Howard and Ruder 2018]
-1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018] [work extended from [TagLM](https://arxiv.org/abs/1705.00108)]
+1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018] \[also see previus works- [TagLM](https://arxiv.org/abs/1705.00108) and [CoVe](https://arxiv.org/abs/1708.00107) \]
 1. [*GPT-1 aka OpenAI Transformer*, Improving Language Understanding by Generative Pre-Training, Radford et al. 2018][Radford et al. 2018]
 1. [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al. 2018][Devlin et al. 2018] [[SLIDES]](https://nlp.stanford.edu/seminar/details/jdevlin.pdf) [[also see Illustrated BERT]][Illustrated BERT]
 1. [Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context, Zihang et al. 2019][Zihang et al. 2019]
 1. [*XLM*, Cross-lingual Language Model Pretraining, Guillaume and Conneau](https://arxiv.org/abs/1901.07291)
 1. [XLNet: Generalized Autoregressive Pretraining for Language Understanding, Yang et al. 2019](https://arxiv.org/abs/1906.08237)
+1. [RoBERTa: A Robustly Optimized BERT Pretraining Approach, Liu et al. 2019](https://arxiv.org/abs/1907.11692)
 
 :bulb: Some people went ahead and thought "how about using supervised(+unsupervised) tasks for pretraining?!"
 1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
@@ -120,12 +131,15 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
   [Papers with code](https://paperswithcode.com/area/natural-language-processing)
   </br>
 - [Awesome-Sentence-Embedding](https://github.com/Separius/awesome-sentence-embedding),
+  [nlp-library](https://github.com/mihail911/nlp-library),
   [Awesome-NLP](https://github.com/keon/awesome-nlp),
   [NLP-Tutorial](https://github.com/graykode/nlp-tutorial),
   [lazynlp](https://github.com/chiphuyen/lazynlp),
-  [huggingface-transformers](https://github.com/huggingface/pytorch-transformers)
+  [huggingface-transformers](https://github.com/huggingface/pytorch-transformers),
+  [pytorch-fairseq](https://github.com/pytorch/fairseq)
   </br>
-- [Illustrated GPT-2][Illustrated GPT-2],
+- [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html),
+  [Illustrated GPT-2][Illustrated GPT-2],
   [Illustrated BERT][Illustrated BERT],
   [OpenAi GPT-1](https://openai.com/blog/language-unsupervised/),
   [OpenAi GPT-2](https://openai.com/blog/better-language-models/),
@@ -133,10 +147,8 @@ Obviously, the list isn't exhaustive and I'll keep adding new papers that help u
   [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/)
   </br>
 - [Regularization Techniques for NLP](http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/),
-  [Important AI papers 2018 TOPBOTS](https://www.topbots.com/most-important-ai-research-papers-2018/),
   [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html)
-  </br>
-- [SPACY IRL 2019 Talks](https://www.youtube.com/playlist?list=PLBmcuObd5An4UC6jvK_-eSl6jCvP1gwXc)
+  [SPACY IRL 2019 Talks](https://www.youtube.com/playlist?list=PLBmcuObd5An4UC6jvK_-eSl6jCvP1gwXc)
 
 # [Go Back To Top](#Contents)
 
