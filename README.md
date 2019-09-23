@@ -47,6 +47,7 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [What you can cram into a single $&!#\* vector: Probing sentence embeddings for linguistic properties, Conneau et al 2018b][Conneau et al 2018b]
 1. [Are Sixteen Heads Really Better than One?, Paul et al. 2019](https://arxiv.org/abs/1905.10650)
 1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
+1. [BERT Rediscovers the Classical NLP Pipeline, Tenney et al. 2019](https://arxiv.org/abs/1905.05950)
 ###
 1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019] [[also see this article]](http://nlp.town/blog/distilling-bert/)
 1. [Large Batch Optimization for Deep Learning: Training BERT in 76 Minutes](https://arxiv.org/pdf/1904.00962.pdf) [[also see this article]](https://medium.com/syncedreview/new-google-brain-optimizer-reduces-bert-pre-training-time-from-days-to-minutes-b454e54eda1d)
@@ -129,7 +130,7 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
   [Ruder's Blogs](http://ruder.io) [and this](http://ruder.io/state-of-transfer-learning-in-nlp/),    
   [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html),    
   [Papers with code](https://paperswithcode.com/area/natural-language-processing),    
-  [RASA blog](https://blog.rasa.com/)   
+  [RASA blog](https://blog.rasa.com/)
   </br>
 - [Awesome-Sentence-Embedding](https://github.com/Separius/awesome-sentence-embedding),   
   [nlp-library](https://github.com/mihail911/nlp-library),    
@@ -137,7 +138,7 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
   [NLP-Tutorial](https://github.com/graykode/nlp-tutorial),   
   [lazynlp](https://github.com/chiphuyen/lazynlp),    
   [huggingface-transformers](https://github.com/huggingface/pytorch-transformers),    
-  [pytorch-fairseq](https://github.com/pytorch/fairseq)   
+  [pytorch-fairseq](https://github.com/pytorch/fairseq)
   </br>
 - [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html),       
   [Illustrated GPT-2][Illustrated GPT-2],   
@@ -145,12 +146,14 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
   [OpenAi GPT-1](https://openai.com/blog/language-unsupervised/),   
   [OpenAi GPT-2](https://openai.com/blog/better-language-models/),    
   [The Natural Language Decathlon](https://blog.einstein.ai/the-natural-language-decathlon/),   
-  [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/)    
+  [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/)
   </br>
 - [some text processing](https://www.kaggle.com/sudalairajkumar/getting-started-with-text-preprocessing),   
   [Regularization Techniques for NLP](http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/),   
   [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html),   
-  [SPACY IRL 2019 Talks](https://www.youtube.com/playlist?list=PLBmcuObd5An4UC6jvK_-eSl6jCvP1gwXc),   
+  [SPACY IRL 2019 Talks](https://www.youtube.com/playlist?list=PLBmcuObd5An4UC6jvK_-eSl6jCvP1gwXc)
+  </br>  
+- <https://www.fast.ai/2019/07/08/fastai-nlp/>    
 
 # [Go Back To Top](#Contents)
 
