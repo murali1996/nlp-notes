@@ -123,32 +123,34 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 # [Go Back To Top](#Contents)
 
 # Bookmarks
-- [See this article from huggingface for more reading pointers :)](https://medium.com/huggingface/the-best-and-most-current-of-modern-natural-language-processing-5055f409a1d1)
-- [NLP Progress Site](http://nlpprogress.com/),
-  [NLP | ML Explained](http://mlexplained.com/category/nlp/),
-  [Ruder's Blogs](http://ruder.io),
-  [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html),
-  [Papers with code](https://paperswithcode.com/area/natural-language-processing)
+- [See this article from huggingface for more reading pointers :)](https://medium.com/huggingface/the-best-and-most-current-of-modern-natural-language-processing-5055f409a1d1)     
+  [NLP Progress Site](http://nlpprogress.com/),   
+  [NLP | ML Explained](http://mlexplained.com/category/nlp/),    
+  [Ruder's Blogs](http://ruder.io) [and this](http://ruder.io/state-of-transfer-learning-in-nlp/),    
+  [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html),    
+  [Papers with code](https://paperswithcode.com/area/natural-language-processing),    
+  [RASA blog](https://blog.rasa.com/)   
   </br>
-- [Awesome-Sentence-Embedding](https://github.com/Separius/awesome-sentence-embedding),
-  [nlp-library](https://github.com/mihail911/nlp-library),
-  [Awesome-NLP](https://github.com/keon/awesome-nlp),
-  [NLP-Tutorial](https://github.com/graykode/nlp-tutorial),
-  [lazynlp](https://github.com/chiphuyen/lazynlp),
-  [huggingface-transformers](https://github.com/huggingface/pytorch-transformers),
-  [pytorch-fairseq](https://github.com/pytorch/fairseq)
+- [Awesome-Sentence-Embedding](https://github.com/Separius/awesome-sentence-embedding),   
+  [nlp-library](https://github.com/mihail911/nlp-library),    
+  [Awesome-NLP](https://github.com/keon/awesome-nlp),   
+  [NLP-Tutorial](https://github.com/graykode/nlp-tutorial),   
+  [lazynlp](https://github.com/chiphuyen/lazynlp),    
+  [huggingface-transformers](https://github.com/huggingface/pytorch-transformers),    
+  [pytorch-fairseq](https://github.com/pytorch/fairseq)   
   </br>
-- [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html),
-  [Illustrated GPT-2][Illustrated GPT-2],
-  [Illustrated BERT][Illustrated BERT],
-  [OpenAi GPT-1](https://openai.com/blog/language-unsupervised/),
-  [OpenAi GPT-2](https://openai.com/blog/better-language-models/),
-  [The Natural Language Decathlon](https://blog.einstein.ai/the-natural-language-decathlon/),
-  [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/)
+- [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html),       
+  [Illustrated GPT-2][Illustrated GPT-2],   
+  [Illustrated BERT][Illustrated BERT],     
+  [OpenAi GPT-1](https://openai.com/blog/language-unsupervised/),   
+  [OpenAi GPT-2](https://openai.com/blog/better-language-models/),    
+  [The Natural Language Decathlon](https://blog.einstein.ai/the-natural-language-decathlon/),   
+  [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/)    
   </br>
-- [Regularization Techniques for NLP](http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/),
-  [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html)
-  [SPACY IRL 2019 Talks](https://www.youtube.com/playlist?list=PLBmcuObd5An4UC6jvK_-eSl6jCvP1gwXc)
+- [some text processing](https://www.kaggle.com/sudalairajkumar/getting-started-with-text-preprocessing),   
+  [Regularization Techniques for NLP](http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/),   
+  [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html),   
+  [SPACY IRL 2019 Talks](https://www.youtube.com/playlist?list=PLBmcuObd5An4UC6jvK_-eSl6jCvP1gwXc),   
 
 # [Go Back To Top](#Contents)
 
