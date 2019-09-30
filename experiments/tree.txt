@@ -1,5 +1,6 @@
 .
-├── bert_semantic_ranking_tf.py
+├── semantic_ranking_bert_tf
+├── semantic_inference_bert_tf
 ├── bert_wrapper_tf
 │   ├── bert_master
 │   │   ├── create_pretraining_data.py
@@ -41,13 +42,11 @@
 │   └── wrapper.py
 ├── checkpoints
 ├── data
-│   └── sentences.txt
-├── elmo_wrapper_tf
-│   └── __init__.py
+│   └── quora_duplicate_questions.tsv
 ├── helpers
 │   ├── __init__.py
 │   ├── sent_embs.py
 │   └── sentences.txt
+├── results
+│   └── README.md
 └── tree.txt
-
-11 directories, 39 files

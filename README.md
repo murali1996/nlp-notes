@@ -27,7 +27,6 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [*FastText*, Enriching Word Vectors with Subword Information, Bojanowski et al. 2016][Bojanowski et al. 2016]
 1. [Neural Machine Translation of Rare Words with Subword Units, Sennrich et al. 2015][Sennrich et al. 2015] [also see [this](https://arxiv.org/pdf/1609.08144.pdf) and [this](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/37842.pdf)]
 1. [Combating Adversarial Misspellings with Robust Word Recognition, Pruthi et al. 2019](https://arxiv.org/abs/1905.11268)
-
 1. [Misspelling Oblivious Word Embeddings, Edizel et al. 2019](https://arxiv.org/abs/1905.09755) [[facebook AI]](https://ai.facebook.com/blog/-a-new-model-for-word-embeddings-that-are-resilient-to-misspellings-/)
 
 ## Related to neural models for Sentence Encoding
@@ -49,9 +48,11 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
 1. [BERT Rediscovers the Classical NLP Pipeline, Tenney et al. 2019](https://arxiv.org/abs/1905.05950)
 ###
-1. [*DistillBERT*, Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019] [[also see this article]](http://nlp.town/blog/distilling-bert/)
+1. [Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019] 
+    - a related work from HuggingFace [here](https://medium.com/huggingface/distilbert-8cf3380435b5), and work on quantization compression by RASA [here](https://blog.rasa.com/compressing-bert-for-faster-prediction-2/)
 1. [Large Batch Optimization for Deep Learning: Training BERT in 76 Minutes](https://arxiv.org/pdf/1904.00962.pdf) [[also see this article]](https://medium.com/syncedreview/new-google-brain-optimizer-reduces-bert-pre-training-time-from-days-to-minutes-b454e54eda1d)
 1. [*RoBERTa*, A Robustly Optimized BERT Pretraining Approach, Liu et al. 2019](https://arxiv.org/abs/1907.11692)
+
 
 ## Related to contextual representations and transfer learning
 :bulb: Typically, these *pre-training* methods involve an unsupervised (also called semi-supervised in some works) learning followed by a supervised learning. This is unlike CV domain where *pre-training* is mainly supervised learning.
@@ -62,7 +63,7 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [*GPT-1 aka OpenAI Transformer*, Improving Language Understanding by Generative Pre-Training, Radford et al. 2018][Radford et al. 2018]
 1. [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, Devlin et al. 2018][Devlin et al. 2018] [[SLIDES]](https://nlp.stanford.edu/seminar/details/jdevlin.pdf) [[also see Illustrated BERT]][Illustrated BERT]
 1. [Transformer-XL: Attentive Language Models Beyond a Fixed-Length Context, Zihang et al. 2019][Zihang et al. 2019]
-1. [*XLM*, Cross-lingual Language Model Pretraining, Guillaume and Conneau](https://arxiv.org/abs/1901.07291)
+1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019] [also see [Illustrated GPT-2][Illustrated GPT-2]]
 1. [XLNet: Generalized Autoregressive Pretraining for Language Understanding, Yang et al. 2019](https://arxiv.org/abs/1906.08237)
 1. [RoBERTa: A Robustly Optimized BERT Pretraining Approach, Liu et al. 2019](https://arxiv.org/abs/1907.11692)
 
@@ -71,11 +72,11 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [*USE*, Universal Sentence Encoder, Cer et al. 2018][Cer et al. 2018] [[also see Multilingual USE]][Yinfei et al. 2019]
 1. [Sentence Encoders on STILTs: Supplementary Training on Intermediate Labeled-data Tasks, Phang et al. 2018][Phang et al. 2018]
 
-:bulb: And few more walked further and thought "how about using multi-task learning?!"
+:bulb: And few more walked further and thought "how about using multi-task learning?!" or for that matter "cross-lingual pre-training?!"
+1. [*XLM*, Cross-lingual Language Model Pretraining, Guillaume and Conneau et al. 2019](https://arxiv.org/abs/1901.07291)
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering, McCann et al. 2018][McCann et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
 1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Subramanian et al. 2018][Subramanian et al. 2018]
-1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019] [[also see Illustrated GPT-2]][Illustrated GPT-2]
 1. [Can You Tell Me How to Get Past Sesame Street? Sentence-Level Pretraining Beyond Language Modeling, Wang et al. 2019](https://arxiv.org/abs/1812.10860)
 1. [ERNIE 2.0: A Continual Pre-training Framework for Language Understanding, Sun et al. 2019](https://arxiv.org/abs/1907.12412)
 

@@ -1,15 +1,14 @@
+from sklearn.metrics.pairwise import euclidean_distances as eu_dist
+import matplotlib.pyplot as plt,pandas as pd #for eval stats
+from sklearn.metrics import accuracy_score
 import numpy as np, os, math, re
-import pandas as pd #for eval stats
-import matplotlib.pyplot as plt #for eval stats
+import tensorflow as tf
+from tqdm import tqdm
 import copy
 import random
-from tqdm import tqdm
-from sklearn.metrics.pairwise import euclidean_distances as eu_dist
-from sklearn.metrics import accuracy_score
-import tensorflow as tf
+import sys
 
 from helpers import load_data, split_data
-import sys
 from bert_wrapper_tf.wrapper import Model
 
 
@@ -582,7 +581,4 @@ if __name__=="__main__":
 		#
 		sess.close()
 	
-
-
-
 

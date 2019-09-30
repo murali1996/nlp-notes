@@ -125,3 +125,4 @@ dmypy.json
 
 # This Repository Specific
 checkpoints/
+data/
