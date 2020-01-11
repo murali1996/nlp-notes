@@ -128,10 +128,14 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 #### each link is either a series of blogs from an individual/organization or a conference related link
 - [NLP Progress](http://nlpprogress.com/)
 - [Papers with code](https://paperswithcode.com/area/natural-language-processing)  
-- [Ruder's Blogs](http://ruder.io); [this](https://ruder.io/research-highlights-2019/) and [this](http://ruder.io/state-of-transfer-learning-in-nlp/) taking on latest trends
-- [Jay Alammar](http://jalammar.github.io/)
-- [Article from Victor Sanh at Huggingface](https://medium.com/huggingface/the-best-and-most-current-of-modern-natural-language-processing-5055f409a1d1)
-- [Keita Kurita|ML & NLP](http://mlexplained.com/category/nlp/), [Chris McCormick](https://mccormickml.com/archive/), [Kavita Ganesan](https://kavita-ganesan.com/kavitas-tutorials/#.Xhk3_0dKjDc)
+- [Ruder's Blog-posts](http://ruder.io); [this](https://ruder.io/research-highlights-2019/) and [this](http://ruder.io/state-of-transfer-learning-in-nlp/) taking on latest trends
+- [Jay Alammar's blog-posts](http://jalammar.github.io/), 
+  [LiLian's (at OpenAI) blog-posts](https://lilianweng.github.io/lil-log/),
+  [Victor Sanh (at Huggingface) blog](https://medium.com/huggingface/the-best-and-most-current-of-modern-natural-language-processing-5055f409a1d1), 
+- [Keita Kurita|ML & NLP](http://mlexplained.com/category/nlp/), 
+  [Chris McCormick](https://mccormickml.com/archive/), 
+  [Kavita Ganesan](https://kavita-ganesan.com/kavitas-tutorials/#.Xhk3_0dKjDc)
+- [distill.pub](https://distill.pub/)
 - [blog.feedspot.com](https://drive.google.com/file/d/15XD2c2PypVZTveezFuaJpPEJWP8Vi3ak/view?usp=sharing)
 - [SPACY IRL 2019 Talks](https://www.youtube.com/playlist?list=PLBmcuObd5An4UC6jvK_-eSl6jCvP1gwXc)
 #### MOOCs
@@ -147,10 +151,11 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 - [flairNLP](https://github.com/flairNLP/flair)
 #### handpicked blog-posts
 - [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html)
-- [The Natural Language Decathlon](https://blog.einstein.ai/the-natural-language-decathlon/)
-- [Illustrated GPT-2][Illustrated GPT-2] and [Illustrated BERT][Illustrated BERT]     
-- [OpenAi GPT-1](https://openai.com/blog/language-unsupervised/) and [OpenAi GPT-2](https://openai.com/blog/better-language-models/)
 - [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/)
+- [Lilian at openAI on Attention](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html)
+- [The Natural Language Decathlon](https://blog.einstein.ai/the-natural-language-decathlon/)
+- [OpenAI GPT-1](https://openai.com/blog/language-unsupervised/) and [OpenAi GPT-2](https://openai.com/blog/better-language-models/)
+- [Illustrated BERT][Illustrated BERT] and [Illustrated GPT-2][Illustrated GPT-2]    
 #### Random
 - [some text processing](https://www.kaggle.com/sudalairajkumar/getting-started-with-text-preprocessing)
 - [Regularization Techniques for NLP](http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/) 
