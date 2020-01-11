@@ -125,36 +125,36 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 # [Go Back To Top](#Contents)
 
 # Bookmarks
-- [See this article from huggingface for more reading pointers :)](https://medium.com/huggingface/the-best-and-most-current-of-modern-natural-language-processing-5055f409a1d1)     
-  [NLP Progress Site](http://nlpprogress.com/),   
-  [NLP | ML Explained](http://mlexplained.com/category/nlp/),    
-  [Ruder's Blogs](http://ruder.io) [and this](http://ruder.io/state-of-transfer-learning-in-nlp/),    
-  [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html),    
-  [Papers with code](https://paperswithcode.com/area/natural-language-processing),    
-  [RASA blog](https://blog.rasa.com/)
-  </br>
-- [Awesome-Sentence-Embedding](https://github.com/Separius/awesome-sentence-embedding),   
-  [nlp-library](https://github.com/mihail911/nlp-library),    
-  [Awesome-NLP](https://github.com/keon/awesome-nlp),   
-  [NLP-Tutorial](https://github.com/graykode/nlp-tutorial),   
-  [lazynlp](https://github.com/chiphuyen/lazynlp),    
-  [huggingface-transformers](https://github.com/huggingface/pytorch-transformers),    
-  [pytorch-fairseq](https://github.com/pytorch/fairseq)
-  </br>
-- [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html),       
-  [Illustrated GPT-2][Illustrated GPT-2],   
-  [Illustrated BERT][Illustrated BERT],     
-  [OpenAi GPT-1](https://openai.com/blog/language-unsupervised/),   
-  [OpenAi GPT-2](https://openai.com/blog/better-language-models/),    
-  [The Natural Language Decathlon](https://blog.einstein.ai/the-natural-language-decathlon/),   
-  [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/)
-  </br>
-- [some text processing](https://www.kaggle.com/sudalairajkumar/getting-started-with-text-preprocessing),   
-  [Regularization Techniques for NLP](http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/),   
-  [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html),   
-  [SPACY IRL 2019 Talks](https://www.youtube.com/playlist?list=PLBmcuObd5An4UC6jvK_-eSl6jCvP1gwXc)
-  </br>  
-- <https://www.fast.ai/2019/07/08/fastai-nlp/>    
+#### each link is either a series of blogs from an individual/organization or a conference related link
+- [NLP Progress](http://nlpprogress.com/)
+- [Papers with code](https://paperswithcode.com/area/natural-language-processing)  
+- [Ruder's Blogs](http://ruder.io); [this](https://ruder.io/research-highlights-2019/) and [this](http://ruder.io/state-of-transfer-learning-in-nlp/) taking on latest trends
+- [Jay Alammar](http://jalammar.github.io/)
+- [Article from Victor Sanh at Huggingface](https://medium.com/huggingface/the-best-and-most-current-of-modern-natural-language-processing-5055f409a1d1)
+- [Keita Kurita|ML & NLP](http://mlexplained.com/category/nlp/), [Chris McCormick](https://mccormickml.com/archive/), [Kavita Ganesan](https://kavita-ganesan.com/kavitas-tutorials/#.Xhk3_0dKjDc)
+- [blog.feedspot.com](https://drive.google.com/file/d/15XD2c2PypVZTveezFuaJpPEJWP8Vi3ak/view?usp=sharing)
+- [SPACY IRL 2019 Talks](https://www.youtube.com/playlist?list=PLBmcuObd5An4UC6jvK_-eSl6jCvP1gwXc)
+#### MOOCs
+- [fast.ai](https://www.fast.ai/2019/07/08/fastai-nlp/)
+#### github repos
+- [Awesome-Sentence-Embedding](https://github.com/Separius/awesome-sentence-embedding)   
+- [nlp-library](https://github.com/mihail911/nlp-library)
+- [Awesome-NLP](https://github.com/keon/awesome-nlp)
+- [NLP-Tutorial](https://github.com/graykode/nlp-tutorial)
+- [lazynlp](https://github.com/chiphuyen/lazynlp)
+- [huggingface-transformers](https://github.com/huggingface/pytorch-transformers)
+- [pytorch-fairseq](https://github.com/pytorch/fairseq)
+- [flairNLP](https://github.com/flairNLP/flair)
+#### handpicked blog-posts
+- [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html)
+- [The Natural Language Decathlon](https://blog.einstein.ai/the-natural-language-decathlon/)
+- [Illustrated GPT-2][Illustrated GPT-2] and [Illustrated BERT][Illustrated BERT]     
+- [OpenAi GPT-1](https://openai.com/blog/language-unsupervised/) and [OpenAi GPT-2](https://openai.com/blog/better-language-models/)
+- [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/)
+#### Random
+- [some text processing](https://www.kaggle.com/sudalairajkumar/getting-started-with-text-preprocessing)
+- [Regularization Techniques for NLP](http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/) 
+- [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html)
 
 # [Go Back To Top](#Contents)
 
