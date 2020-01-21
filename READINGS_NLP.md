@@ -1,8 +1,9 @@
+# READINGS_NLP
 
-# Contents
+## Contents
 Hi there!
 
-I have been working on categorizing the massively evolving research studies surrounding language representation and understanding, and here's my curated list. The main idea of this categorization is to find the chain of works that result in a research direction. It is always good to know the genesis before starting to adopt any paper in NLP pipelines. The list isn't exhaustive and I'll keep adding new papers that I come across. (Note: Some papers may appear in multiple sub-categories)
+I have been working on organizing the massively evolving research studies surrounding language representation and understanding, and here's my curated lists. The main idea of this categorization is to find the chain of works that result in a research direction. It is always good to know the genesis before starting to adopt any paper in NLP pipelines. The list isn't exhaustive and I'll keep adding new papers that I come across. (Note: Some papers may appear in multiple sub-categories)
 
 So far, I have added papers on different ways to represent text at word, character and sub-word level, teachniques that evolved to have pre-trained modeling in NLP just like Computer Vision domain, some works on analyzing these massive pretrained models such as their inductive bias and if we can distill their learnings somehow, also some works on how the current day pretrained models are prone to adverserial attacks. 
 
@@ -36,15 +37,17 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [Hierarchical Attention Networks for Document Classification, Yang et al. 2016](http://www.cs.cmu.edu/~./hovy/papers/16HLT-hierarchical-attention-networks.pdf)
 1. [DisSent: Sentence Representation Learning from Explicit Discourse Relations, Nie et al. 2017](https://arxiv.org/abs/1710.04334)
 
-# [Go Back To Top](#Contents)
+### [Go Back To Top](#Contents)
 
-## Evaluation Toolkits 
-###
+## Evaluation Toolkits for NLU and XLU
+1. [XNLI: Evaluating Cross-lingual Sentence Representations, Conneau eta al. 2018c][Conneau eta al. 2018c]
 1. [SentEval: An Evaluation Toolkit for Universal Sentence Representations, Conneau et al. 2018a][Conneau et al. 2018a] [[Site]](https://github.com/facebookresearch/SentEval)
 1. [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018] [[Site]](https://gluebenchmark.com/leaderboard)
 1. [CLUE: Language Understanding Evaluation benchmark for Chinese (CLUE)](https://github.com/CLUEbenchmark/CLUE)
+
+### [Go Back To Top](#Contents)
+
 ## Inductive bias analysis and interpretability, knowledge distillation and pruning
-###
 1. [Dissecting Contextual Word Embeddings: Architecture and Representation, Peters et al. 2018b](https://www.aclweb.org/anthology/D18-1179)
 1. [What you can cram into a single $&!#\* vector: Probing sentence embeddings for linguistic properties, Conneau et al 2018b][Conneau et al 2018b]
 1. [Attention is not Explanation, Jain et al. 2019](https://arxiv.org/abs/1902.10186)
@@ -53,10 +56,8 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [BERT Rediscovers the Classical NLP Pipeline, Tenney et al. 2019](https://arxiv.org/abs/1905.05950)
 1. [Probing Neural Network Comprehension of Natural Language Arguments, Niven & Kao 2019](https://arxiv.org/pdf/1907.07355.pdf) and [[this]](https://medium.com/syncedreview/has-bert-been-cheating-researchers-say-it-exploits-spurious-statistical-cues-b256760ded57) related article
 1. [Understanding Knowledge Distillation in Non-autoregressive Machine Translation, Zhou et al. 2019](https://arxiv.org/abs/1911.02727)
-
 ###
-1. [Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019] 
-    - a related work from HuggingFace [here](https://medium.com/huggingface/distilbert-8cf3380435b5), and work on quantization compression by RASA [here](https://blog.rasa.com/compressing-bert-for-faster-prediction-2/)
+1. [Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]. Also a related work from HuggingFace [here](https://medium.com/huggingface/distilbert-8cf3380435b5), and work on quantization compression by RASA [here](https://blog.rasa.com/compressing-bert-for-faster-prediction-2/)
 1. [Large Batch Optimization for Deep Learning: Training BERT in 76 Minutes](https://arxiv.org/pdf/1904.00962.pdf) [[also see this article]](https://medium.com/syncedreview/new-google-brain-optimizer-reduces-bert-pre-training-time-from-days-to-minutes-b454e54eda1d)
 1. [*RoBERTa*, A Robustly Optimized BERT Pretraining Approach, Liu et al. 2019](https://arxiv.org/abs/1907.11692)
 1. [Patient Knowledge Distillation for BERT Model Compression, Sun et al. 2019](https://arxiv.org/abs/1908.09355)
@@ -78,39 +79,45 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [ERNIE 2.0: A Continual Pre-training Framework for Language Understanding, Sun et al. 2019](https://arxiv.org/abs/1907.12412)
 1. [CTRL: A Conditional Transformer Language Model for Controllable Generation, Keskar et al. 2019](https://arxiv.org/abs/1909.05858)
 1. [ALBERT: A Lite BERT for Self-supervised Learning of Language Representations, Lan et al. 2019](https://arxiv.org/abs/1909.11942)
+1. [ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators, Clark et al. 2019](https://openreview.net/pdf?id=r1xMH1BtvB)
 ###
 :bulb: Some people went ahead and thought "how about using supervised (+- self-unsupervised) tasks for pretraining?!"
 1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
 1. [*USE*, Universal Sentence Encoder, Cer et al. 2018][Cer et al. 2018] [[also see Multilingual USE]][Yinfei et al. 2019]
 1. [Sentence Encoders on STILTs: Supplementary Training on Intermediate Labeled-data Tasks, Phang et al. 2018][Phang et al. 2018]
 ###
-:bulb: And few more walked further and thought "how about using multi-task learning?!" or for that matter "cross-lingual pre-training?!"
+:bulb: multi-task learning or for that matter "cross-lingual pre-training?!"
 1. [*XLM*, Cross-lingual Language Model Pretraining, Guillaume and Conneau et al. 2019](https://arxiv.org/abs/1901.07291)
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering, McCann et al. 2018][McCann et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
 1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Subramanian et al. 2018][Subramanian et al. 2018]
 1. [Can You Tell Me How to Get Past Sesame Street? Sentence-Level Pretraining Beyond Language Modeling, Wang et al. 2019](https://arxiv.org/abs/1812.10860)
+1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019] [also see [Illustrated GPT-2][Illustrated GPT-2]]
 1. [ERNIE 2.0: A Continual Pre-training Framework for Language Understanding, Sun et al. 2019](https://arxiv.org/abs/1907.12412)
-2. [ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators, Clark et al. 2019](https://openreview.net/pdf?id=r1xMH1BtvB)
-
-## Huh...the derivatives, I reckon!
+###
+:bulb: LMs realized as diverse learners; learning more than what you thought!!
+1. [Language Models as Knowledge Bases?, Petroni et al. 2019](https://arxiv.org/abs/1909.01066)
+###
+:bulb: Finally, some derived works
 1. [Practical Text Classification With Large Pre-Trained Language Models, NeelKant et al. 2018][NeelKant et al. 2018]
 1. [SciBERT: Pretrained Contextualized Embeddings for Scientific Text, Beltagy et al. 2019][Beltagy et al. 2019]
+1. [Publicly Available Clinical BERT Embeddings, Alsentzer et al. 2019](https://arxiv.org/abs/1904.03323)
 
-# [Go Back To Top](#Contents)
+### [Go Back To Top](#Contents)
 
-## Machine Translation
+## Applications
+### Machine Translation
 1. [Neural Machine Translation of Rare Words with Subword Units, Sennrich et al. 2015][Sennrich et al. 2015]
 1. [*Transformer*, Attention Is All You Need, Vaswami et al. 2017][Vaswami et al. 2017]
 1. [Understanding Back-Translation at Scale, Edunov et al. 2018](https://arxiv.org/pdf/1808.09381.pdf)
 1. [Achieving Human Parity on Automatic Chinese to English News Translation, Microsoft Research 2018](https://arxiv.org/abs/1803.05567) [[Bites]](https://github.com/kweonwooj/papers/issues/98) [also see [this](https://arxiv.org/pdf/1707.00415.pdf) and [this](https://papers.nips.cc/paper/6775-deliberation-networks-sequence-generation-beyond-one-pass-decoding.pdf)]
 
-## Natural Language Generation
+### Natural Language Generation
 1. [Incorporating Copying Mechanism in Sequence-to-Sequence Learning, Jiatao Gu et al. 2016](https://arxiv.org/abs/1603.06393)
 1. [Unified Language Model Pre-training for Natural Language Understanding and Generation, Dong et al. 2019](https://arxiv.org/abs/1905.03197)
 1. [MASS: Masked Sequence to Sequence Pre-training for Language Generation, Song et al. 2019](https://arxiv.org/abs/1905.02450)
 
-## Neural Dialogue
+### Dialogue Sytems
 1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
 1. [Investigating Capsule Networks with Dynamic Routing for Text Classification, Zhao et al. 2018][Zhao et al. 2018]
 1. [BERT for Joint Intent Classification and Slot Filling, Chen et al. 2019][Chen et al. 2019]
@@ -118,24 +125,16 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [Towards Open Intent Discovery for Conversational Text, Vedula et al. 2019][Vedula et al. 2019]
 1. [What makes a good conversation? How controllable attributes affect human judgments](https://www.aclweb.org/anthology/N19-1170) [[also see this article]](http://www.abigailsee.com/2019/08/13/what-makes-a-good-conversation.html)
 
-# [Go Back To Top](#Contents)
-
-## Related to XLU, Cross-lingual & Multi-lingual
+### Related to XLU, Cross-lingual & Multi-lingual
 1. <http://ruder.io/cross-lingual-embeddings/index.html>
-1. [XNLI: Evaluating Cross-lingual Sentence Representations, Conneau eta al. 2018c][Conneau eta al. 2018c]
 1. [Massively Multilingual Sentence Embeddings for Zero-Shot Cross-Lingual Transfer and Beyond, Artetxe et al. 2018][Artetxe et al. 2018]
 1. [Cross-lingual Language Model Pretraining, Lample et al. 2019][Lample et al. 2019]
 1. [Multilingual Universal Sentence Encoder for Semantic Retrieval, Yang et al. 2019][Yinfei et al. 2019]
 1. [*XLM*, Cross-lingual Language Model Pretraining, Guillaume and Conneau](https://arxiv.org/abs/1901.07291)
 
-## Miscellaneous
-1. [ResNet 2015](https://arxiv.org/abs/1512.03385)
-1. [DenseNet 2017](https://arxiv.org/abs/1608.06993)
-1. [Stability Based Filter Pruning for Accelerating Deep CNNs, Pravendra et al. 2018](https://arxiv.org/abs/1811.08321)
-1. <https://towardsdatascience.com/latest-computer-vision-trends-from-cvpr-2019-c07806dd570b>
-1. [Object-driven Text-to-Image Synthesis via Adversarial Training, Li et al. 2019](https://arxiv.org/abs/1902.10740)
+### Low-resource setting
 
-# [Go Back To Top](#Contents)
+### [Go Back To Top](#Contents)
 
 # Bookmarks
 #### each link is either a series of blogs from an individual/organization or a conference related link
@@ -176,7 +175,7 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 - [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html)
 - [Rethinking Generalization of Neural Models: A Named Entity Recognition Case Study, Fu et al. 2019](http://pfliu.com/InterpretNER/rethink-ner.pdf)
 
-# [Go Back To Top](#Contents)
+### [Go Back To Top](#Contents)
 
 ## Food For Thought
 1. How good do ranking algorithms, the ones with pointwise/pairwise/listwise learning paradigms, perform when the no. of test classes at the infernece time grow massively? KG Reasoning using Translational/Bilinear/DL techniques is one important area under consideration.

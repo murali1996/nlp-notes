@@ -33,8 +33,14 @@ except:
 
 
 class Module(object):
-	def __init__(self, gpu_devices: "can be empty list or a list of device numbers", use3_directory=None, elmo2_directory=None, glove_directory=None):
-		#
+
+
+
+	def __init__(self, gpu_devices: "can be empty list or a list of device numbers",
+				 use3_directory=None, 
+				 elmo2_directory=None, 
+				 glove_directory=None):
+		
 		self.gpu_devices = gpu_devices
 		if len(self.gpu_devices)>1:
 			os.environ['CUDA_VISIBLE_DEVICES']=','.join(str(device) for device in self.gpu_devices)
@@ -47,7 +53,7 @@ class Module(object):
 			os.environ['CUDA_VISIBLE_DEVICES'] = ''
 			setattr(self, 'gpu_devices_n1', '/cpu:0')
 		print("GPU DEVICE SETTINGS:: {}".format(self.gpu_devices))
-		#
+		
 		self.cachedStopWords = stopwords.words("english")
 		if use3_directory:
 			self.init_use3_hub_model(use3_directory, trainable=False)
@@ -55,6 +61,10 @@ class Module(object):
 			self.init_elmo2_hub_model(elmo2_directory, trainable=False)
 		if glove_directory:
 			self.init_glove_embedding(glove_directory)
+
+
+
+
 	##########################################################
 	# pre-processing textual sentences
 	def __get_string_tokens_for_glove(self, txt, remove_stopwords=False):
@@ -67,16 +77,27 @@ class Module(object):
 		else:
 			tokens = [token for token in tokens if (token and token not in self.cachedStopWords)]
 		return tokens
+
+
 	def __get_string_tokens_for_elmo2(self, txt, remove_stopwords=False):
 		txt = txt.strip()
-		#tokens = re.findall(r"[\w']+|[\\/,!?;_-]", txt) # covers all contiguous strings with only exceptional punctuation "'" and a set of punctuation chars
-		#tokens = re.findall(r"[-+]?\d*\.\d+|\d+|[A-Za-z0-9_-]+|[?!]", txt) # covers decimal numbers, integer numbers, contiguous strings with only exceptional punctuation "_", "?!" chars
+		# tokens = re.findall(r"[\w']+|[\\/,!?;_-]", txt) # covers all contiguous strings with only exceptional 
+		#	punctuation "'" and a set of punctuation chars
+		# tokens = re.findall(r"[-+]?\d*\.\d+|\d+|[A-Za-z0-9_-]+|[?!]", txt) # covers decimal numbers, integer numbers,
+		#	 contiguous strings with only exceptional punctuation "_", "?!" chars
 		tokens = re.findall(r"[-+]?\d*[.-]\d+|\d+|[A-Za-z0-9_-]+|[?!]", txt)
 		if not remove_stopwords:
 			tokens = [token for token in tokens if token]
 		else:
 			tokens = [token for token in tokens if (token and token not in self.cachedStopWords)]
 		return tokens
+
+
+
+
+
+
+
 	##########################################################
 	# use3 embeddings
 	def init_use3_hub_model(self, use3_directory, trainable=False):
@@ -114,6 +135,12 @@ class Module(object):
 					use3_vecs = np.vstack((use3_vecs,batch_use3_vecs))
 		print("obtaining use3 sentence vector end")
 		return use3_vecs # np array with shape [n_list_rows, 512]
+
+
+
+
+
+
 	##########################################################
 	# elmo2 embeddings
 	def init_elmo2_hub_model(self, elmo2_directory, trainable=False):
@@ -184,6 +211,11 @@ class Module(object):
 					elmo2_vecs = np.vstack((elmo2_vecs,batch_elmo2_vecs))
 		print("obtaining elmo2 sentence vector end")
 		return elmo2_vecs # np array with shape [n_list_rows, 1024]	
+
+
+
+
+
 	##########################################################
 	# BERT PRETRAINED [CLS] embeddings
 	def get_bert_cls_sentence_vector(self, list_sentences):
@@ -234,6 +266,12 @@ class Module(object):
 					full_outputs = np.concatenate((full_outputs, batch_full_outputs), axis=0)
 		print("obtaining bert cls sentence vector start")
 		return cls_outputs
+
+
+
+
+
+
 	##########################################################
 	# mean-pooled glove embeddings
 	def init_glove_embedding(self, glove_directory):
@@ -300,6 +338,11 @@ class Module(object):
 		glove_avg_vecs = np.asarray(glove_avg_vecs)
 		print("obtaining avg glove embeddings end")
 		return glove_avg_vecs # np array with shape [n_list_rows, size of glove embedding]
+
+
+
+
+
 	##########################################################
 	# tensorboard projections
 	def tfboard_projections(
@@ -388,10 +431,14 @@ if __name__=="__main__":
 	# elmo
 	module = Module(gpu_devices=[0], elmo2_directory=elmo2_directory)
 	myEmbs = module.get_elmo2_sentence_vector(list_sentences)
-	module.tfboard_projections(ckpt_dir=projections_ckpt_dir, myEmbeddings=myEmbs, myName="elmo2_hhp_train_intents", metadata=np.asarray(list_sentences).reshape(-1,1), metadata_names=np.asarray(["train_labels"]))
+	module.tfboard_projections(ckpt_dir=projections_ckpt_dir, myEmbeddings=myEmbs, myName="elmo2_hhp_train_intents", 
+									metadata=np.asarray(list_sentences).reshape(-1,1), 
+									metadata_names=np.asarray(["train_labels"]))
 	# bert cls
 	module = Module(gpu_devices=[0])
 	myEmbs = module.get_bert_cls_sentence_vector(list_sentences)
-	module.tfboard_projections(ckpt_dir=projections_ckpt_dir, myEmbeddings=myEmbs, myName="bert_cls_hhp_train_intents", metadata=np.asarray(list_sentences).reshape(-1,1), metadata_names=np.asarray(["train_labels"]))
+	module.tfboard_projections(ckpt_dir=projections_ckpt_dir, myEmbeddings=myEmbs, myName="bert_cls_hhp_train_intents", 
+									metadata=np.asarray(list_sentences).reshape(-1,1), 
+									metadata_names=np.asarray(["train_labels"]))
 	
 
