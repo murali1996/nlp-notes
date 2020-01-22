@@ -94,6 +94,7 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [Can You Tell Me How to Get Past Sesame Street? Sentence-Level Pretraining Beyond Language Modeling, Wang et al. 2019](https://arxiv.org/abs/1812.10860)
 1. [*GPT-2*, Language Models are Unsupervised Multitask Learners, Radford et al. 2019][Radford et al. 2019] [also see [Illustrated GPT-2][Illustrated GPT-2]]
 1. [ERNIE 2.0: A Continual Pre-training Framework for Language Understanding, Sun et al. 2019](https://arxiv.org/abs/1907.12412)
+1. [Exploring the Limits of Transfer Learning with aUnified Text-to-Text Transformer, Raffel et al. 2019](https://arxiv.org/pdf/1910.10683v2.pdf)
 ###
 :bulb: LMs realized as diverse learners; learning more than what you thought!!
 1. [Language Models as Knowledge Bases?, Petroni et al. 2019](https://arxiv.org/abs/1909.01066)
@@ -127,10 +128,14 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 
 ### Related to XLU, Cross-lingual & Multi-lingual
 1. <http://ruder.io/cross-lingual-embeddings/index.html>
+1. [A Deep Neural Network Framework for English Hindi Question Answering](https://www.cse.iitb.ac.in/~pb/papers/tallip-qa.pdf)
+###
 1. [Massively Multilingual Sentence Embeddings for Zero-Shot Cross-Lingual Transfer and Beyond, Artetxe et al. 2018][Artetxe et al. 2018]
 1. [Cross-lingual Language Model Pretraining, Lample et al. 2019][Lample et al. 2019]
 1. [Multilingual Universal Sentence Encoder for Semantic Retrieval, Yang et al. 2019][Yinfei et al. 2019]
 1. [*XLM*, Cross-lingual Language Model Pretraining, Guillaume and Conneau](https://arxiv.org/abs/1901.07291)
+1. [How multilingual is Multilingual BERT?, Pires etal. 2019](https://arxiv.org/pdf/1906.01502.pdf)
+
 
 ### Low-resource setting
 
