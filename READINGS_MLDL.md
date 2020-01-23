@@ -57,6 +57,9 @@
 
 
 # Optimization
+1. Gradient Clipping to mitigate exploding gradient
+1. Vanishing gradient problem; [see Deep Learning Book Ch 8.2.5](https://www.deeplearningbook.org/contents/optimization.html#pff)
+###
 1. [Ruder's blog-post, Optimization for Deep Learning Highlights in 2017](https://ruder.io/deep-learning-optimization-2017/)
 1. [Ruder's blog-post, An overview of gradient descent optimization algorithms](https://ruder.io/optimizing-gradient-descent/)
 1. [Berkeley AI, How to Escape Saddle Points Efficiently](https://bair.berkeley.edu/blog/2017/08/31/saddle-efficiency/)
@@ -72,7 +75,6 @@
 1. [Devarakonda et al. 2017, AdaBatch: Adaptive Batch Sizes for Training Deep Neural Networks](https://arxiv.org/abs/1712.02029)
 ###### Gradient Noising
 1. [neelakantan et al. 2019, Adding Gradient Noise Improves Learning for Very Deep Networks](https://arxiv.org/abs/1511.06807)
-###### Gradient Clipping
 ###### Gradient Checking
 1. <http://ufldl.stanford.edu/tutorial/supervised/DebuggingGradientChecking/>
 1. <https://www.coursera.org/lecture/machine-learning/gradient-checking-Y3s6r>
