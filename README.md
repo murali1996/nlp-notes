@@ -14,7 +14,6 @@
 - [Question Answering](#Question-Answering)
 - [Bookmarks](#Bookmarks)
 
-
 # Contents
 Hi there!
 
@@ -27,7 +26,7 @@ In near future, I plan to add works on conversational nlp and the chain of works
 I'm also adding pointers to some blogs that helped me in understanding some of these works in-detail, some github repos that have categorization of plentiful works in NLP and some websites that keep SOTA results updated.
 
 
-# Word and Sentence representations
+# Word and Sentence Embeddings
 
 ### word-level representations
 1. [Natural Language Processing (almost) from Scratch, Collobert et al. 2011](https://arxiv.org/abs/1103.0398)
@@ -110,6 +109,7 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 # Contextual Representations and Transfer Learning
 
 ### Language modeling
+:bulb: Similar works are also compiled here: [Pre-trained Language Model Papers](https://github.com/thunlp/PLMpapers)
 :bulb: Typically, these *pre-training* methods involve an self-supervised (also called semi-supervised/unsupervised in some works) learning followed by a supervised learning. This is unlike CV domain where *pre-training* is mainly supervised learning.
 1. [Semi-supervised Sequence Learning, Dai et al. 2015][Dai et al. 2015]
 1. [Unsupervised Pretraining for Sequence to Sequence Learning, Ramachandran et al. 2016][Ramachandran et al. 2016]
