@@ -7,11 +7,13 @@
   - [Contextual Representations and Transfer Learning](#Contextual-Representations-and-Transfer-Learning)
   - [Multi-task learning](#Multi-task-learning)
   - [Multi-lingual and cross-lingual learning](#Multi-lingual-and-cross-lingual-learning)
-  - [Interpretability](#Interpretability)
+  - [Multi-modal learning](#Multi-modal-learning)
+  - [Interpretability and Ethics](#Interpretability-and-Ethics)
   - [Evaluation Toolkits for Language Understanding](#Evaluation-Toolkits-for-Language-Understanding)
 - [Generation](#Generation)
-- [Knowledge Graphs](#Knowledge-Graphs)
-- [Question Answering](#Question-Answering)
+- [IR and QA](#IR-and-QA)
+  - [Knowledge Graphs](#Knowledge-Graphs)
+  - [Question Answering](#Question-Answering)
 - [Bookmarks](#Bookmarks)
 
 # Contents
@@ -75,7 +77,7 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 
 
 
-# Interpretability 
+# Interpretability and Ethics 
 :bulb: inductive bias, distillation and pruning, adversarial attacks, fairness and bias  
 :bulb: distillation (can thought of a MAP estimate with prior rather than MLE objective)  
 :arrow_upper_right: see some papers on bias in [Word and Sentence Embeddings](#Word-and-Sentence-Embeddings) section
@@ -83,11 +85,14 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 ### inductive bias
 1. [Dissecting Contextual Word Embeddings: Architecture and Representation, Peters et al. 2018b](https://www.aclweb.org/anthology/D18-1179)
 1. [What you can cram into a single $&!#\* vector: Probing sentence embeddings for linguistic properties, Conneau et al 2018b][Conneau et al 2018b]
+1. [Troubling Trends in Machine Learning Scholarship, Lipton and Steinhardt 2018](https://arxiv.org/pdf/1807.03341.pdf)
+1. [How Much Reading Does Reading Comprehension Require? A Critical Investigation of Popular Benchmarks, Kaushik and Lipton 2018](https://arxiv.org/abs/1808.04926)
 1. [Attention is not Explanation, Jain et al. 2019](https://arxiv.org/abs/1902.10186)
 1. [Are Sixteen Heads Really Better than One?, Paul et al. 2019](https://arxiv.org/abs/1905.10650)
 1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
 1. [BERT Rediscovers the Classical NLP Pipeline, Tenney et al. 2019](https://arxiv.org/abs/1905.05950)
 1. [Probing Neural Network Comprehension of Natural Language Arguments, Niven & Kao 2019](https://arxiv.org/pdf/1907.07355.pdf) and [[this]](https://medium.com/syncedreview/has-bert-been-cheating-researchers-say-it-exploits-spurious-statistical-cues-b256760ded57) related article
+1. [Compositional Questions Do Not Necessitate Multi-hop Reasoning, Min et al. 2019](https://arxiv.org/abs/1906.02900)
 
 ### distillation and pruning
 1. [Understanding Knowledge Distillation in Non-autoregressive Machine Translation, Zhou et al. 2019](https://arxiv.org/abs/1911.02727)
@@ -100,6 +105,9 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 ### adversarial attacks
 1. [Combating Adversarial Misspellings with Robust Word Recognition, Danish et al. 2019](https://arxiv.org/abs/1905.11268)
 
+### fairness and bias 
+1. [GROVER, Defending Against Neural Fake News, Zellers et al. 2019](https://arxiv.org/abs/1905.12616) [[blogpost]](https://grover.allenai.org/)
+
 ### [Go Back To Top](#Contents)
 
 
@@ -109,8 +117,9 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 # Contextual Representations and Transfer Learning
 
 ### Language modeling
-:bulb: Similar works are also compiled here: [Pre-trained Language Model Papers](https://github.com/thunlp/PLMpapers)
+:bulb: Similar works are also compiled here: [Pre-trained Language Model Papers](https://github.com/thunlp/PLMpapers)  
 :bulb: Typically, these *pre-training* methods involve an self-supervised (also called semi-supervised/unsupervised in some works) learning followed by a supervised learning. This is unlike CV domain where *pre-training* is mainly supervised learning.
+1. <https://web.stanford.edu/class/cs224n/slides/cs224n-2019-lecture13-contextual-representations.pdf>
 1. [Semi-supervised Sequence Learning, Dai et al. 2015][Dai et al. 2015]
 1. [Unsupervised Pretraining for Sequence to Sequence Learning, Ramachandran et al. 2016][Ramachandran et al. 2016]
 1. [*ULM-FiT*, Universal Language Model Fine-tuning for Text Classification, Howard and Ruder 2018][Howard and Ruder 2018]
@@ -139,7 +148,6 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 
 
 # Multi-task learning
-:bulb: multi-task learning or for that matter "cross-lingual pre-training?!"
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering, McCann et al. 2018][McCann et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
 1. [*GenSen*, Learning General Purpose Distributed Sentence Representations via Large Scale Multi-task Learning, Subramanian et al. 2018][Subramanian et al. 2018]
@@ -158,7 +166,9 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 
 ### text generation
 1. [Incorporating Copying Mechanism in Sequence-to-Sequence Learning, Jiatao Gu et al. 2016](https://arxiv.org/abs/1603.06393)
+1. [Quantifying Exposure Bias for Neural Language Generation, He et al. 2019](https://arxiv.org/abs/1905.10617)
 1. [CTRL: A Conditional Transformer Language Model for Controllable Generation, Keskar et al. 2019](https://arxiv.org/abs/1909.05858)
+1. [Plug and Play Language Models: A Simple Approach to Controlled Text Generation, Dathathri et al. 2019](https://arxiv.org/abs/1912.02164)
 
 ### dialogue sytems
 1. [Zero-shot User Intent Detection via Capsule Neural Networks, Xia et al. 2018][Xia et al. 2018]
@@ -169,6 +179,8 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [What makes a good conversation? How controllable attributes affect human judgments](https://www.aclweb.org/anthology/N19-1170) [[also see this article]](http://www.abigailsee.com/2019/08/13/what-makes-a-good-conversation.html)
 
 ### machine translation
+1. [Sequence to Sequence Learning with Neural Networks, Sutskever et al. 2014](https://arxiv.org/abs/1409.3215)
+1. [Addressing the Rare Word Problem in Neural Machine Translation, Luong et al. 2014](https://arxiv.org/abs/1410.8206)
 1. [Neural Machine Translation of Rare Words with Subword Units, Sennrich et al. 2015][Sennrich et al. 2015]
 1. [*Transformer*, Attention Is All You Need, Vaswami et al. 2017][Vaswami et al. 2017]
 1. [Understanding Back-Translation at Scale, Edunov et al. 2018](https://arxiv.org/pdf/1808.09381.pdf)
@@ -195,6 +207,8 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 ### Cross-Lingual
 1. <http://ruder.io/cross-lingual-embeddings/index.html>
 1. [*XLM*, Cross-lingual Language Model Pretraining, Guillaume and Conneau et al. 2019](https://arxiv.org/abs/1901.07291)
+1. [Cross-Lingual Ability of Multilingual BERT: An Empirical Study, karthikeyan et al. 2019](https://arxiv.org/abs/1912.07840)
+1. [XQA: A Cross-lingual Open-domain Question Answering Dataset, Liu et al. 2019](https://www.aclweb.org/anthology/P19-1227.pdf)
 
 ### [Go Back To Top](#Contents)
 
@@ -202,8 +216,34 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 
 
 
+
+
+# Multi-modal learning
+1. [Representation Learning with Contrastive Predictive Coding, Oord et al. 2018](https://arxiv.org/abs/1807.03748)
+1. [M-BERT: Injecting Multimodal Information in the BERT Structure, Rahman et al. 2019](https://arxiv.org/abs/1908.05787)
+1. [LXMERT: Learning Cross-Modality Encoder Representations from Transformers, Tan and Bansal 2019](https://arxiv.org/abs/1908.07490)
+
+
+
+
+
+
+
+
 # Question Answering
 1. [A Deep Neural Network Framework for English Hindi Question Answering](https://www.cse.iitb.ac.in/~pb/papers/tallip-qa.pdf)
+1. [DrQA, Reading Wikipedia to Answer Open-Domain Questions, Chen et al. 2017](https://arxiv.org/abs/1704.00051)
+1. [GoldEn Retriever, Answering Complex Open-domain Questions Through Iterative Query Generation, Qi et al 2019](https://arxiv.org/pdf/1910.07000.pdf)
+1. [BREAK It Down: A Question Understanding Benchmark, Wolfson et al. 2020](https://arxiv.org/pdf/2001.11770v1.pdf)
+1. [XQA: A Cross-lingual Open-domain Question Answering Dataset, Liu et al. 2019](https://www.aclweb.org/anthology/P19-1227.pdf)
+
+
+
+
+
+
+
+
 
 ### [Go Back To Top](#Contents)
 
@@ -262,7 +302,8 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. Commonality between Language Modelling, Machine Translation and Word2vec: All of them have a huge vocabulary size at the output and there is a need to alleviate computing of the huge sized softmax layer! See [Ruder's page](http://ruder.io/word-embeddings-softmax/index.html) for a quick-read.
 
 ## Quick Bites
-1. Byte Pair Encoding (BPE) is a data compression technique that iteratively replaces the most frequent pair of symbols (originally bytes) in a given dataset with a single unused symbol. In each iteration, the algorithm finds the most frequent (adjacent) pair of symbols, each can be constructed of a single character or a sequence of characters, and merged them to create a new symbol. All occurences of the selected pair are then replaced with the new symbol before the next iteration. Eventually, frequent sequence of characters, up to a whole word, are replaced with a single symbol, until the algorithm reaches the defined number of iterations (50k can be an example figure). During inference, if a word isn’t part of the BPE’s pre-built dictionary, it will be split into subwords that are. An example code of BPE can be found here. https://gist.github.com/ranihorev/6ba9a88c9e7401b603cd483dd767e783
+1. Byte Pair Encoding (BPE) is a data compression technique that iteratively replaces the most frequent pair of symbols (originally bytes) in a given dataset with a single unused symbol. In each iteration, the algorithm finds the most frequent (adjacent) pair of symbols, each can be constructed of a single character or a sequence of characters, and merged them to create a new symbol. All occurences of the selected pair are then replaced with the new symbol before the next iteration. Eventually, frequent sequence of characters, up to a whole word, are replaced with a single symbol, until the algorithm reaches the defined number of iterations (50k can be an example figure). During inference, if a word isn’t part of the BPE’s pre-built dictionary, it will be split into subwords that are. An example code of BPE can be found here. <https://gist.github.com/ranihorev/6ba9a88c9e7401b603cd483dd767e783>
+1. Also for BPE, see <https://leimao.github.io/blog/Byte-Pair-Encoding/>
 1. Models can be trained on SNLI in two different ways: (i) sentence encoding-based models that explicitly separate the encoding of the individual sentences and (ii) joint methods that allow to use encoding of both sentences (to use cross-features or attention from one sentence to the other).
 
 [Mikolov et al. 2013a]: https://arxiv.org/abs/1301.3781

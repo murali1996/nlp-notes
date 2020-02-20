@@ -1,7 +1,7 @@
 # 11785IDL
 
 # Contents
-- [Course Readings](#Course-Readings)
+- [Courses](#Courses)
 - [Universal Approximators](#Universal-Approximators)
 - [Initialization](#Initialization)
 - [Normalizations](#Normalizations)
@@ -10,8 +10,9 @@
 - [Losses](#Losses)
 - [Optimization](#Optimization)
 - [Training at Large](#Training-at-Large)
+- [RNN-LSTM](#RNN-LSTM)
 
-# Course Readings
+# Courses
 1. [MILA | IFT 6085: Theoretical principles for deep learning](http://mitliagkas.github.io/ift6085-dl-theory-class-2020/)
 
 # Universal Approximators
@@ -85,6 +86,12 @@
 # Training at Large
 1. [Chen et al. 2015, Strategies for Training Large Vocabulary Neural Language Models](https://arxiv.org/abs/1512.04906)
 
+
+
+# RNN-LSTM
+1. [The unreasonable effectiveness of the forget gate, Westhuizen and Lasenby et al. 2018](https://arxiv.org/abs/1804.04849)
+1. [An Empirical Exploration of Recurrent Network Architectures, Rafal et al. 2015](http://proceedings.mlr.press/v37/jozefowicz15.pdf)
+1. <https://www.quora.com/Why-doesnt-the-use-of-a-forget-gate-in-LSTMs-cause-vanishing-dying-gradients>
 
 
 # Random
