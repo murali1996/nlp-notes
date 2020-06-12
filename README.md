@@ -32,8 +32,10 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 
 ### word-level representations
 1. [Natural Language Processing (almost) from Scratch, Collobert et al. 2011](https://arxiv.org/abs/1103.0398)
-1. [*Word2Vec*, Efficient Estimation of Word Representations in Vector Space, Mikolov et al. 2013a][Mikolov et al. 2013a] \[also see [this](http://ruder.io/word-embeddings-softmax/index.html), [this](http://ruder.io/secret-word2vec/), [this](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/), [this](http://mccormickml.com/2016/04/27/word2vec-resources/) and [this](http://www.claudiobellei.com/2018/01/06/backprop-word2vec/)\] [[vectors]](https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz)
+1. [*Word2Vec*, Efficient Estimation of Word Representations in Vector Space, Mikolov et al. 2013a][Mikolov et al. 2013a]
 1. [*Word2Vec*, Distributed Representations of Words and Phrases and their Compositionality, Mikolov et al. 2013b][Mikolov et al. 2013b]
+
+:bulb: see Ruder's 3 parts of explanation-[p1](https://ruder.io/word-embeddings-1/), [p2](http://ruder.io/word-embeddings-softmax/index.html), [p3](http://ruder.io/secret-word2vec/) along with his [Aylien blog](https://blog.aylien.com/overview-word-embeddings-history-word2vec-cbow-glove/), Chris McCormick's take on Negative Sampling [here](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/) along with [resources](http://mccormickml.com/2016/04/27/word2vec-resources/) to reimplement, see [here](http://www.claudiobellei.com/2018/01/06/backprop-word2vec/) for backprop derivations in word2vec and [here](https://s3.amazonaws.com/dl4j-distribution/GoogleNews-vectors-negative300.bin.gz) to download pretrained embeddings
 1. [GloVe: Global Vectors for Word Representation, Pennington et al. 2014][Pennington et al. 2014]
 
 ### character-level representations
@@ -55,7 +57,7 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [Combating Adversarial Misspellings with Robust Word Recognition, Danish et al. 2019](https://arxiv.org/abs/1905.11268)
 1. [Misspelling Oblivious Word Embeddings, Edizel et al. 2019](https://arxiv.org/abs/1905.09755) [[facebook AI]](https://ai.facebook.com/blog/-a-new-model-for-word-embeddings-that-are-resilient-to-misspellings-/)
 
-### sentence encodings
+### sentence representations
 1. [Skip-Thought Vectors, Kiros et al. 2015][Kiros et al. 2015]
 1. [A Structured Self-attentive Sentence Embedding, Lin et al. 2017][Lin et al. 2017]
 1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
@@ -87,8 +89,7 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [What you can cram into a single $&!#\* vector: Probing sentence embeddings for linguistic properties, Conneau et al 2018b][Conneau et al 2018b]
 1. [Troubling Trends in Machine Learning Scholarship, Lipton and Steinhardt 2018](https://arxiv.org/pdf/1807.03341.pdf)
 1. [How Much Reading Does Reading Comprehension Require? A Critical Investigation of Popular Benchmarks, Kaushik and Lipton 2018](https://arxiv.org/abs/1808.04926)
-1. [Attention is not Explanation, Jain et al. 2019](https://arxiv.org/abs/1902.10186)
-1. [Are Sixteen Heads Really Better than One?, Paul et al. 2019](https://arxiv.org/abs/1905.10650)
+1. [Are Sixteen Heads Really Better than One?, Paul et al. 2019](https://arxiv.org/abs/1905.10650) [[Blogpost]](https://blog.ml.cmu.edu/2020/03/20/are-sixteen-heads-really-better-than-one/?/)
 1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
 1. [BERT Rediscovers the Classical NLP Pipeline, Tenney et al. 2019](https://arxiv.org/abs/1905.05950)
 1. [Probing Neural Network Comprehension of Natural Language Arguments, Niven & Kao 2019](https://arxiv.org/pdf/1907.07355.pdf) and [[this]](https://medium.com/syncedreview/has-bert-been-cheating-researchers-say-it-exploits-spurious-statistical-cues-b256760ded57) related article
@@ -108,7 +109,23 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 ### fairness and bias 
 1. [GROVER, Defending Against Neural Fake News, Zellers et al. 2019](https://arxiv.org/abs/1905.12616) [[blogpost]](https://grover.allenai.org/)
 
+### attention
+1. [Attention is not Explanation, Jain and Wallace 2019](https://arxiv.org/pdf/1902.10186.pdf)
+1. [Is Attention Interpretable?, Serrano and Smith 2019](https://arxiv.org/abs/1906.03731)
+1. [Attention is not not Explanation, Wiegreffe and Pinter 2019](https://arxiv.org/pdf/1908.04626.pdf)
+1. [Learning to Deceive with Attention-Based Explanations, Pruthi et al. 2020](https://arxiv.org/abs/1909.07913)
+
 ### [Go Back To Top](#Contents)
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -122,6 +139,8 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. <https://web.stanford.edu/class/cs224n/slides/cs224n-2019-lecture13-contextual-representations.pdf>
 1. [Semi-supervised Sequence Learning, Dai et al. 2015][Dai et al. 2015]
 1. [Unsupervised Pretraining for Sequence to Sequence Learning, Ramachandran et al. 2016][Ramachandran et al. 2016]
+1. [context2vec: Learning Generic Context Embedding with Bidirectional LSTM, Melamud et al. 2016](https://www.aclweb.org/anthology/K16-1006.pdf)
+1. [*InferSent*, Supervised Learning of Universal Sentence Representations from Natural Language Inference Data, Conneau eta al. 2017][Conneau eta al. 2017]
 1. [*ULM-FiT*, Universal Language Model Fine-tuning for Text Classification, Howard and Ruder 2018][Howard and Ruder 2018]
 1. [*ELMo*, Deep contextualized word representations, Peters et al. 2018][Peters et al. 2018] \[also see previus works- [TagLM](https://arxiv.org/abs/1705.00108) and [CoVe](https://arxiv.org/abs/1708.00107) \]
 1. [*GPT-1 aka OpenAI Transformer*, Improving Language Understanding by Generative Pre-Training, Radford et al. 2018][Radford et al. 2018]
@@ -147,6 +166,16 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 
 
 
+
+
+
+
+
+
+
+
+
+
 # Multi-task learning
 1. [*decaNLP*, The Natural Language Decathlon: Multitask Learning as Question Answering, McCann et al. 2018][McCann et al. 2018]
 1. [*HMTL*, A Hierarchical Multi-task Approach for Learning Embeddings from Semantic Tasks, Victor et al. 2018][Victor et al. 2018]
@@ -156,9 +185,16 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [Unified Language Model Pre-training for Natural Language Understanding and Generation, Dong et al. 2019](https://arxiv.org/abs/1905.03197)
 1. [MASS: Masked Sequence to Sequence Pre-training for Language Generation, Song et al. 2019](https://arxiv.org/abs/1905.02450)
 1. [ERNIE 2.0: A Continual Pre-training Framework for Language Understanding, Sun et al. 2019](https://arxiv.org/abs/1907.12412)
-1. [Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer, Raffel et al. 2019](https://arxiv.org/pdf/1910.10683v2.pdf)
+1. [T5: Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer, Raffel et al. 2019](https://arxiv.org/pdf/1910.10683v2.pdf) [[code]](https://github.com/google-research/text-to-text-transfer-transformer)
 
 ### [Go Back To Top](#Contents)
+
+
+
+
+
+
+
 
 
 
@@ -187,11 +223,24 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [Achieving Human Parity on Automatic Chinese to English News Translation, Microsoft Research 2018](https://arxiv.org/abs/1803.05567) [[Bites]](https://github.com/kweonwooj/papers/issues/98) [also see [this](https://arxiv.org/pdf/1707.00415.pdf) and [this](https://papers.nips.cc/paper/6775-deliberation-networks-sequence-generation-beyond-one-pass-decoding.pdf)]
 
 
+
+
+
+
+
+
+
+
 # Knowledge Graphs
 :bulb: LMs realized as diverse learners; learning more than what you thought!!
 1. [Language Models as Knowledge Bases?, Petroni et al. 2019](https://arxiv.org/abs/1909.01066)
 
 ### [Go Back To Top](#Contents)
+
+
+
+
+
 
 
 
@@ -218,10 +267,19 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 
 
 
+
+
+
+
+
 # Multi-modal learning
 1. [Representation Learning with Contrastive Predictive Coding, Oord et al. 2018](https://arxiv.org/abs/1807.03748)
 1. [M-BERT: Injecting Multimodal Information in the BERT Structure, Rahman et al. 2019](https://arxiv.org/abs/1908.05787)
 1. [LXMERT: Learning Cross-Modality Encoder Representations from Transformers, Tan and Bansal 2019](https://arxiv.org/abs/1908.07490)
+
+
+
+
 
 
 
@@ -236,13 +294,6 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [GoldEn Retriever, Answering Complex Open-domain Questions Through Iterative Query Generation, Qi et al 2019](https://arxiv.org/pdf/1910.07000.pdf)
 1. [BREAK It Down: A Question Understanding Benchmark, Wolfson et al. 2020](https://arxiv.org/pdf/2001.11770v1.pdf)
 1. [XQA: A Cross-lingual Open-domain Question Answering Dataset, Liu et al. 2019](https://www.aclweb.org/anthology/P19-1227.pdf)
-
-
-
-
-
-
-
 
 
 ### [Go Back To Top](#Contents)
