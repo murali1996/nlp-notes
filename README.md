@@ -1,8 +1,6 @@
 # READINGS_NLP
 
-
-- [Contents](#Contents)
-- [Comprehension](#Comprehension)
+- [Text Comprehension](#Comprehension)
   - [Word and Sentence Embeddings](#Word-and-Sentence-Embeddings)
   - [Contextual Representations and Transfer Learning](#Contextual-Representations-and-Transfer-Learning)
   - [Multi-task learning](#Multi-task-learning)
@@ -10,23 +8,11 @@
   - [Multi-modal learning](#Multi-modal-learning)
   - [Interpretability and Ethics](#Interpretability-and-Ethics)
   - [Evaluation Toolkits for Language Understanding](#Evaluation-Toolkits-for-Language-Understanding)
-- [Generation](#Generation)
+- [Text Generation](#Generation)
 - [IR and QA](#IR-and-QA)
   - [Knowledge Graphs](#Knowledge-Graphs)
   - [Question Answering](#Question-Answering)
-- [Bookmarks](#Bookmarks)
-
-# Contents
-Hi there!
-
-I have been working on organizing the massively evolving research studies surrounding language representation and understanding, and here's my curated lists. The main idea of this categorization is to find the chain of works that result in a research direction. It is always good to know the genesis before starting to adopt any paper in NLP pipelines. The list isn't exhaustive and I'll keep adding new papers that I come across. (Note: Some papers may appear in multiple sub-categories)
-
-So far, I have added papers on different ways to represent text at word, character and sub-word level, techniques that evolved to have pretrained modeling in NLP just like Computer Vision domain, some works on analyzing these massive pretrained models such as their inductive bias and if we can distill their learnings somehow, also some works on how the current day pretrained models are prone to adversarial attacks. 
-
-In near future, I plan to add works on conversational nlp and the chain of works that happened in that domain, also on cross-lingual and multi-lingual learnings. The domain of Question Answering and Answer Ranking/Selection is vast and I'm planning to add only pointers to good sites that already have a comprehensive list of them. 
-
-I'm also adding pointers to some blogs that helped me in understanding some of these works in-detail, some github repos that have categorization of plentiful works in NLP and some websites that keep SOTA results updated.
-
+- [Notes](#Notes)
 
 # Word and Sentence Embeddings
 
@@ -64,6 +50,13 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 1. [Hierarchical Attention Networks for Document Classification, Yang et al. 2016](http://www.cs.cmu.edu/~./hovy/papers/16HLT-hierarchical-attention-networks.pdf)
 1. [DisSent: Sentence Representation Learning from Explicit Discourse Relations, Nie et al. 2017](https://arxiv.org/abs/1710.04334)
 1. [*USE*, Universal Sentence Encoder, Cer et al. 2018][Cer et al. 2018] [[also see Multilingual USE]][Yinfei et al. 2019]
+
+### Multi-lingual word embeddings
+1. [Density Matching for Bilingual Word Embedding, Zhou et al. 2015](https://www.aclweb.org/anthology/N19-1161.pdf)
+1. [Word Translation Without Parallel Data, Conneua et al. 2017](https://arxiv.org/abs/1710.04087) [[repo]](https://github.com/facebookresearch/MUSE)
+1. [Loss in Translation: Learning Bilingual Word Mapping with a Retrieval Criterion, Joulin et al. 2018](https://arxiv.org/abs/1804.07745) [[fasttext embeddings]](https://fasttext.cc/docs/en/aligned-vectors.html)
+1. [Unsupervised Multilingual Word Embeddings, Chen & Cardie 2018](https://arxiv.org/abs/1808.08933) [[repo]](https://github.com/ccsasuke/umwe)
+
 
 ### [Go Back To Top](#Contents)
 
@@ -298,14 +291,43 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 
 ### [Go Back To Top](#Contents)
 
+# Notes
+
+## Quick Bites
+1. ```Byte Pair Encoding (BPE)``` is a data compression technique that iteratively replaces the most frequent pair of symbols (originally bytes) in a given dataset with a single unused symbol. In each iteration, the algorithm finds the most frequent (adjacent) pair of symbols, each can be constructed of a single character or a sequence of characters, and merged them to create a new symbol. All occurences of the selected pair are then replaced with the new symbol before the next iteration. Eventually, frequent sequence of characters, up to a whole word, are replaced with a single symbol, until the algorithm reaches the defined number of iterations (50k can be an example figure). During inference, if a word isn’t part of the BPE’s pre-built dictionary, it will be split into subwords that are. Code of BPE can be found [here](https://gist.github.com/ranihorev/6ba9a88c9e7401b603cd483dd767e783). See [Overall Idea blog-post](https://medium.com/@makcedward/how-subword-helps-on-your-nlp-model-83dd1b836f46), [BPE specific blog-post](https://leimao.github.io/blog/Byte-Pair-Encoding/) and [BPE Code](https://github.com/google/sentencepiece) for more details.
+```
+import re
+words0 = [" ".join([char for char in word]+["</w>"]) for word in "in the rain in Ukraine".split()]+["i n"]+["<w> i n"]
+print(words0)
+
+eword1 = re.escape('i n')
+p1 = re.compile(r'(?<!\S)' + eword1 + r'(?!\S)')
+words1 = [p1.sub('in',word) for word in words0]
+print(words1)
 
 
+eword2 = re.escape('in </w>')
+p2 = re.compile(r'(?<!\S)' + eword2 + r'(?!\S)')
+words2 = [p2.sub('in</w>',word) for word in words1]
+print(words2)
 
 
+eword3 = re.escape('a in</w>')
+p3 = re.compile(r'(?<!\S)' + eword3 + r'(?!\S)')
+words3 = [p3.sub('ain</w>',word) for word in words2]
+print(words3)
+```
+1. 
+```re``` library
+```
+re.search(), re.findall(), re.split(), re.sub()
+re.escape(), re.compile()
+```
+[101](https://www.w3schools.com/python/python_regex.asp), [Positive and Negative Lookahead/Lookbehind](https://www.regular-expressions.info/lookaround.html)
+1. Models can be trained on SNLI in two different ways: (i) sentence encoding-based models that explicitly separate the encoding of the individual sentences and (ii) joint methods that allow to use encoding of both sentences (to use cross-features or attention from one sentence to the other).
 
 
-
-# Bookmarks
+## Bookmarks
 #### each link is either a series of blogs from an individual/organization or a conference related link
 - [NLP Progress](http://nlpprogress.com/)
 - [Papers with code](https://paperswithcode.com/area/natural-language-processing)  
@@ -340,22 +362,19 @@ I'm also adding pointers to some blogs that helped me in understanding some of t
 - [OpenAI GPT-1](https://openai.com/blog/language-unsupervised/) and [OpenAi GPT-2](https://openai.com/blog/better-language-models/)
 - [Illustrated BERT][Illustrated BERT] and [Illustrated GPT-2][Illustrated GPT-2]    
 #### Random
-- [some text processing](https://www.kaggle.com/sudalairajkumar/getting-started-with-text-preprocessing)
+- [text processing](https://www.kaggle.com/sudalairajkumar/getting-started-with-text-preprocessing)
 - [Regularization Techniques for NLP](http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/) 
 - [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html)
 - [Rethinking Generalization of Neural Models: A Named Entity Recognition Case Study, Fu et al. 2019](http://pfliu.com/InterpretNER/rethink-ner.pdf)
 
-### [Go Back To Top](#Contents)
 
 ## Food For Thought
 1. How good do ranking algorithms, the ones with pointwise/pairwise/listwise learning paradigms, perform when the no. of test classes at the infernece time grow massively? KG Reasoning using Translational/Bilinear/DL techniques is one important area under consideration.
 1. While the chosen neural achitecture is important, the techniques used for training the problem objective e.g.[*Word2Vec*][Mikolov et al. 2013b] or the techniques used while doing loss optimization e.g.[*OpenAI Transformer*][Radford et al. 2018] play a significant role in both fast as well as a good convergence.
 1. Commonality between Language Modelling, Machine Translation and Word2vec: All of them have a huge vocabulary size at the output and there is a need to alleviate computing of the huge sized softmax layer! See [Ruder's page](http://ruder.io/word-embeddings-softmax/index.html) for a quick-read.
 
-## Quick Bites
-1. Byte Pair Encoding (BPE) is a data compression technique that iteratively replaces the most frequent pair of symbols (originally bytes) in a given dataset with a single unused symbol. In each iteration, the algorithm finds the most frequent (adjacent) pair of symbols, each can be constructed of a single character or a sequence of characters, and merged them to create a new symbol. All occurences of the selected pair are then replaced with the new symbol before the next iteration. Eventually, frequent sequence of characters, up to a whole word, are replaced with a single symbol, until the algorithm reaches the defined number of iterations (50k can be an example figure). During inference, if a word isn’t part of the BPE’s pre-built dictionary, it will be split into subwords that are. An example code of BPE can be found here. <https://gist.github.com/ranihorev/6ba9a88c9e7401b603cd483dd767e783>
-1. Also for BPE, see <https://leimao.github.io/blog/Byte-Pair-Encoding/>
-1. Models can be trained on SNLI in two different ways: (i) sentence encoding-based models that explicitly separate the encoding of the individual sentences and (ii) joint methods that allow to use encoding of both sentences (to use cross-features or attention from one sentence to the other).
+
+### [Go Back To Top](#Contents)
 
 [Mikolov et al. 2013a]: https://arxiv.org/abs/1301.3781
 [Mikolov et al. 2013b]: https://arxiv.org/abs/1310.4546
