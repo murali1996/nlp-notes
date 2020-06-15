@@ -12,7 +12,7 @@
 - [IR and QA](#IR-and-QA)
   - [Knowledge Graphs](#Knowledge-Graphs)
   - [Question Answering](#Question-Answering)
-- [BERT & Transformers](#-BERT-&-Transformers)
+- [BERT & Transformers](#-BERT--Transformers)
 - [Notes](#Notes)
 
 # Word and Sentence Embeddings
@@ -175,9 +175,10 @@
 
 ### BERTology
 :arrow_forward: [Bert related papers compilation](https://github.com/tomohideshibata/BERT-related-papers)
+1. [E-BERT: Efficient-Yet-Effective Entity Embeddings for BERT, Poerner et al. 2020](https://arxiv.org/abs/1911.03681)
 1. [A Primer in BERTology: What we know about how BERT works, Rogers et al. 2020](https://arxiv.org/abs/2002.12327)
 1. [Comparing BERT against traditional machine learning text classification, Carvajal et al. 2020](https://arxiv.org/abs/2005.13012)
-1. [E-BERT: Efficient-Yet-Effective Entity Embeddings for BERT, Poerner et al. 2020](https://arxiv.org/abs/1911.03681)
+1. [Revisiting Few-sample BERT Fine-tuning, Zhang et al. 2020](https://arxiv.org/pdf/2006.05987.pdf)
 
 ### Transformers
 
