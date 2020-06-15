@@ -12,6 +12,7 @@
 - [IR and QA](#IR-and-QA)
   - [Knowledge Graphs](#Knowledge-Graphs)
   - [Question Answering](#Question-Answering)
+- [BERT & Transformers](#-BERT-&-Transformers)
 - [Notes](#Notes)
 
 # Word and Sentence Embeddings
@@ -98,6 +99,7 @@
 
 ### adversarial attacks
 1. [Combating Adversarial Misspellings with Robust Word Recognition, Danish et al. 2019](https://arxiv.org/abs/1905.11268)
+1. [Universal Adversarial Triggers for Attacking and Analyzing NLP, Wallace et al. 2019](https://arxiv.org/abs/1908.07125)
 
 ### fairness and bias 
 1. [GROVER, Defending Against Neural Fake News, Zellers et al. 2019](https://arxiv.org/abs/1905.12616) [[blogpost]](https://grover.allenai.org/)
@@ -158,6 +160,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+# BERT & Transformers
+
+### BERTology
+:arrow_forward: [Bert related papers compilation](https://github.com/tomohideshibata/BERT-related-papers)
+1. [A Primer in BERTology: What we know about how BERT works, Rogers et al. 2020](https://arxiv.org/abs/2002.12327)
+1. [Comparing BERT against traditional machine learning text classification, Carvajal et al. 2020](https://arxiv.org/abs/2005.13012)
+1. [E-BERT: Efficient-Yet-Effective Entity Embeddings for BERT, Poerner et al. 2020](https://arxiv.org/abs/1911.03681)
+
+### Transformers
+
+1. [The Evolved Transformer, So et al. 2019](https://arxiv.org/abs/1901.11117v2)
+1. [R-Transformer: Recurrent Neural Network Enhanced Transformer, Wang et al. 2019](https://arxiv.org/abs/1907.05572)
+1. [Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer, Raffel et al. 2019](https://arxiv.org/abs/1910.10683)
+1. [Reformer: The Efficient Transformer, Kitaev et al. 2020](https://arxiv.org/abs/2001.04451)
 
 
 
@@ -269,7 +296,7 @@
 1. [Representation Learning with Contrastive Predictive Coding, Oord et al. 2018](https://arxiv.org/abs/1807.03748)
 1. [M-BERT: Injecting Multimodal Information in the BERT Structure, Rahman et al. 2019](https://arxiv.org/abs/1908.05787)
 1. [LXMERT: Learning Cross-Modality Encoder Representations from Transformers, Tan and Bansal 2019](https://arxiv.org/abs/1908.07490)
-
+1. [BERT Can See Out of the Box: On the Cross-modal Transferability of Text Representations, Scialom et al. 2020](https://arxiv.org/abs/2002.10832)
 
 
 
@@ -317,14 +344,13 @@ p3 = re.compile(r'(?<!\S)' + eword3 + r'(?!\S)')
 words3 = [p3.sub('ain</w>',word) for word in words2]
 print(words3)
 ```
-1. 
-```re``` library
+2. ```re``` library
 ```
 re.search(), re.findall(), re.split(), re.sub()
 re.escape(), re.compile()
 ```
 [101](https://www.w3schools.com/python/python_regex.asp), [Positive and Negative Lookahead/Lookbehind](https://www.regular-expressions.info/lookaround.html)
-1. Models can be trained on SNLI in two different ways: (i) sentence encoding-based models that explicitly separate the encoding of the individual sentences and (ii) joint methods that allow to use encoding of both sentences (to use cross-features or attention from one sentence to the other).
+3. Models can be trained on SNLI in two different ways: (i) sentence encoding-based models that explicitly separate the encoding of the individual sentences and (ii) joint methods that allow to use encoding of both sentences (to use cross-features or attention from one sentence to the other).
 
 
 ## Bookmarks
