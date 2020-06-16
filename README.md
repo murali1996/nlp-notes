@@ -12,7 +12,8 @@
 - [IR and QA](#IR-and-QA)
   - [Knowledge Graphs](#Knowledge-Graphs)
   - [Question Answering](#Question-Answering)
-- [BERT & Transformers](#-BERT--Transformers)
+- [BERT & Transformers](#Bert--Transformers)
+- [Active Learning](#Active-Learning )
 - [Notes](#Notes)
 
 # Word and Sentence Embeddings
@@ -73,12 +74,18 @@
 
 
 
+
+
+
+
+
+
 # Interpretability and Ethics 
 :bulb: inductive bias, distillation and pruning, adversarial attacks, fairness and bias  
 :bulb: distillation (can thought of a MAP estimate with prior rather than MLE objective)  
 :arrow_upper_right: see some papers on bias in [Word and Sentence Embeddings](#Word-and-Sentence-Embeddings) section
 
-### inductive bias
+### inductive bias and generalization
 1. [Dissecting Contextual Word Embeddings: Architecture and Representation, Peters et al. 2018b](https://www.aclweb.org/anthology/D18-1179)
 1. [What you can cram into a single $&!#\* vector: Probing sentence embeddings for linguistic properties, Conneau et al 2018b][Conneau et al 2018b]
 1. [Troubling Trends in Machine Learning Scholarship, Lipton and Steinhardt 2018](https://arxiv.org/pdf/1807.03341.pdf)
@@ -88,8 +95,19 @@
 1. [BERT Rediscovers the Classical NLP Pipeline, Tenney et al. 2019](https://arxiv.org/abs/1905.05950)
 1. [Probing Neural Network Comprehension of Natural Language Arguments, Niven & Kao 2019](https://arxiv.org/pdf/1907.07355.pdf) and [[this]](https://medium.com/syncedreview/has-bert-been-cheating-researchers-say-it-exploits-spurious-statistical-cues-b256760ded57) related article
 1. [Compositional Questions Do Not Necessitate Multi-hop Reasoning, Min et al. 2019](https://arxiv.org/abs/1906.02900)
+1. [Rethinking Generalization of Neural Models: A Named Entity Recognition Case Study, Fu et al. 2019](https://arxiv.org/abs/2001.03844)
 
-### distillation and pruning
+### interpreting attention
+1. [Attention is not Explanation, Jain and Wallace 2019](https://arxiv.org/pdf/1902.10186.pdf)
+1. [Is Attention Interpretable?, Serrano and Smith 2019](https://arxiv.org/abs/1906.03731)
+1. [Attention is not not Explanation, Wiegreffe and Pinter 2019](https://arxiv.org/pdf/1908.04626.pdf)
+1. [Learning to Deceive with Attention-Based Explanations, Pruthi et al. 2020](https://arxiv.org/abs/1909.07913)
+
+### adversarial attacks
+1. [Combating Adversarial Misspellings with Robust Word Recognition, Danish et al. 2019](https://arxiv.org/abs/1905.11268)
+1. [Universal Adversarial Triggers for Attacking and Analyzing NLP, Wallace et al. 2019](https://arxiv.org/abs/1908.07125)
+
+### model distillation and pruning
 1. [Understanding Knowledge Distillation in Non-autoregressive Machine Translation, Zhou et al. 2019](https://arxiv.org/abs/1911.02727)
 1. [Distilling Task-Specific Knowledge from BERT into Simple Neural Networks, Tang et al. 2019][Tang et al. 2019]. Also a related work from HuggingFace [here](https://medium.com/huggingface/distilbert-8cf3380435b5), and work on quantization compression by RASA [here](https://blog.rasa.com/compressing-bert-for-faster-prediction-2/)
 1. [Large Batch Optimization for Deep Learning: Training BERT in 76 Minutes](https://arxiv.org/pdf/1904.00962.pdf) [[also see this article]](https://medium.com/syncedreview/new-google-brain-optimizer-reduces-bert-pre-training-time-from-days-to-minutes-b454e54eda1d)
@@ -97,18 +115,10 @@
 1. [Patient Knowledge Distillation for BERT Model Compression, Sun et al. 2019](https://arxiv.org/abs/1908.09355)
 1. [ALBERT: A Lite BERT for Self-supervised Learning of Language Representations, Lan et al. 2019](https://arxiv.org/abs/1909.11942)
 
-### adversarial attacks
-1. [Combating Adversarial Misspellings with Robust Word Recognition, Danish et al. 2019](https://arxiv.org/abs/1905.11268)
-1. [Universal Adversarial Triggers for Attacking and Analyzing NLP, Wallace et al. 2019](https://arxiv.org/abs/1908.07125)
 
-### fairness and bias 
+### fairness and bias in models
 1. [GROVER, Defending Against Neural Fake News, Zellers et al. 2019](https://arxiv.org/abs/1905.12616) [[blogpost]](https://grover.allenai.org/)
 
-### attention
-1. [Attention is not Explanation, Jain and Wallace 2019](https://arxiv.org/pdf/1902.10186.pdf)
-1. [Is Attention Interpretable?, Serrano and Smith 2019](https://arxiv.org/abs/1906.03731)
-1. [Attention is not not Explanation, Wiegreffe and Pinter 2019](https://arxiv.org/pdf/1908.04626.pdf)
-1. [Learning to Deceive with Attention-Based Explanations, Pruthi et al. 2020](https://arxiv.org/abs/1909.07913)
 
 ### [Go Back To Top](#Contents)
 
@@ -174,7 +184,7 @@
 # BERT & Transformers
 
 ### BERTology
-:arrow_forward: [Bert related papers compilation](https://github.com/tomohideshibata/BERT-related-papers)
+:arrow_forward:  [Bert related papers compilation](https://github.com/tomohideshibata/BERT-related-papers)
 1. [E-BERT: Efficient-Yet-Effective Entity Embeddings for BERT, Poerner et al. 2020](https://arxiv.org/abs/1911.03681)
 1. [A Primer in BERTology: What we know about how BERT works, Rogers et al. 2020](https://arxiv.org/abs/2002.12327)
 1. [Comparing BERT against traditional machine learning text classification, Carvajal et al. 2020](https://arxiv.org/abs/2005.13012)
@@ -188,6 +198,25 @@
 1. [Reformer: The Efficient Transformer, Kitaev et al. 2020](https://arxiv.org/abs/2001.04451)
 
 
+
+
+
+
+
+
+
+
+
+
+# Active Learning 
+:bulb: dataset distillation :p
+
+1. [Deep Active Learning for Named Entity Recognition, shen et al. 2017](https://arxiv.org/abs/1707.05928)
+1. [Learning how to Active Learn: A Deep Reinforcement Learning Approach, Fang et al. 2017](https://arxiv.org/pdf/1708.02383.pdf)
+1. [An Ensemble Deep Active Learning Method for Intent
+Classification, Zhang et al. 2019](https://dl.acm.org/doi/pdf/10.1145/3374587.3374611)
+
+### [Go Back To Top](#Contents)
 
 
 
@@ -356,10 +385,8 @@ re.escape(), re.compile()
 
 ## Bookmarks
 #### each link is either a series of blogs from an individual/organization or a conference related link
-- [NLP Progress](http://nlpprogress.com/)
-- [Papers with code](https://paperswithcode.com/area/natural-language-processing)  
+- [NLP Progress](http://nlpprogress.com/), [Papers with code](https://paperswithcode.com/area/natural-language-processing), [NLP Newsletter](https://github.com/dair-ai/nlp_newsletter), [GoundAI](https://www.groundai.com/?=&tag=LANGUAGE)
 - [Ruder's Blog-posts](http://ruder.io); [this](https://ruder.io/research-highlights-2019/) and [this](http://ruder.io/state-of-transfer-learning-in-nlp/) taking on latest trends
-- [NLP Newsletter](https://github.com/dair-ai/nlp_newsletter)
 - [Jay Alammar](http://jalammar.github.io/), 
   [LiLian (at OpenAI)](https://lilianweng.github.io/lil-log/),  
   [Sebastian Rraschka (at UW-Madison)](https://sebastianraschka.com/blog/index.html),  
@@ -381,18 +408,17 @@ re.escape(), re.compile()
 - [huggingface-transformers](https://github.com/huggingface/pytorch-transformers)
 - [pytorch-fairseq](https://github.com/pytorch/fairseq)
 - [flairNLP](https://github.com/flairNLP/flair)
-#### handpicked blog-posts
+#### blog-posts on selected topics
 - [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html)
 - [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/)
 - [Lilian at openAI on Attention](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html)
 - [The Natural Language Decathlon](https://blog.einstein.ai/the-natural-language-decathlon/)
 - [OpenAI GPT-1](https://openai.com/blog/language-unsupervised/) and [OpenAi GPT-2](https://openai.com/blog/better-language-models/)
 - [Illustrated BERT][Illustrated BERT] and [Illustrated GPT-2][Illustrated GPT-2]    
-#### Random
+#### Miscellaneous
 - [text processing](https://www.kaggle.com/sudalairajkumar/getting-started-with-text-preprocessing)
 - [Regularization Techniques for NLP](http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/) 
 - [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html)
-- [Rethinking Generalization of Neural Models: A Named Entity Recognition Case Study, Fu et al. 2019](http://pfliu.com/InterpretNER/rethink-ner.pdf)
 
 
 ## Food For Thought
