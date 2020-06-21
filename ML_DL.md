@@ -1,5 +1,3 @@
-# 11785IDL
-
 # Contents
 - [Courses](#Courses)
 - [Universal Approximators](#Universal-Approximators)
@@ -92,7 +90,7 @@
 1. [The unreasonable effectiveness of the forget gate, Westhuizen and Lasenby et al. 2018](https://arxiv.org/abs/1804.04849)
 1. [An Empirical Exploration of Recurrent Network Architectures, Rafal et al. 2015](http://proceedings.mlr.press/v37/jozefowicz15.pdf)
 1. <https://www.quora.com/Why-doesnt-the-use-of-a-forget-gate-in-LSTMs-cause-vanishing-dying-gradients>
-
+1. [LSTM: A Search Space Odyssey, Greff et al. 2015](https://arxiv.org/abs/1503.04069)
 
 # Random
 1. <https://www.kaggle.com/chandraroy/plotting-with-pandas-matplotlib-and-seaborn>

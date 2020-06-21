@@ -15,6 +15,7 @@
 - [BERT & Transformers](#Bert--Transformers)
 - [Active Learning](#Active-Learning )
 - [Notes](#Notes)
+- [Bookmarks](#Bookmarks)
 
 # Word and Sentence Embeddings
 
@@ -68,6 +69,7 @@
 1. [SentEval: An Evaluation Toolkit for Universal Sentence Representations, Conneau et al. 2018a][Conneau et al. 2018a] [[Site]](https://github.com/facebookresearch/SentEval)
 1. [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018] [[Site]](https://gluebenchmark.com/leaderboard)
 1. [CLUE: Language Understanding Evaluation benchmark for Chinese (CLUE)](https://github.com/CLUEbenchmark/CLUE)
+1. [XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization, Hu et al. 2020](https://arxiv.org/abs/2003.11080)
 
 ### [Go Back To Top](#Contents)
 
@@ -93,8 +95,9 @@
 1. [Are Sixteen Heads Really Better than One?, Paul et al. 2019](https://arxiv.org/abs/1905.10650) [[Blogpost]](https://blog.ml.cmu.edu/2020/03/20/are-sixteen-heads-really-better-than-one/?/)
 1. [No Training Required: Exploring Random Encoders for Sentence Classification, Wieting et al. 2019][Wieting et al. 2019]
 1. [BERT Rediscovers the Classical NLP Pipeline, Tenney et al. 2019](https://arxiv.org/abs/1905.05950)
-1. [Probing Neural Network Comprehension of Natural Language Arguments, Niven & Kao 2019](https://arxiv.org/pdf/1907.07355.pdf) and [[this]](https://medium.com/syncedreview/has-bert-been-cheating-researchers-say-it-exploits-spurious-statistical-cues-b256760ded57) related article
 1. [Compositional Questions Do Not Necessitate Multi-hop Reasoning, Min et al. 2019](https://arxiv.org/abs/1906.02900)
+1. [Probing Neural Network Comprehension of Natural Language Arguments, Niven & Kao 2019](https://arxiv.org/pdf/1907.07355.pdf) and [[this]](https://medium.com/syncedreview/has-bert-been-cheating-researchers-say-it-exploits-spurious-statistical-cues-b256760ded57) related article
+1. [The Bottom-up Evolution of Representations in the Transformer: A Study with Machine Translation and Language Modeling Objectives, Voita et al. 2019](https://arxiv.org/abs/1909.01380)
 1. [Rethinking Generalization of Neural Models: A Named Entity Recognition Case Study, Fu et al. 2019](https://arxiv.org/abs/2001.03844)
 
 ### interpreting attention
@@ -106,6 +109,7 @@
 ### adversarial attacks
 1. [Combating Adversarial Misspellings with Robust Word Recognition, Danish et al. 2019](https://arxiv.org/abs/1905.11268)
 1. [Universal Adversarial Triggers for Attacking and Analyzing NLP, Wallace et al. 2019](https://arxiv.org/abs/1908.07125)
+1. [Weight Poisoning Attacks on Pre-trained Models, Kurita et al. 2020](https://arxiv.org/abs/2004.06660)
 
 ### model distillation and pruning
 1. [Understanding Knowledge Distillation in Non-autoregressive Machine Translation, Zhou et al. 2019](https://arxiv.org/abs/1911.02727)
@@ -158,7 +162,7 @@
 1. [ERNIE 2.0: A Continual Pre-training Framework for Language Understanding, Sun et al. 2019](https://arxiv.org/abs/1907.12412)
 1. [CTRL: A Conditional Transformer Language Model for Controllable Generation, Keskar et al. 2019](https://arxiv.org/abs/1909.05858)
 1. [ALBERT: A Lite BERT for Self-supervised Learning of Language Representations, Lan et al. 2019](https://arxiv.org/abs/1909.11942)
-1. [ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators, Clark et al. 2019](https://openreview.net/pdf?id=r1xMH1BtvB)
+1. [ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators, Clark et al. 2019](https://openreview.net/pdf?id=r1xMH1BtvB) [[Google Blog]](https://ai.googleblog.com/2020/03/more-efficient-nlp-model-pre-training.html?m=1)
 
 ### + supervised objectives
 :bulb: Some people went ahead and thought "how about using supervised (+- self-unsupervised) tasks for pretraining?!"
@@ -195,6 +199,7 @@
 1. [The Evolved Transformer, So et al. 2019](https://arxiv.org/abs/1901.11117v2)
 1. [R-Transformer: Recurrent Neural Network Enhanced Transformer, Wang et al. 2019](https://arxiv.org/abs/1907.05572)
 1. [Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer, Raffel et al. 2019](https://arxiv.org/abs/1910.10683)
+1. [The Bottom-up Evolution of Representations in the Transformer: A Study with Machine Translation and Language Modeling Objectives, Voita et al. 2019](https://arxiv.org/abs/1909.01380)
 1. [Reformer: The Efficient Transformer, Kitaev et al. 2020](https://arxiv.org/abs/2001.04451)
 
 
@@ -302,6 +307,8 @@ Classification, Zhang et al. 2019](https://dl.acm.org/doi/pdf/10.1145/3374587.33
 1. [Massively Multilingual Sentence Embeddings for Zero-Shot Cross-Lingual Transfer and Beyond, Artetxe et al. 2018][Artetxe et al. 2018]
 1. [How multilingual is Multilingual BERT?, Pires et al.2019](https://arxiv.org/abs/1906.01502)
 1. [Multilingual Universal Sentence Encoder (USE) for Semantic Retrieval, Yinfei Yang et al. 2019](https://arxiv.org/pdf/1907.04307.pdf)
+1. [How Language-Neutral is Multilingual BERT?, Libovicky et al. 2020](https://arxiv.org/abs/1911.03310)
+1. [Universal Phone Recognition with a Multilingual Allophone System, Le te al. 2020](https://arxiv.org/abs/2002.11800)
 
 ### Cross-Lingual
 1. <http://ruder.io/cross-lingual-embeddings/index.html>
@@ -348,6 +355,14 @@ Classification, Zhang et al. 2019](https://dl.acm.org/doi/pdf/10.1145/3374587.33
 
 ### [Go Back To Top](#Contents)
 
+
+
+
+
+
+
+
+
 # Notes
 
 ## Quick Bites
@@ -382,52 +397,60 @@ re.escape(), re.compile()
 [101](https://www.w3schools.com/python/python_regex.asp), [Positive and Negative Lookahead/Lookbehind](https://www.regular-expressions.info/lookaround.html)
 3. Models can be trained on SNLI in two different ways: (i) sentence encoding-based models that explicitly separate the encoding of the individual sentences and (ii) joint methods that allow to use encoding of both sentences (to use cross-features or attention from one sentence to the other).
 
-
-## Bookmarks
-#### each link is either a series of blogs from an individual/organization or a conference related link
-- [NLP Progress](http://nlpprogress.com/), [Papers with code](https://paperswithcode.com/area/natural-language-processing), [NLP Newsletter](https://github.com/dair-ai/nlp_newsletter), [GoundAI](https://www.groundai.com/?=&tag=LANGUAGE)
-- [Ruder's Blog-posts](http://ruder.io); [this](https://ruder.io/research-highlights-2019/) and [this](http://ruder.io/state-of-transfer-learning-in-nlp/) taking on latest trends
-- [Jay Alammar](http://jalammar.github.io/), 
-  [LiLian (at OpenAI)](https://lilianweng.github.io/lil-log/),  
-  [Sebastian Rraschka (at UW-Madison)](https://sebastianraschka.com/blog/index.html),  
-  [Victor Sanh (at Huggingface)](https://medium.com/@victorsanh),  
-  [Keita Kurita|ML & NLP Explained](http://mlexplained.com/category/nlp/),  
-  [distill.pub](https://distill.pub/),  
-- [Chris McCormick](https://mccormickml.com/archive/), 
-  [Kavita Ganesan](https://kavita-ganesan.com/kavitas-tutorials/#.Xhk3_0dKjDc), 
-- [blog.feedspot.com](https://drive.google.com/file/d/15XD2c2PypVZTveezFuaJpPEJWP8Vi3ak/view?usp=sharing)
-- [SPACY IRL 2019 Talks](https://www.youtube.com/playlist?list=PLBmcuObd5An4UC6jvK_-eSl6jCvP1gwXc)
-#### MOOCs
-- [fast.ai](https://www.fast.ai/2019/07/08/fastai-nlp/)
-#### github repos
-- [Awesome-Sentence-Embedding](https://github.com/Separius/awesome-sentence-embedding)   
-- [nlp-library](https://github.com/mihail911/nlp-library)
-- [Awesome-NLP](https://github.com/keon/awesome-nlp)
-- [NLP-Tutorial](https://github.com/graykode/nlp-tutorial)
-- [lazynlp](https://github.com/chiphuyen/lazynlp)
-- [huggingface-transformers](https://github.com/huggingface/pytorch-transformers)
-- [pytorch-fairseq](https://github.com/pytorch/fairseq)
-- [flairNLP](https://github.com/flairNLP/flair)
-#### blog-posts on selected topics
-- [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html)
-- [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/)
-- [Lilian at openAI on Attention](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html)
-- [The Natural Language Decathlon](https://blog.einstein.ai/the-natural-language-decathlon/)
-- [OpenAI GPT-1](https://openai.com/blog/language-unsupervised/) and [OpenAi GPT-2](https://openai.com/blog/better-language-models/)
-- [Illustrated BERT][Illustrated BERT] and [Illustrated GPT-2][Illustrated GPT-2]    
-#### Miscellaneous
-- [text processing](https://www.kaggle.com/sudalairajkumar/getting-started-with-text-preprocessing)
-- [Regularization Techniques for NLP](http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/) 
-- [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html)
-
-
 ## Food For Thought
 1. How good do ranking algorithms, the ones with pointwise/pairwise/listwise learning paradigms, perform when the no. of test classes at the infernece time grow massively? KG Reasoning using Translational/Bilinear/DL techniques is one important area under consideration.
 1. While the chosen neural achitecture is important, the techniques used for training the problem objective e.g.[*Word2Vec*][Mikolov et al. 2013b] or the techniques used while doing loss optimization e.g.[*OpenAI Transformer*][Radford et al. 2018] play a significant role in both fast as well as a good convergence.
 1. Commonality between Language Modelling, Machine Translation and Word2vec: All of them have a huge vocabulary size at the output and there is a need to alleviate computing of the huge sized softmax layer! See [Ruder's page](http://ruder.io/word-embeddings-softmax/index.html) for a quick-read.
 
+# Bookmarks
+
+## codes, videos and MOOCs
+- nlp code examples: [nn4nlp-code](https://github.com/neubig/nn4nlp-code) and [nlp-tutorial](https://github.com/graykode/nlp-tutorial)
+- [lazynlp for data crawling](https://github.com/chiphuyen/lazynlp)
+- [video-list](https://github.com/CShorten/HenryAILabs-VideoList)
+- [fast.ai](https://www.fast.ai/2019/07/08/fastai-nlp/), [d2l.ai](https://d2l.ai/index.html), [nn4nlp-graham](http://www.phontron.com/class/nn4nlp2020/)
+
+## each link is either a series of blogs from an individual/organization or a conference related link or a MOOC
+- [nlpprogress](http://nlpprogress.com/), [paperswithcode](https://paperswithcode.com/area/natural-language-processing), [dair-ai](https://github.com/dair-ai/nlp_newsletter), [groundai](https://www.groundai.com/?=&tag=LANGUAGE), [lyrn.ai](https://www.lyrn.ai/category/nlp/)
+- [BERT-related-papers](https://github.com/tomohideshibata/BERT-related-papers), [awesome-qa](https://github.com/seriousran/awesome-qa), 
+[awesome-NLP](https://github.com/keon/awesome-nlp), [awesome-sentence-embedding](https://github.com/Separius/awesome-sentence-embedding)
+- [Ruder's Blog-posts](http://ruder.io); [this](https://ruder.io/research-highlights-2019/) and [this](http://ruder.io/state-of-transfer-learning-in-nlp/) taking on latest trends  
+  [Jay Alammar](http://jalammar.github.io/),  
+  [LiLian (at OpenAI)](https://lilianweng.github.io/lil-log/),  
+  [Sebastian Rraschka (at UW-Madison)](https://sebastianraschka.com/blog/index.html),  
+  [Victor Sanh (at Huggingface)](https://medium.com/@victorsanh),  
+  [Keita Kurita|ML & NLP Explained](http://mlexplained.com/category/nlp/),  
+  [distill.pub](https://distill.pub/),  
+  [Chris McCormick](https://mccormickml.com/archive/),  
+  [Kavita Ganesan](https://kavita-ganesan.com/kavitas-tutorials/#.Xhk3_0dKjDc), 
+- [blog.feedspot.com](https://drive.google.com/file/d/15XD2c2PypVZTveezFuaJpPEJWP8Vi3ak/view?usp=sharing)
+
+
+## selected blog-posts
+- [Guillaume's blog for seq tagging](https://guillaumegenthial.github.io/sequence-tagging-with-tensorflow.html)
+- [ULMFit](https://yashuseth.blog/2018/06/17/understanding-universal-language-model-fine-tuning-ulmfit/)
+- [Lilian at openAI on Attention](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html)
+- [The Natural Language Decathlon](https://blog.einstein.ai/the-natural-language-decathlon/)
+- [OpenAI GPT-1](https://openai.com/blog/language-unsupervised/) and [OpenAi GPT-2](https://openai.com/blog/better-language-models/)  
+
+## miscellaneous
+- [SPACY IRL 2019 Talks](https://www.youtube.com/playlist?list=PLBmcuObd5An4UC6jvK_-eSl6jCvP1gwXc)
+- [text processing](https://www.kaggle.com/sudalairajkumar/getting-started-with-text-preprocessing)
+- [Regularization Techniques for NLP](http://mlexplained.com/2018/03/02/regularization-techniques-for-natural-language-processing-with-code-examples/) 
+- [Chat Smarter with Allo](https://ai.googleblog.com/2016/05/chat-smarter-with-allo.html)
+- [word cloud](https://github.com/amueller/word_cloud)
 
 ### [Go Back To Top](#Contents)
+
+
+
+
+
+
+
+
+
+
 
 [Mikolov et al. 2013a]: https://arxiv.org/abs/1301.3781
 [Mikolov et al. 2013b]: https://arxiv.org/abs/1310.4546
