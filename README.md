@@ -187,6 +187,7 @@
 
 # BERT & Transformers
 
+:bulb: see [Interpretability and Ethics](#Interpretability-and-Ethics) section for more papers
 ### BERTology
 :arrow_forward:  [Bert related papers compilation](https://github.com/tomohideshibata/BERT-related-papers)
 1. [E-BERT: Efficient-Yet-Effective Entity Embeddings for BERT, Poerner et al. 2020](https://arxiv.org/abs/1911.03681)
