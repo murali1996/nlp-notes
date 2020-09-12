@@ -1,13 +1,13 @@
 # READINGS_NLP
 
 - [Text Comprehension](#Comprehension)
+  - [Evaluation](#Evaluation)
   - [Word and Sentence Embeddings](#Word-and-Sentence-Embeddings)
   - [Contextual Representations and Transfer Learning](#Contextual-Representations-and-Transfer-Learning)
   - [Multi-task learning](#Multi-task-learning)
   - [Multi-lingual and cross-lingual learning](#Multi-lingual-and-cross-lingual-learning)
   - [Multi-modal learning](#Multi-modal-learning)
   - [Interpretability and Ethics](#Interpretability-and-Ethics)
-  - [Evaluation Toolkits for Language Understanding](#Evaluation-Toolkits-for-Language-Understanding)
 - [Text Generation](#Generation)
 - [IR and QA](#IR-and-QA)
   - [Knowledge Graphs](#Knowledge-Graphs)
@@ -63,13 +63,17 @@
 
 ### [Go Back To Top](#Contents)
 
-# Evaluation Toolkits for Language Understanding
+# Evaluation
 :bulb: NLU and XLU
+1. [GLUECoS: An Evaluation Benchmark for Code-Switched NLP, Khanuja et al. 2020](https://www.aclweb.org/anthology/2020.acl-main.329/)
+1. [XGLUE: A New Benchmark Dataset for Cross-lingual Pre-training, Understanding and Generation, Liang et al. 2020](https://arxiv.org/abs/2004.01401)
+1. [XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization, Hu et al. 2020](https://arxiv.org/abs/2003.11080)
+1. [SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems, Wang et al. 2019](https://arxiv.org/abs/1905.00537)
+1. [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018] [[Site]](https://gluebenchmark.com/leaderboard)
 1. [XNLI: Evaluating Cross-lingual Sentence Representations, Conneau eta al. 2018c][Conneau eta al. 2018c]
 1. [SentEval: An Evaluation Toolkit for Universal Sentence Representations, Conneau et al. 2018a][Conneau et al. 2018a] [[Site]](https://github.com/facebookresearch/SentEval)
-1. [GLUE: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding, Wang et al. 2018][Wang et al. 2018] [[Site]](https://gluebenchmark.com/leaderboard)
 1. [CLUE: Language Understanding Evaluation benchmark for Chinese (CLUE)](https://github.com/CLUEbenchmark/CLUE)
-1. [XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization, Hu et al. 2020](https://arxiv.org/abs/2003.11080)
+
 
 ### [Go Back To Top](#Contents)
 
