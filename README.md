@@ -55,9 +55,11 @@
 1. [*USE*, Universal Sentence Encoder, Cer et al. 2018][Cer et al. 2018] [[also see Multilingual USE]][Yinfei et al. 2019]
 
 ### Multi-lingual word embeddings
+1. [[fasttext embeddings]](https://fasttext.cc/docs/en/aligned-vectors.html)
+1. [Polyglot: Distributed Word Representations for Multilingual NLP, Rami et al. 2013](https://www.aclweb.org/anthology/W13-3520.pdf)
 1. [Density Matching for Bilingual Word Embedding, Zhou et al. 2015](https://www.aclweb.org/anthology/N19-1161.pdf)
 1. [Word Translation Without Parallel Data, Conneua et al. 2017](https://arxiv.org/abs/1710.04087) [[repo]](https://github.com/facebookresearch/MUSE)
-1. [Loss in Translation: Learning Bilingual Word Mapping with a Retrieval Criterion, Joulin et al. 2018](https://arxiv.org/abs/1804.07745) [[fasttext embeddings]](https://fasttext.cc/docs/en/aligned-vectors.html)
+1. [Loss in Translation: Learning Bilingual Word Mapping with a Retrieval Criterion, Joulin et al. 2018](https://arxiv.org/abs/1804.07745)
 1. [Unsupervised Multilingual Word Embeddings, Chen & Cardie 2018](https://arxiv.org/abs/1808.08933) [[repo]](https://github.com/ccsasuke/umwe)
 
 
