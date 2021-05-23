@@ -73,7 +73,7 @@ flags.DEFINE_integer(
 
 flags.DEFINE_bool(
     "use_one_hot_embeddings", False,
-    "If True, tf.one_hot will be used for embedding lookups, otherwise "
+    "If True, tf.one_hot will be used for embedding lookups_and_quick_starts, otherwise "
     "tf.nn.embedding_lookup will be used. On TPUs, this should be True "
     "since it is much faster.")
 

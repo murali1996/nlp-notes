@@ -48,9 +48,8 @@
 
 print("/".join(__file__.split("/")[:-1]))
 
-import os, sys, math, numpy as np, pandas as pd
+import os, numpy as np, pandas as pd
 import json
-from tqdm import tqdm # to maintain progress bar
 import shutil # to copy files
 import tensorflow as tf
 
@@ -85,7 +84,7 @@ import tensorflow as tf
 # Bert-Wrapper Model Class
 # ======================================================================
 
-from .bert_master import run_classifier, optimization, tokenization, modeling
+from .bert_master import run_classifier, tokenization, modeling
 
 class Model(object):
     """
@@ -163,9 +162,10 @@ class Model(object):
         #
         inputExamples = []
         for i, _ in enumerate(text_a_list):
-            inputExamples.append(run_classifier.InputExample(guid=guid_list[i], text_a=text_a_list[i], 
-                                                             text_b=text_b_list[i], label=label_list[i]))
-        inputFeatures = run_classifier.convert_examples_to_features(inputExamples, all_unique_labels, 
+            inputExamples.append(
+                run_classifier.InputExample(guid=guid_list[i], text_a=text_a_list[i],
+                                            text_b=text_b_list[i], label=label_list[i]))
+        inputFeatures = run_classifier.convert_examples_to_features(inputExamples, all_unique_labels,
                                                                     self.MAX_SEQ_LENGTH, self.tokenizer)
         # input_ids, input_mask, segment_ids, label_id, is_real_example are the attributes for a inputFeauture object
         return inputFeatures
@@ -392,8 +392,8 @@ class Model(object):
                                                     input_ids=self.batch_input_ids__tensor,
                                                     input_mask=self.batch_input_mask__tensor,
                                                     token_type_ids=self.batch_token_type_ids__tensor,
-                                                    scope="bert" 
-                                               )
+                                                    scope="bert"
+                                                    )
                 self.cls_output = self.bertModel.get_cls_vector()
                 self.full_output = self.bertModel.get_sequence_output()
         return
