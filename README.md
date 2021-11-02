@@ -1,3 +1,9 @@
+# UPDATE
+
+This repository is no longer actively maintained. If you are interested in maintaining/updating it, 
+feel free to update by raising PRs or by reaching out to `jsaimurali001 [at] gmail [dot] com` 
+
+
 # READINGS_NLP
 
 - [Text Comprehension](#Comprehension)
@@ -18,10 +24,7 @@
 - [Bookmarks](#Bookmarks)
 
 
-# UPDATE
-This repository is no longer actively maintained. 
-If you are interested in maintaining/updating it, feel free to update by raising PRs or 
-by reaching out to `jsaimurali001 [at] gmail [dot] com` 
+
 
 # Word and Sentence Embeddings
 
