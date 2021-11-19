@@ -1,7 +1,22 @@
 # UPDATE
 
-This repository is no longer actively maintained. If you are interested in maintaining/updating it, 
+This file is no longer actively maintained. If you are interested in maintaining/updating it, 
 feel free to update by raising PRs or by reaching out to `jsaimurali001 [at] gmail [dot] com` 
+
+# Contents
+
+This repository contains series of papers/articles/blogs/links organized in a way to understand the
+trends of the field/domain easily. While story-like, the resources mentioned might not be
+comprehensive like several other _awesome-xxx_ repos out there, and hence I added pointers to such
+repos in the readmes below.
+
+- [NLP](#READINGS_NLP) 
+- [Audio](./Audio.md)
+- [Graph Neural Nets](./GNNs.md)
+- [ML_DL_concepts](./ML_DL_concepts.md)
+- [Productionization resources](./ML_productionization.md)
+
+
 
 
 # READINGS_NLP
